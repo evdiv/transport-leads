@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
-use App\Order;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -68,18 +67,6 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
-        if(empty($data['carrier'])) {
-            Order::create([
-                'user_id' => $User->id,
-                'title' => 'Test title',
-                'description' => 'Test description'
-            ]);
-        } else {
-            if($data['carrier']) {
-
-            }
-        }
 
         return $User;
     }

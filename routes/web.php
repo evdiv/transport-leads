@@ -56,12 +56,12 @@ Route::put('/users/{user}', 'UsersController@update');
 
 
 
-Route::get('/orders/create', 'OrdersController@create')->name('create-order');
-
+Route::get('/orders/create', 'OrdersController@create')->name('order.create');
 Route::post('/orders/', 'Auth\RegisterController@store');
 
 
 Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@userLogout')->name('logout');
@@ -71,6 +71,13 @@ Route::prefix('admin')->group(function() {
 	Route::post('/login', 'Auth\AdminsLoginController@login')->name('admin.login.submit');
 	Route::get('/logout', 'Auth\AdminsLoginController@logout')->name('admin.logout');
 	Route::get('/', 'AdminsController@index')->name('admin.dashboard');
+
+
+	// Password reset routes
+	Route::post('/password/email', 'Auth\AdminsForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+	Route::get('/password/reset', 'Auth\AdminsForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+	Route::post('/password/reset', 'Auth\AdminsResetPasswordController@reset');
+	Route::get('/password/reset/{token}', 'Auth\AdminsResetPasswordController@showResetForm')->name('admin.password.reset');
 });
 
 
@@ -80,4 +87,10 @@ Route::prefix('carrier')->group(function() {
 	Route::post('/login', 'Auth\CarriersLoginController@login')->name('carrier.login.submit');
 	Route::get('/logout', 'Auth\CarriersLoginController@logout')->name('carrier.logout');
 	Route::get('/', 'CarriersController@index')->name('carrier.dashboard');
+
+	// Password reset routes
+	Route::post('/password/email', 'Auth\CarriersForgotPasswordController@sendResetLinkEmail')->name('carrier.password.email');
+	Route::get('/password/reset', 'Auth\CarriersForgotPasswordController@showLinkRequestForm')->name('carrier.password.request');
+	Route::post('/password/reset', 'Auth\CarriersResetPasswordController@reset');
+	Route::get('/password/reset/{token}', 'Auth\CarriersResetPasswordController@showResetForm')->name('carrier.password.reset');
 });

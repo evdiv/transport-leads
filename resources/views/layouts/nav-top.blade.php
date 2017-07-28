@@ -8,7 +8,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Такелажник</a>
+            <a class="navbar-brand" href="/">Такелажник</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -20,7 +20,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Клиентам <span class="caret"></span></a>
                     <ul class="dropdown-menu">
 
-                        <li><a href="{{ route('create-order') }}">Сделать заказ</a></li>
+                        <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
                         <li><a href="#">История заказов</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Такелажные работы</a></li>
@@ -36,7 +36,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">Link</a></li>
+
+                <li><a href="{{ route('register') }}">Регистрация перевозчика</a></li>
+
                 <li class="dropdown">
 
                 @if (Auth::guest())
@@ -53,7 +55,6 @@
                             <li><a href="{{ route('login') }}">Как заказчик</a></li>
                             <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
                             <li><a href="{{ route('admin.login') }}">Как админ</a></li>
-                            <li><a href="{{ route('register') }}">Регистрация</a></li>
                         @else
                             <li>
                                 @if(Auth::guard('web')->check())
@@ -67,9 +68,6 @@
                                 @if(Auth::guard('web-carrier')->check())
                                     <a href="{{ route('carrier.logout') }}">Carrier Logout</a>
                                 @endif
-
-
-
 
                             </li>
                         @endif

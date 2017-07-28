@@ -20,7 +20,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Клиентам <span class="caret"></span></a>
                     <ul class="dropdown-menu">
 
-                        <li><a href="{{ route('create-order') }}">Сделать заказ</a></li>
+                        <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
                         <li><a href="#">История заказов</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">Такелажные работы</a></li>
@@ -37,7 +37,6 @@
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-
 
                         <!-- Authentication Links -->
                         @if (Auth::guest())
@@ -65,9 +64,6 @@
                                 </ul>
                             </li>
                         @endif
-
-
-
 
                     </ul>
                 </li>
