@@ -37,7 +37,7 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="{{ route('register') }}">Регистрация перевозчика</a></li>
+                <li><a href="{{ route('carrier.register') }}">Регистрация перевозчика</a></li>
 
                 <li class="dropdown">
 

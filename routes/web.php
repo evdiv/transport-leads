@@ -93,4 +93,9 @@ Route::prefix('carrier')->group(function() {
 	Route::get('/password/reset', 'Auth\CarriersForgotPasswordController@showLinkRequestForm')->name('carrier.password.request');
 	Route::post('/password/reset', 'Auth\CarriersResetPasswordController@reset');
 	Route::get('/password/reset/{token}', 'Auth\CarriersResetPasswordController@showResetForm')->name('carrier.password.reset');
+
+	//Register
+	Route::get('/register', 'Auth\CarriersRegisterController@showRegistrationForm')->name('carrier.register');
+	Route::post('/register', 'Auth\CarriersRegisterController@register')->name('carrier.register.submit');
+
 });
