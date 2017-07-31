@@ -15,7 +15,10 @@ class CreateTakelajsTable extends Migration
     {
         Schema::create('takelajs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id');
+            $table->integer('order_id');
+            $table->float('weight')->default(0);
+            $table->float('length')->default(0);
+            $table->float('width')->default(0);
             $table->timestamps();
         });
     }

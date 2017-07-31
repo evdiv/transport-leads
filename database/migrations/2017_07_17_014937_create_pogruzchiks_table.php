@@ -15,6 +15,8 @@ class CreatePogruzchiksTable extends Migration
     {
         Schema::create('pogruzchiks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id');
+            $table->float('capacity')->default();
             $table->timestamps();
         });
     }

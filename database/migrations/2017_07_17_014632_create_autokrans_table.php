@@ -15,6 +15,8 @@ class CreateAutokransTable extends Migration
     {
         Schema::create('autokrans', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id');
+            $table->float('capacity')->default(0);
             $table->timestamps();
         });
     }
