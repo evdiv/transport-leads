@@ -16,7 +16,9 @@ class CreateGruzchiksTable extends Migration
         Schema::create('gruzchiks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
-            $table->integer('number')->default(0);
+            $table->integer('service_type')->default(1);
+            $table->integer('number')->default(1);
+            $table->integer('time_period')->default(1);
             $table->timestamps();
         });
     }

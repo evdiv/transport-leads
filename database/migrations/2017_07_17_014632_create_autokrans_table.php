@@ -17,6 +17,7 @@ class CreateAutokransTable extends Migration
             $table->increments('id');
             $table->integer('order_id');
             $table->float('capacity')->default(0);
+            $table->integer('time_period')->default(1);
             $table->timestamps();
         });
     }
