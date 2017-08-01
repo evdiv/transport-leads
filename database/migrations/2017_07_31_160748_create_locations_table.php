@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTakelajsTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateTakelajsTable extends Migration
      */
     public function up()
     {
-        Schema::create('takelajs', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id');
-            $table->integer('cargo_id')->default(0);
+            $table->integer('type')->default(1);
+            $table->string('name');
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +30,6 @@ class CreateTakelajsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('takelajs');
+        Schema::dropIfExists('locations');
     }
 }

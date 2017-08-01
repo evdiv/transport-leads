@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateManipulatorsTable extends Migration
+class CreateCargosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,19 @@ class CreateManipulatorsTable extends Migration
      */
     public function up()
     {
-        Schema::create('manipulators', function (Blueprint $table) {
+        Schema::create('cargos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id');
+            $table->string('name');
+            $table->integer('cargo_type_id');
+            $table->integer('cargo_photo_id');
+            $table->integer('cargo_loading_list_id');
+            $table->text('description')->nullable();
+            $table->float('weight')->default(0);
             $table->float('length')->default(0);
             $table->float('width')->default(0);
-            $table->float('capacity')->default(0);
-            $table->integer('time_period')->default(1);
+            $table->float('hight')->default(0);
+            $table->float('units')->default(1);
+
             $table->timestamps();
         });
     }
@@ -31,6 +37,6 @@ class CreateManipulatorsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('manipulators');
+        Schema::dropIfExists('cargos');
     }
 }

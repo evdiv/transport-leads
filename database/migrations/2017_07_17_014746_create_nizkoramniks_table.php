@@ -15,6 +15,11 @@ class CreateNizkoramniksTable extends Migration
     {
         Schema::create('nizkoramniks', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id');
+            $table->float('length')->default(0);
+            $table->float('width')->default(0);
+            $table->float('capacity')->default(0);
+            $table->integer('time_period')->default(1);
             $table->timestamps();
         });
     }
