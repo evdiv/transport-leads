@@ -24,7 +24,7 @@ class CarriersRegisterController extends Controller
 
     use RegistersUsers;
 
-    protected $redirectTo = '/carriers/';
+    protected $redirectTo = '/carrier/add-info';
 
 
     public function __construct()
@@ -44,9 +44,11 @@ class CarriersRegisterController extends Controller
         return Validator::make($data, [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:carriers',
+            'phone' => 'string|max:12',
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
+
 
 
     protected function create(array $data)
@@ -54,6 +56,7 @@ class CarriersRegisterController extends Controller
         $Carrier = Carrier::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
             'password' => bcrypt($data['password']),
         ]);
 

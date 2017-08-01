@@ -18,7 +18,7 @@ class CreateCarriersTable extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone')->nullable();
-            $table->text('location')->nullable();
+            $table->string('location')->nullable();
             $table->text('description')->nullable();
             $table->string('password');
             $table->rememberToken();

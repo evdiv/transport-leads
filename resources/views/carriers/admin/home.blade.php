@@ -9,7 +9,6 @@
 
                 <div class="panel-body">
                     You are logged in as a Carrier
-                </div>
             </div>
         </div>
     </div>

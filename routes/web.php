@@ -67,6 +67,7 @@ Route::get('/logout', 'Auth\LoginController@userLogout')->name('logout');
 
 
 Route::prefix('admin')->group(function() {
+
 	Route::get('/login', 'Auth\AdminsLoginController@showLoginForm')->name('admin.login');
 	Route::post('/login', 'Auth\AdminsLoginController@login')->name('admin.login.submit');
 	Route::get('/logout', 'Auth\AdminsLoginController@logout')->name('admin.logout');
@@ -88,8 +89,8 @@ Route::prefix('carrier')->group(function() {
 	Route::get('/logout', 'Auth\CarriersLoginController@logout')->name('carrier.logout');
 
 	Route::get('/', 'CarriersController@index')->name('carrier.dashboard');
-	Route::get('/add-info', 'CarriersController@showAddInfoForm')->name('carrier.add-info');
-	Route::post('/add-info', 'CarriersController@addInfo')->name('carrier.add-info.submit');
+	Route::get('/add-info', 'CarriersController@edit')->name('carrier.add-info');
+	Route::post('/add-info', 'CarriersController@update')->name('carrier.add-info.submit');
 
 
 	// Password reset routes
