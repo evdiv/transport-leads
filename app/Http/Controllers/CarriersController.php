@@ -25,4 +25,9 @@ class CarriersController extends Controller
     {
         return view('carriers.admin.home');
     }
+
+    public function showAddInfoForm() 
+    {
+        return view('carriers.admin.add-info');
+    }
 }

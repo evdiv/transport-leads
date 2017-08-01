@@ -3,12 +3,29 @@
 @section('content')
 <div class="container">
     <div class="row">
+
         <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Такелажные работы</button> </div>
+                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Грузчики</button> </div>
+                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Спецтехника</button></div>
+            </div>
+        </div>
+    </div>
+
+<hr/>
+    <div class="row">   
+
+        <div class="col-md-8 col-md-offset-2">
+
             <div class="panel panel-default">
                 <div class="panel-heading">Оформить заказ</div>
                 <div class="panel-body">
+
+
                     <form class="form-horizontal" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
+
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Ваше имя</label>

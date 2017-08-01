@@ -62,9 +62,9 @@ Route::post('/orders/', 'Auth\RegisterController@store');
 
 Auth::routes();
 
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/logout', 'Auth\LoginController@userLogout')->name('logout');
+
 
 Route::prefix('admin')->group(function() {
 	Route::get('/login', 'Auth\AdminsLoginController@showLoginForm')->name('admin.login');
@@ -86,7 +86,11 @@ Route::prefix('carrier')->group(function() {
 	Route::get('/login', 'Auth\CarriersLoginController@showLoginForm')->name('carrier.login');
 	Route::post('/login', 'Auth\CarriersLoginController@login')->name('carrier.login.submit');
 	Route::get('/logout', 'Auth\CarriersLoginController@logout')->name('carrier.logout');
+
 	Route::get('/', 'CarriersController@index')->name('carrier.dashboard');
+	Route::get('/add-info', 'CarriersController@showAddInfoForm')->name('carrier.add-info');
+	Route::post('/add-info', 'CarriersController@addInfo')->name('carrier.add-info.submit');
+
 
 	// Password reset routes
 	Route::post('/password/email', 'Auth\CarriersForgotPasswordController@sendResetLinkEmail')->name('carrier.password.email');
@@ -97,5 +101,6 @@ Route::prefix('carrier')->group(function() {
 	//Register
 	Route::get('/register', 'Auth\CarriersRegisterController@showRegistrationForm')->name('carrier.register');
 	Route::post('/register', 'Auth\CarriersRegisterController@register')->name('carrier.register.submit');
+
 
 });

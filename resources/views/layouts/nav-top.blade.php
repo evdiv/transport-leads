@@ -21,15 +21,7 @@
                     <ul class="dropdown-menu">
 
                         <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
-                        <li><a href="#">История заказов</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">Такелажные работы</a></li>
-                        <li><a href="#">Грузчики</a></li>
-                        <li><a href="#">Автокраны</a></li>
-                        <li><a href="#">Манипуляторы</a></li>
-                        <li><a href="#">Низкорамные платформы</a></li>
-                        <li><a href="#">Погрузчики</a></li>
-                        <li><a href="#">Бортовые машины</a></li>
+                        <li><a href="{{ route('login') }}">Войти как заказчик</a></li>
 
                     </ul>
                 </li>
@@ -52,7 +44,6 @@
                     <ul class="dropdown-menu">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">Как заказчик</a></li>
                             <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
                             <li><a href="{{ route('admin.login') }}">Как админ</a></li>
                         @else
