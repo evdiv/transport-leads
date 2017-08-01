@@ -3,23 +3,10 @@
 @section('content')
 <div class="container">
 
-    <div class="row">
-
-        <div class="col-md-8 col-md-offset-2">
-<<<<<<< HEAD
-            <div class="row">
-                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Такелажные работы</button> </div>
-                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Грузчики</button> </div>
-                <div class="col-sm-4"><button type="button" class="btn btn-default btn-lg btn-block">Спецтехника</button></div>
-            </div>
-        </div>
-    </div>
-
 <hr/>
     <div class="row">   
 
         <div class="col-md-8 col-md-offset-2">
-=======
 
         <div class="row">
             <div class="col-sm-4">
@@ -329,10 +316,8 @@
 
 
 
-
->>>>>>> office
-
             <div class="panel panel-default">
+                <div class="panel-heading">Personal Information</div>
                 <div class="panel-body">
 
 
