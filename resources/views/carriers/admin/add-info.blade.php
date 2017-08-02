@@ -32,12 +32,6 @@
                             <label for="takelaj_max_weight" class="col-md-4 control-label">Takelaj Максимальный вес </label>
 
                             <div class="col-md-6">
-     {{ $carrier }}
-                            {{ $service[0] }}
-                                
-                                <?php 
-                                        echo Form::select('size', ['L' => 'Large', 'S' => 'Small'], 'S' , ['class' => 'form-control']);
-                                ?>
 
                                 <select class="form-control" name="takelaj_max_weight">
                                     <option value="10">10 тонн</option>
