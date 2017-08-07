@@ -17,8 +17,8 @@ class CreateCargosTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('cargo_type_id');
-            $table->integer('cargo_photo_id');
-            $table->integer('cargo_loading_list_id');
+            $table->integer('cargo_photo_id')->default(0);
+            $table->integer('cargo_loading_list_id')->default(0);
             $table->text('description')->nullable();
             $table->float('weight')->default(0);
             $table->float('length')->default(0);

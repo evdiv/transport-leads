@@ -14,14 +14,15 @@
 	<link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <body>
+        <div id="app">
+            @include('layouts.nav-top')
 
-        @include('layouts.nav-top')
+            @include('layouts.errors')
 
-        @include('layouts.errors')
+            @yield('content')
 
-        @yield('content')
-
-        @include('layouts.footer')
+            @include('layouts.footer')
+        </div>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

@@ -57,7 +57,7 @@ Route::put('/users/{user}', 'UsersController@update');
 
 
 Route::get('/orders/create', 'OrdersController@create')->name('order.create');
-Route::post('/orders/', 'Auth\RegisterController@store');
+Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
 
 Auth::routes();

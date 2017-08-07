@@ -22,7 +22,9 @@ class OrdersController extends Controller
         return view('orders.create');
     }
 
-    public function store() {
+    public function store(Request $request) {
+
+        dd($request->all());
 
         $this->validate(request(), [
             'title' => 'required',
