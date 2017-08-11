@@ -15,16 +15,16 @@ class CreateCargosTable extends Migration
     {
         Schema::create('cargos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->integer('cargo_type_id');
+            $table->string('name')->nullable();
+            $table->integer('cargo_type_id')->default(0);
             $table->integer('cargo_photo_id')->default(0);
             $table->integer('cargo_loading_list_id')->default(0);
             $table->text('description')->nullable();
             $table->float('weight')->default(0);
             $table->float('length')->default(0);
             $table->float('width')->default(0);
-            $table->float('hight')->default(0);
-            $table->float('units')->default(1);
+            $table->float('height')->default(0);
+            $table->float('quantity')->default(1);
 
             $table->timestamps();
         });

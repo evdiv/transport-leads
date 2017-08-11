@@ -45,7 +45,9 @@
 
 
                  <!-- User Details Form -->
-                @include('orders.partials.create-customer-details')
+                @if(!Auth::guard('web')->check())
+                    @include('orders.partials.create-customer-details')
+                @endif    
 
                     <div class="form-group">
                         Дополнительная информация к заказу

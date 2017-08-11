@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\User;
+use App\Takelaj;
+use App\Cargo;
+use Auth;
 
 class OrdersController extends Controller
 {
@@ -22,19 +26,49 @@ class OrdersController extends Controller
         return view('orders.create');
     }
 
+
+
     public function store(Request $request) {
 
-        dd($request->all());
 
-        $this->validate(request(), [
-            'title' => 'required',
-            'description' => 'required'
-        ]);
+        if (!Auth::check() && !empty($request['login'])) {
 
-        Order::create(request(['title', 'description']));
+            if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+                
+                // Authentication passed...
+                return back()->withInput();
+            }
 
-        return redirect('/');
-    }
+            $User = Auth::user();
+
+        } elseif(!Auth::check()) {
+
+            $this->validate(request(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:carriers',
+                'password' => 'required|string|min:6|confirmed',
+            ]); 
+
+            $User = User::create(request(['name', 'email', 'phone', 'password']));
+            Auth::loginUsingId($User->id, true);
+        
+        } else {
+            $User = Auth::user();
+        }
+
+
+        $Order = Order::create(['user_id' => $User->id]);
+
+        $cargos = json_decode($request['order-takelaj-data'], true);
+
+        foreach ($cargos as $cargo) {
+            $Cargo = Cargo::create($cargo);
+
+            Takelaj::create(['order_id' => $Order->id, 'cargo_id' => $Cargo->id]);
+        }
+
+        return redirect('/home');
+    } 
 
 
     public function edit($id) {
