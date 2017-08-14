@@ -1,6 +1,7 @@
 @extends('layouts.admin.master')
 
 @section('content')
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -10,139 +11,177 @@
                     <form class="form-horizontal" method="POST" action="{{ route('carrier.add-info.submit') }}">
                         {{ csrf_field() }}
 
-                        <div class="form-group{{ $errors->has('city') ? ' has-error' : '' }}">
-                            <label for="city" class="col-md-4 control-label">Регион или Город</label>
+                        <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                            <label for="location" class="col-md-4 control-label">Регион или Город</label>
 
                             <div class="col-md-6">
-                                <input id="city" type="text" class="form-control" name="city" value="{{ old('city') }}" required autofocus>
+                                <input id="location" type="text" class="form-control" name="location" value="{{  old('location', $carrier->location) }}" required autofocus>
 
-                                @if ($errors->has('city'))
+                                @if ($errors->has('location'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('city') }}</strong>
+                                        <strong>{{ $errors->first('location') }}</strong>
                                     </span>
                                 @endif
                             </div>
                         </div>
 
-                        <div class="col-md-offset-4 col-md-6">
-                            <div class="form-group">
-                                <div class="checkbox">
-                                  <label>
-                                    <input name="takelaj" type="checkbox" value="">
-                                    Такелажные работы
-                                  </label>
-                                </div>
-                            </div>
-                        </div>  
 
+                        
                         <div class="form-group">
-                            <label for="takelaj-ves" class="col-md-4 control-label">Максимальный вес</label>
+
+                            <label for="takelaj_max_weight" class="col-md-4 control-label">Takelaj Максимальный вес </label>
 
                             <div class="col-md-6">
-                                <select class="form-control" name="takelaj-ves">
-                                    <option>10 тонн</option>
-                                    <option>30 тонн</option>
-                                    <option>50 тонн</option>
-                                    <option>100 тонн</option>
-                                    <option>более 100 тонн</option>
+
+                                <select class="form-control" name="takelaj_max_weight">
+                                    <option value="10">10 тонн</option>
+                                    <option value="30">30 тонн</option>
+                                    <option value="50">50 тонн</option>
+                                    <option value="70">70 тонн</option>
+                                    <option value="100">более 100 тонн</option>
                                 </select>
                             </div>    
                         </div>
 
                          <hr />                     
 
+                        <div class="form-group">
+                            <label for="gruzchik-number" class="col-md-4 control-label">Количество gruzchikov</label>
+
+                            <div class="col-md-6">
+                                <select class="form-control" name="gruzchik_number">
+                                    <option value="5">от 1 до 5</option>
+                                    <option value="10">от 5 до 10</option>
+                                    <option value="20">от 10 до 20</option>
+                                    <option value="50">от 20 до 50</option>
+                                    <option value="100">более 50</option>
+                                </select>
+                            </div>    
+                        </div>
+
                         <div class="col-md-offset-4 col-md-6">
+                            <h4>Автокраны</h4>
+                        </div>
+
+                        <div class="col-md-offset-2 col-md-8">
                             <div class="form-group">
                                 <div class="checkbox">
-                                  <label>
-                                    <input name="gruzchik" type="checkbox" value="">
-                                    Услуги грузчиков
-                                  </label>
+                                    <label> <input name="autokran_14" type="checkbox" value="1">
+                                        Автокран 14 тонн</label>
+
+                                    <label><input name="autokran_16" type="checkbox" value="1">
+                                        Автокран 16 тонн</label>
+
+                                    <label><input name="autokran_25" type="checkbox" value="1">
+                                        Автокран 25 тонн</label>
+
+                                    <label> <input name="autokran_32" type="checkbox" value="1">
+                                        Автокран 32 тонн</label>
+
+                                    <label> <input name="autokran_40" type="checkbox" value="1">
+                                        Автокран 40 тонн</label>
+
+                                    <label> <input name="autokran_50" type="checkbox" value="1">
+                                        Автокран 50 тонн</label>
+
+                                    <label> <input name="autokran_70" type="checkbox" value="1">
+                                        Автокран 70 тонн</label>
+
+                                    <label> <input name="autokran_90" type="checkbox" value="1">
+                                        Автокран 90 тонн</label>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="gruzchik-number" class="col-md-4 control-label">Количество человек</label>
-
-                            <div class="col-md-6">
-                                <select class="form-control" name="gruzchik-number">
-                                    <option>от 1 до 5</option>
-                                    <option>от 5 до 10</option>
-                                    <option>от 10 до 20</option>
-                                    <option>от 20 до 50</option>
-                                    <option>более 50</option>
-                                </select>
-                            </div>    
+    
+                        <div class="col-md-offset-4 col-md-6">
+                            <h4>Манипуляторы</h4>
                         </div>
 
-                        <hr />    
-
-                        <div class="col-md-offset-4 col-md-6">
+                        <div class="col-md-offset-2 col-md-8">
                             <div class="form-group">
                                 <div class="checkbox">
-                                  <label>
-                                    <input name="auto" type="checkbox" value="">
-                                    Спецтехника
-                                  </label>
+                                    <label> <input name="manipulator_3" type="checkbox" value="1">
+                                        Манипуляторы 3 тонн</label>
+
+                                    <label><input name="manipulator_5" type="checkbox" value="1">
+                                        Манипуляторы 5 тонн</label>
+
+                                    <label><input name="manipulator_7" type="checkbox" value="1">
+                                        Манипуляторы 7 тонн</label>
+
+                                    <label> <input name="manipulator_10" type="checkbox" value="1">
+                                        Манипуляторы 10 тонн</label>
+
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <label for="auto_avtokran" class="col-md-4 control-label">Автокраны</label>
-
-                            <div class="col-md-6">
-                                <select class="form-control" name="auto_avtokran" multiple>
-                                    <option>Автокран 14 тонн</option>
-                                    <option>Автокран 16 тонн</option>
-                                    <option>Автокран 25 тонн</option>
-                                    <option>Автокран 32 тонн</option>
-                                    <option>Автокран 40 тонн</option>
-                                    <option>Автокран 50 тонн</option>
-                                    <option>Автокран 70 тонн</option>
-                                    <option>Автокран 90 тонн и более</option>
-                                </select>
-                            </div>    
+                        <div class="col-md-offset-4 col-md-6">
+                            <h4>Nizcoramniki</h4>
                         </div>
 
-                        <div class="form-group">
-                            <label for="auto_manipulator" class="col-md-4 control-label">Манипуляторы</label>
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input name="nizkoramnik_15" type="checkbox" value="1">
+                                        Nizkoramnik 15 тонн</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="auto_manipulator" multiple>
-                                    <option>Манипуляторы 3 тонны</option>
-                                    <option>Манипуляторы 5 тонн</option>
-                                    <option>Манипуляторы 7 тонн</option>
-                                    <option>Манипуляторы 10 тонн и более </option>
-                                </select>
-                            </div>    
-                        </div>                        
+                                    <label><input name="nizkoramnik_25" type="checkbox" value="1">
+                                        Nizkoramnik 25 тонн</label>
 
-                        <div class="form-group">
-                            <label for="auto_pogruzchik" class="col-md-4 control-label">Погрузчики</label>
+                                    <label><input name="nizkoramnik_35" type="checkbox" value="1">
+                                        Nizkoramnik 35 тонн</label>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="auto_pogruzchik" multiple>
-                                    <option>Фронтальный погрузчики 1 тонна</option>
-                                    <option>Фронтальный погрузчики 3 тонн</option>
-                                    <option>Фронтальный погрузчики 5 тонн и более</option>
-                                </select>
-                            </div>    
+                                    <label> <input name="nizkoramnik_40" type="checkbox" value="1">
+                                        Nizkoramnik 40 тонн</label>
+
+                                </div>
+                            </div>
                         </div>
 
 
-                        <div class="form-group">
-                            <label for="auto_bort" class="col-md-4 control-label">Бортовые машины</label>
+                        <div class="col-md-offset-4 col-md-6">
+                            <h4>Фронтальный погрузчики</h4>
+                        </div>
 
-                            <div class="col-md-6">
-                                <select class="form-control" name="auto_bort" multiple>
-                                    <option>Бортовые машины 6 метров</option>
-                                    <option>Бортовые машины 9 метров</option>
-                                    <option>Бортовые машины 12 метров</option>
-                                    <option>Бортовые машины 13 метров и более</option>
-                                </select>
-                            </div>    
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input name="lifter_1" type="checkbox" value="1">
+                                        Фронтальный погрузчики 1 тонн</label>
+
+                                    <label><input name="lifter_3" type="checkbox" value="1">
+                                        Фронтальный погрузчики 3 тонн</label>
+
+                                    <label><input name="lifter_5" type="checkbox" value="1">
+                                        Фронтальный погрузчики 5 тонн</label>
+                                </div>
+                            </div>
+                        </div>
+                     
+
+                        <div class="col-md-offset-4 col-md-6">
+                            <h4>Бортовые машины</h4>
+                        </div>
+
+                        <div class="col-md-offset-2 col-md-8">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label> <input name="open_6" type="checkbox" value="1">
+                                        Бортовые машины 6 метров</label>
+
+                                    <label><input name="open_9" type="checkbox" value="1">
+                                        Бортовые машины 9 метров</label>
+
+                                    <label><input name="open_12" type="checkbox" value="1">
+                                        Бортовые машины 12 метров</label>
+
+                                    <label><input name="open_13" type="checkbox" value="1">
+                                        Бортовые машины 13.5 метров и более</label>                                        
+                                </div>
+                            </div>
                         </div>
 
 
