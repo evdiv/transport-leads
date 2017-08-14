@@ -4,14 +4,14 @@
         <div class="row">
             <div class="col-sm-12 text-center">
                 <!-- Cargo Type buttons -->
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-car fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-home fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-subway fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-ship fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-motorcycle fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i></button>
-                <button class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-university fa-2x" aria-hidden="true"></i></button>                
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-car fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-cogs fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-home fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-subway fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-ship fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-motorcycle fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-diamond fa-2x" aria-hidden="true"></i></div>
+                <div class="btn btn-primary" @click="showAddCargoForm"><i class="fa fa-university fa-2x" aria-hidden="true"></i></div>                
             </div>
         </div>
 
@@ -26,11 +26,11 @@
             </div>
         </div>
 
-        <hr />
+        <hr /> 
         <!-- Add cargo Form Component -->
         <form-add-cargo v-if="showForm" @addCargo="addCargo"></form-add-cargo>
 
-        <textarea name="order-takelaj-data" class="form-control" rows="3">{{ orderTakelajData }}</textarea>
+        <input type="hidden" name="order-takelaj-data" class="form-control" v-bind:value="orderTakelajData">
 
     </div>
 </template>     
