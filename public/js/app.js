@@ -32161,7 +32161,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-sm-12 text-center"
-  }, [_c('button', {
+  }, [_c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32171,7 +32171,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32181,7 +32181,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32191,7 +32191,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32201,7 +32201,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32211,7 +32211,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32221,7 +32221,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32231,7 +32231,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     attrs: {
       "aria-hidden": "true"
     }
-  })]), _vm._v(" "), _c('button', {
+  })]), _vm._v(" "), _c('div', {
     staticClass: "btn btn-primary",
     on: {
       "click": _vm.showAddCargoForm
@@ -32269,13 +32269,16 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     on: {
       "addCargo": _vm.addCargo
     }
-  }) : _vm._e(), _vm._v(" "), _c('textarea', {
+  }) : _vm._e(), _vm._v(" "), _c('input', {
     staticClass: "form-control",
     attrs: {
-      "name": "order-takelaj-data",
-      "rows": "3"
+      "type": "hidden",
+      "name": "order-takelaj-data"
+    },
+    domProps: {
+      "value": _vm.orderTakelajData
     }
-  }, [_vm._v(_vm._s(_vm.orderTakelajData))])], 2)
+  })], 2)
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
