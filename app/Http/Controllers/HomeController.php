@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Order;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -17,12 +19,15 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application dashboard with the last active Orders
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        return view('users.admin.home');
+        $Order = new Order();
+        $orders = $Order->getByUserId(Auth::user()->id);
+
+        return view('users.admin.home', compact('orders'));
     }
 }
