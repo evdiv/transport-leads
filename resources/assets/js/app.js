@@ -17,6 +17,7 @@ window.Vue = require('vue');
 
 Vue.component('form-add-takelaj', require('./components/form-add-takelaj.vue'));
 Vue.component('form-add-cargo', require('./components/form-add-cargo.vue'));
+Vue.component('form-add-customer-details', require('./components/form-add-customer-details.vue'));
 
 
 const app = new Vue({

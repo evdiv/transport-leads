@@ -38,29 +38,44 @@
                 @include('orders.partials.create-auto')
 
 
+
+
                  <!-- Loading / Destination Addresses Order Form -->
                 @include('orders.partials.create-address')
 
                  --}}
 
-
                  <!-- User Details Form -->
                     @if(!Auth::guard('web')->check())
-                        @include('orders.partials.create-customer-login')
+                        
+                        @include('orders.partials.create-customer-details');
+
                     @endif    
 
-                    <div class="form-group">
-                        Дополнительная информация к заказу
-                        <textarea name="order-description" class="form-control" rows="3"></textarea>
+
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Дополнительная информация к заказу</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-10 col-md-offset-1">
+                                    <textarea name="order-description" 
+                                    class="form-control" rows="3"></textarea>
+                                </div>    
+                            </div>
+                        </div>
                     </div>
+
 
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
-                            <button type="submit" class="btn btn-primary btn-block">
+                        <br/>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">
                                 Добавить заказ
                             </button>
                         </div>
                     </div>
+
+
             </form>
 
         </div>

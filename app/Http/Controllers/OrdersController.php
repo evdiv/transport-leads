@@ -31,9 +31,10 @@ class OrdersController extends Controller
     public function store(Request $request) {
 
 
-        if (!Auth::check() && !empty($request['login'])) {
+        if (!Auth::check() && $request->customer == 'login') {
 
-            if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+            if (!Auth::attempt(['email' => $request->email, 
+                                'password' => $request->password])) {
                 
                 // Authentication passed...
                 return back()->withInput();
@@ -41,7 +42,7 @@ class OrdersController extends Controller
 
             $User = Auth::user();
 
-        } elseif(!Auth::check()) {
+        } elseif(!Auth::check() && $request->customer == 'register') {
 
             $this->validate(request(), [
                 'name' => 'required|string|max:255',
@@ -49,7 +50,13 @@ class OrdersController extends Controller
                 'password' => 'required|string|min:6|confirmed',
             ]); 
 
-            $User = User::create(request(['name', 'email', 'phone', 'password']));
+            $User = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => bcrypt($request->password),
+            ]);
+
             Auth::loginUsingId($User->id, true);
         
         } else {

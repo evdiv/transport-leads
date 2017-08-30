@@ -30,7 +30,7 @@
         <!-- Add cargo Form Component -->
         <form-add-cargo v-if="showForm" @addCargo="addCargo"></form-add-cargo>
 
-        <input type="hidden" name="order-takelaj-data" class="form-control" v-bind:value="orderTakelajData">
+        <input name="order-takelaj-data" type="hidden" class="form-control" v-bind:value="orderTakelajData">
 
     </div>
 </template>     
