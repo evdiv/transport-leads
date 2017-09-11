@@ -13,18 +13,49 @@ class Order extends Model
         return $this->hasMany(Comment::class);
     }
 
-
     public function addComment($body) {
 
         $this->comments()->create(compact('body'));
     }
 
-    public function getByUserId($user_id) {
 
-    	//we need to get an array with orders and related services
-    	$orders = DB::table('orders')->where('orders.user_id', $user_id)->get();
-    	
-
-    	return $orders;
+    public function cargos() {
+        return $this->hasMany('App\Cargo');
     }
+
+
+    public function autokrans() {
+        return $this->hasMany('App\Autokran');
+    }
+
+
+    public function borttovoys() {
+        return $this->hasMany('App\Bortovoy');
+    }
+
+
+    public function gruzchiks() {
+        return $this->hasMany('App\Gruzchik');
+    }
+
+
+    public function manipulators() {
+        return $this->hasMany('App\Manipulator');
+    }
+
+
+    public function nizkoramniks() {
+        return $this->hasMany('App\Nizkoramnik');
+    }  
+
+
+    public function pogruzchiks() {
+        return $this->hasMany('App\Pogruzchik');
+    }  
+
+
+    public function takelajs() {
+        return $this->hasMany('App\Takelaj');
+    }
+
 }

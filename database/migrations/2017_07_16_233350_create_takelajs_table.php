@@ -16,7 +16,7 @@ class CreateTakelajsTable extends Migration
         Schema::create('takelajs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->default(0);
-            $table->integer('cargo_id')->default(0);
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

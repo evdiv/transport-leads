@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\User;
 use App\Order;
+
+use Illuminate\Http\Request;
 use Auth;
 
 class HomeController extends Controller
@@ -25,8 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $Order = new Order();
-        $orders = $Order->getByUserId(Auth::user()->id);
+
+        $orders = User::find(Auth::user()->id)->orders;
 
         return view('users.admin.home', compact('orders'));
     }

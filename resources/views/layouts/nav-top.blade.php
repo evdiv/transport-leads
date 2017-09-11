@@ -47,20 +47,22 @@
                             <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
                             <li><a href="{{ route('admin.login') }}">Как админ</a></li>
                         @else
-                            <li>
-                                @if(Auth::guard('web')->check())
-                                    <a href="{{ route('logout') }}">Logout</a>
-                                @endif
+                            
+                            @if(Auth::guard('web')->check())
+                                <li><a href="{{ route('home') }}">My Orders</a></li> 
+                                <li><a href="{{ route('logout') }}">Logout</a></li>
+                            @endif
 
-                                @if(Auth::guard('web-admin')->check())
-                                    <a href="{{ route('admin.logout') }}">Admin Logout</a>
-                                @endif
 
-                                @if(Auth::guard('web-carrier')->check())
-                                    <a href="{{ route('carrier.logout') }}">Carrier Logout</a>
-                                @endif
+                            @if(Auth::guard('web-admin')->check())
+                                <li><a href="{{ route('admin.logout') }}">Admin Logout</a></li>
+                            @endif
 
-                            </li>
+
+                            @if(Auth::guard('web-carrier')->check())
+                                <li><a href="{{ route('carrier.logout') }}">Carrier Logout</a></li>
+                            @endif
+                            
                         @endif
 
 

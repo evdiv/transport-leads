@@ -15,6 +15,7 @@ class CreateCargosTable extends Migration
     {
         Schema::create('cargos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('order_id')->default(0);
             $table->string('name')->nullable();
             $table->integer('cargo_type_id')->default(0);
             $table->integer('cargo_photo_id')->default(0);

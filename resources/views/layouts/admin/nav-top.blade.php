@@ -36,12 +36,15 @@
                                 <ul class="dropdown-menu" role="menu">
 
                                 @if(Auth::guard('web-carrier')->check())
-                                   <li>
-                                        <a href="{{ route('carrier.add-info') }}">Update Carrier Info</a>
-                                   </li> 
+                                   <li><a href="{{ route('carrier.add-info') }}">Update Carrier Info</a></li> 
                                 @endif
 
-                                
+
+                                @if(Auth::guard('web')->check())
+                                    <li><a href="{{ route('order.create') }}">Сделать заказ</a></li> 
+                                @endif
+
+                              
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
