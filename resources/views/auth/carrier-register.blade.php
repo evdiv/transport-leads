@@ -7,6 +7,9 @@
             <div class="panel panel-default">
                 <div class="panel-heading">Зарегистрировать транспортную компанию</div>
                 <div class="panel-body">
+
+                    <div class="alert alert-success" role="alert">After adding your company to our database you start receiving new orders and will be able to contact them and offer your service</div>
+
                     <form class="form-horizontal" method="POST" action="{{ route('carrier.register.submit') }}">
                         {{ csrf_field() }}
                         <input id="carrier" type="hidden" name="carrier" value="1">

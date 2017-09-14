@@ -14,22 +14,14 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Клиентам <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-
-                        <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
-                        <li><a href="{{ route('login') }}">Войти как заказчик</a></li>
-
-                    </ul>
-                </li>
+                <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
+                <li><a href="{{ route('carrier.register') }}">Регистрация перевозчика</a></li>
                 
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li><a href="{{ route('carrier.register') }}">Регистрация перевозчика</a></li>
+
 
                 <li class="dropdown">
 
@@ -41,12 +33,13 @@
                     </a>
                 @endif
 
-                    <ul class="dropdown-menu">
-                        <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
-                            <li><a href="{{ route('admin.login') }}">Как админ</a></li>
-                        @else
+                <ul class="dropdown-menu">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
+                        <li><a href="{{ route('login') }}">Войти как заказчик</a></li>
+                        <li><a href="{{ route('admin.login') }}">Как админ</a></li>
+                    @else
                             
                             @if(Auth::guard('web')->check())
                                 <li><a href="{{ route('home') }}">My Orders</a></li> 
@@ -63,7 +56,7 @@
                                 <li><a href="{{ route('carrier.logout') }}">Carrier Logout</a></li>
                             @endif
                             
-                        @endif
+                    @endif
 
 
 

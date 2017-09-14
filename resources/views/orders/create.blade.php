@@ -8,6 +8,8 @@
 
         <div class="col-md-8 col-md-offset-2">
 
+        <div class="alert alert-success" role="alert">After adding your order to our database you start receiving offers from shippers.</div>
+
         <div class="row">
             <div class="col-sm-4">
                 <button type="button" class="btn btn-primary btn-lg btn-block">Такелажные работы</button>
@@ -58,7 +60,7 @@
                         <div class="panel-body">
                             <div class="form-group">
                                 <div class="col-md-10 col-md-offset-1">
-                                    <textarea name="order-description" 
+                                    <textarea name="note" 
                                     class="form-control" rows="3"></textarea>
                                 </div>    
                             </div>

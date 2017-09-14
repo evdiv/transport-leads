@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
 use App\Order;
-
 use Illuminate\Http\Request;
-use Auth;
+
 
 class HomeController extends Controller
 {
@@ -20,15 +18,20 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard with the last active Orders
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
+        $Order = new Order();
+        $orders = $Order->getActiveCreatedByUser();
 
-        $orders = User::find(Auth::user()->id)->orders;
+        return view('users.admin.home', compact('orders'));
+    }
+
+
+    public function completed()
+    {
+        $Order = new Order();
+        $orders = $Order->getCompletedCreatedByUser();
 
         return view('users.admin.home', compact('orders'));
     }

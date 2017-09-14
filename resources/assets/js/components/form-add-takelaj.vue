@@ -32,6 +32,28 @@
 
         <input name="order-takelaj-data" type="hidden" class="form-control" v-bind:value="orderTakelajData">
 
+        <div class="form-group">
+            <div class="col-sm-4 col-sm-offset-2">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="1" name="demontaj">Demontaj</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" value="1" name="montaj">Montaj</label>
+                </div>
+            </div>
+
+            <div class="col-sm-4 col-sm-offset-2">
+                <div class="checkbox">
+                    <label><input type="checkbox" value="1" name="peremeshenie">Peremeshenie</label>
+                </div>
+
+                <div class="checkbox">
+                    <label><input type="checkbox" value="1" name="razbor">Razbor perekritiy</label>
+                </div>
+            </div>
+        </div>
+
     </div>
 </template>     
 

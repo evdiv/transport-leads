@@ -16,7 +16,12 @@ class CreateTakelajsTable extends Migration
         Schema::create('takelajs', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('order_id')->default(0);
-            $table->text('description')->nullable();
+            $table->integer('demontaj')->nullable();
+            $table->integer('montaj')->nullable();
+            $table->integer('peremeshenie')->nullable();
+            $table->integer('razbor')->nullable();
+
+
             $table->timestamps();
         });
     }

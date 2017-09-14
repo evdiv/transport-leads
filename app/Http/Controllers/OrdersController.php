@@ -64,14 +64,23 @@ class OrdersController extends Controller
         }
 
 
-        $Order = Order::create(['user_id' => $User->id]);
+        $Order = Order::create([
+            'user_id' => $User->id,
+            'note' => $request->note]);
+
+        Takelaj::create([
+            'order_id' => $Order->id,
+            'demontaj' => $request->demontaj,
+            'montaj' => $request->montaj,
+            'peremeshenie' => $request->peremeshenie,
+            'razbor' => $request->razbor,
+            ]);
 
         $cargos = json_decode($request['order-takelaj-data'], true);
 
         foreach ($cargos as $cargo) {
+            $cargo['order_id'] = $Order->id;
             $Cargo = Cargo::create($cargo);
-
-            Takelaj::create(['order_id' => $Order->id, 'cargo_id' => $Cargo->id]);
         }
 
         return redirect('/home');

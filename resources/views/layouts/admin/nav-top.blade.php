@@ -8,16 +8,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Такелажник</a>
+            <a class="navbar-brand" href="/">Такелажник</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-
-                <li class="active"><a href="#">История заказов</a></li>
-                <li><a href="{{ route('order.create') }}">Сделать заказ</a></li>
-            </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -38,13 +33,11 @@
                                 @if(Auth::guard('web-carrier')->check())
                                    <li><a href="{{ route('carrier.add-info') }}">Update Carrier Info</a></li> 
                                 @endif
-
+                                    
 
                                 @if(Auth::guard('web')->check())
-                                    <li><a href="{{ route('order.create') }}">Сделать заказ</a></li> 
+                                   <li><a href="#">My Account</a></li> 
                                 @endif
-
-                              
                                     <li>
                                         <a href="{{ route('logout') }}"
                                            onclick="event.preventDefault();
