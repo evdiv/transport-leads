@@ -23,8 +23,9 @@ class HomeController extends Controller
     {
         $Order = new Order();
         $orders = $Order->getActiveCreatedByUser();
+        $active = true;
 
-        return view('users.admin.home', compact('orders'));
+        return view('users.admin.home', compact('orders', 'active'));
     }
 
 
@@ -32,7 +33,8 @@ class HomeController extends Controller
     {
         $Order = new Order();
         $orders = $Order->getCompletedCreatedByUser();
+        $completed = true;
 
-        return view('users.admin.home', compact('orders'));
+        return view('users.admin.home', compact('orders', 'completed'));
     }
 }

@@ -1,29 +1,54 @@
 <template>    
-
     <div class="panel panel-default" v-if="show">
-        <div class="panel-heading">Takelajnie Raboty</div>
+        <div class="panel-heading">Uslugi Gruzchikov</div>
         <div class="panel-body">
             
-                  <div class="form-group">
-            <div class="col-sm-4 col-sm-offset-2">
-                <div class="checkbox">
-                    <label><input type="checkbox" value="1" name="demontaj">Demontaj</label>
+
+        <div class="form-group">
+
+            <label for="people_number" class="col-md-4 control-label">Number of people</label>
+
+            <div class="col-md-6">
+                <input type="number" class="form-control" name="people_number" value="" required>
+            </div>
+
+                <label for="required_time" class="col-md-4 control-label">Required Time</label>
+
+                <div class="col-md-6">
+                    <select name="required_time" class="form-control">
+                        <option>I dont know</option>
+                        <option>less than 4 hours</option>
+                        <option>5 hours</option>
+                        <option>6 hours</option>
+                        <option>7 hours</option>
+                        <option>8 hours</option>
+                        <option>9 hours</option>
+                        <option>more than 10 hours</option>
+                    </select>
                 </div>
 
+
+            <div class="col-sm-4">
                 <div class="checkbox">
-                    <label><input type="checkbox" value="1" name="montaj">Montaj</label>
+                    <label><input type="checkbox" value="1" name="pogruzka">Pogruzka / Razgruzka</label>
                 </div>
             </div>
 
-            <div class="col-sm-4 col-sm-offset-2">
+            <div class="col-sm-4">
                 <div class="checkbox">
                     <label><input type="checkbox" value="1" name="peremeshenie">Peremeshenie</label>
                 </div>
+            </div>
 
+            <div class="col-sm-4">
                 <div class="checkbox">
-                    <label><input type="checkbox" value="1" name="razbor">Razbor perekritiy</label>
+                    <label><input type="checkbox" value="1" name="uborka">Uborka</label>
                 </div>
             </div>
+
+
+
+
         </div>
 
 
@@ -56,12 +81,9 @@
         <form-add-cargo v-if="showCargoForm" @addCargo="addCargo"></form-add-cargo>
 
         <input name="order-takelaj-data" type="hidden" class="form-control" v-bind:value="orderTakelajData">
-
-
           
         </div>
     </div>
-
 </template>     
 
 
@@ -69,7 +91,7 @@
     export default {
         data: function () {
             return {
-                show: true,
+                show: false,
                 showCargoForm: false,
                 cargos: [],
                 orderTakelajData: ''

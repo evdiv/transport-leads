@@ -15,10 +15,17 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('buttons-select-service', require('./components/buttons-select-service.vue')); 
+
 Vue.component('form-add-takelaj', require('./components/form-add-takelaj.vue'));
+Vue.component('form-add-gruzchiki', require('./components/form-add-gruzchiki.vue'));
+Vue.component('form-add-auto', require('./components/form-add-auto.vue'));
+Vue.component('form-add-address', require('./components/form-add-address.vue'));
+
 Vue.component('form-add-cargo', require('./components/form-add-cargo.vue'));
 Vue.component('form-add-customer-details', require('./components/form-add-customer-details.vue'));
 
+Vue.component('form-add-carrier-proposal', require('./components/form-add-carrier-proposal.vue'));
 
 const app = new Vue({
     el: '#app'

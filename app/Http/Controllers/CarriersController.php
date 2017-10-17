@@ -20,7 +20,10 @@ class CarriersController extends Controller
 
     public function index()
     {
-        return view('carriers.admin.home');
+        $messages = array();
+        $orders = array();
+        
+        return view('carriers.admin.home', compact('messages', 'orders'));
     }
 
 

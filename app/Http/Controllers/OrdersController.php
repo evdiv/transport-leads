@@ -9,18 +9,22 @@ use App\Takelaj;
 use App\Cargo;
 use Auth;
 
+
 class OrdersController extends Controller
 {
     public function index() {
 
-        $orders = Order::latest()->get();
+        $Order = new Order;
+        $orders = $Order->getRecent();
         return view('orders.index', compact('orders'));
     }
+
 
     public function show($id) {
         $order = Order::find($id);
         return view('orders.show', compact('order'));
     }
+
 
     public function create() {
         return view('orders.create');

@@ -842,9 +842,17 @@ window.Vue = __webpack_require__(43);
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+Vue.component('buttons-select-service', __webpack_require__(66));
+
 Vue.component('form-add-takelaj', __webpack_require__(39));
+Vue.component('form-add-gruzchiki', __webpack_require__(60));
+Vue.component('form-add-auto', __webpack_require__(62));
+Vue.component('form-add-address', __webpack_require__(64));
+
 Vue.component('form-add-cargo', __webpack_require__(37));
 Vue.component('form-add-customer-details', __webpack_require__(38));
+
+Vue.component('form-add-carrier-proposal', __webpack_require__(69));
 
 var app = new Vue({
   el: '#app'
@@ -1915,11 +1923,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            showForm: false,
+            show: true,
+            showCargoForm: false,
             cargos: [],
             orderTakelajData: ''
         };
@@ -1927,11 +1943,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         showAddCargoForm: function showAddCargoForm() {
-            this.showForm = true;
+            this.showCargoForm = true;
         },
         addCargo: function addCargo(cargo) {
             this.cargos.push(cargo);
-            this.showForm = false;
+            this.showCargoForm = false;
             this.updateOrderTakelaj();
         },
         removeCargo: function removeCargo(index) {
@@ -32244,7 +32260,13 @@ if (false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-  return _c('div', [_c('div', {
+  return (_vm.show) ? _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Takelajnie Raboty")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
     staticClass: "row"
   }, [_c('div', {
     staticClass: "col-sm-12 text-center"
@@ -32352,7 +32374,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
         "aria-hidden": "true"
       }
     })]), _vm._v("\n            Груз: "), _c('b', [_vm._v(_vm._s(cargo.name))]), _vm._v(", Вес: "), _c('b', [_vm._v(_vm._s(cargo.weight))]), _vm._v(" "), _c('br'), _vm._v("\n            Размеры: длина " + _vm._s(cargo.length) + ", ширина " + _vm._s(cargo.width) + ", высота " + _vm._s(cargo.height) + "\n        ")])])
-  }), _vm._v(" "), _c('hr'), _vm._v(" "), (_vm.showForm) ? _c('form-add-cargo', {
+  }), _vm._v(" "), (_vm.showCargoForm) ? _c('form-add-cargo', {
     on: {
       "addCargo": _vm.addCargo
     }
@@ -32365,7 +32387,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     domProps: {
       "value": _vm.orderTakelajData
     }
-  }), _vm._v(" "), _vm._m(0)], 2)
+  })], 2)]) : _vm._e()
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     staticClass: "form-group"
@@ -32421,7 +32443,7 @@ if (false) {
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    staticClass: "panel-body"
+    staticClass: "panel panel-default"
   }, [_c('label', {
     staticClass: "radio-inline"
   }, [_c('input', {
@@ -42585,6 +42607,743 @@ module.exports = function(module) {
 __webpack_require__(9);
 module.exports = __webpack_require__(10);
 
+
+/***/ }),
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */,
+/* 53 */,
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */,
+/* 58 */,
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            show: false,
+            showCargoForm: false,
+            cargos: [],
+            orderTakelajData: ''
+        };
+    },
+
+    methods: {
+        showAddCargoForm: function showAddCargoForm() {
+            this.showCargoForm = true;
+        },
+        addCargo: function addCargo(cargo) {
+            this.cargos.push(cargo);
+            this.showCargoForm = false;
+            this.updateOrderTakelaj();
+        },
+        removeCargo: function removeCargo(index) {
+            this.cargos.splice(index, 1);
+            this.updateOrderTakelaj();
+        },
+        updateOrderTakelaj: function updateOrderTakelaj() {
+            this.orderTakelajData = JSON.stringify(this.cargos);
+        }
+    }
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(59),
+  /* template */
+  __webpack_require__(61),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\takelajnik.com\\resources\\assets\\js\\components\\form-add-gruzchiki.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] form-add-gruzchiki.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3e40a866", Component.options)
+  } else {
+    hotAPI.reload("data-v-3e40a866", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.show) ? _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Uslugi Gruzchikov")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_vm._m(0), _vm._v(" "), _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-12 text-center"
+  }, [_c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-car fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-cogs fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-home fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-subway fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-ship fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-motorcycle fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-diamond fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })]), _vm._v(" "), _c('div', {
+    staticClass: "btn btn-primary",
+    on: {
+      "click": _vm.showAddCargoForm
+    }
+  }, [_c('i', {
+    staticClass: "fa fa-university fa-2x",
+    attrs: {
+      "aria-hidden": "true"
+    }
+  })])])]), _vm._v(" "), _vm._l((_vm.cargos), function(cargo, index) {
+    return _c('div', [_c('div', {
+      staticClass: "alert alert-success alert-dismissible",
+      attrs: {
+        "role": "alert"
+      }
+    }, [_c('button', {
+      staticClass: "close",
+      attrs: {
+        "type": "button",
+        "data-dismiss": "alert",
+        "aria-label": "Close"
+      },
+      on: {
+        "click": function($event) {
+          _vm.removeCargo(index)
+        }
+      }
+    }, [_c('i', {
+      staticClass: "fa fa-times-circle",
+      attrs: {
+        "aria-hidden": "true"
+      }
+    })]), _vm._v("\n            Груз: "), _c('b', [_vm._v(_vm._s(cargo.name))]), _vm._v(", Вес: "), _c('b', [_vm._v(_vm._s(cargo.weight))]), _vm._v(" "), _c('br'), _vm._v("\n            Размеры: длина " + _vm._s(cargo.length) + ", ширина " + _vm._s(cargo.width) + ", высота " + _vm._s(cargo.height) + "\n        ")])])
+  }), _vm._v(" "), (_vm.showCargoForm) ? _c('form-add-cargo', {
+    on: {
+      "addCargo": _vm.addCargo
+    }
+  }) : _vm._e(), _vm._v(" "), _c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "order-takelaj-data",
+      "type": "hidden"
+    },
+    domProps: {
+      "value": _vm.orderTakelajData
+    }
+  })], 2)]) : _vm._e()
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-md-4 control-label",
+    attrs: {
+      "for": "people_number"
+    }
+  }, [_vm._v("Number of people")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "number",
+      "name": "people_number",
+      "value": "",
+      "required": ""
+    }
+  })]), _vm._v(" "), _c('label', {
+    staticClass: "col-md-4 control-label",
+    attrs: {
+      "for": "required_time"
+    }
+  }, [_vm._v("Required Time")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('select', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "required_time"
+    }
+  }, [_c('option', [_vm._v("I dont know")]), _vm._v(" "), _c('option', [_vm._v("less than 4 hours")]), _vm._v(" "), _c('option', [_vm._v("5 hours")]), _vm._v(" "), _c('option', [_vm._v("6 hours")]), _vm._v(" "), _c('option', [_vm._v("7 hours")]), _vm._v(" "), _c('option', [_vm._v("8 hours")]), _vm._v(" "), _c('option', [_vm._v("9 hours")]), _vm._v(" "), _c('option', [_vm._v("more than 10 hours")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "value": "1",
+      "name": "pogruzka"
+    }
+  }), _vm._v("Pogruzka / Razgruzka")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "value": "1",
+      "name": "peremeshenie"
+    }
+  }), _vm._v("Peremeshenie")])])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('div', {
+    staticClass: "checkbox"
+  }, [_c('label', [_c('input', {
+    attrs: {
+      "type": "checkbox",
+      "value": "1",
+      "name": "uborka"
+    }
+  }), _vm._v("Uborka")])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-3e40a866", module.exports)
+  }
+}
+
+/***/ }),
+/* 62 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  __webpack_require__(68),
+  /* template */
+  __webpack_require__(63),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\takelajnik.com\\resources\\assets\\js\\components\\form-add-auto.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] form-add-auto.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-46158aaa", Component.options)
+  } else {
+    hotAPI.reload("data-v-46158aaa", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return (_vm.show) ? _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Auto")]), _vm._v(" "), _vm._m(0)]) : _vm._e()
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel-body"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-md-4 control-label",
+    attrs: {
+      "for": "required_time"
+    }
+  }, [_vm._v("Required Time")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('select', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "required_time"
+    }
+  }, [_c('option', [_vm._v("I dont know")]), _vm._v(" "), _c('option', [_vm._v("less than 4 hours")]), _vm._v(" "), _c('option', [_vm._v("5 hours")]), _vm._v(" "), _c('option', [_vm._v("6 hours")]), _vm._v(" "), _c('option', [_vm._v("7 hours")]), _vm._v(" "), _c('option', [_vm._v("8 hours")]), _vm._v(" "), _c('option', [_vm._v("9 hours")]), _vm._v(" "), _c('option', [_vm._v("more than 10 hours")])])]), _vm._v(" "), _c('label', {
+    staticClass: "col-md-4 control-label",
+    attrs: {
+      "for": "service_type"
+    }
+  }, [_vm._v("Type of Auto")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('select', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "service_type"
+    }
+  }, [_c('option', [_vm._v("Auto Type 1")]), _vm._v(" "), _c('option', [_vm._v("Auto Type 2")]), _vm._v(" "), _c('option', [_vm._v("Auto Type 3")]), _vm._v(" "), _c('option', [_vm._v("Auto Type 4")]), _vm._v(" "), _c('option', [_vm._v("Auto Type 5")])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-46158aaa", module.exports)
+  }
+}
+
+/***/ }),
+/* 64 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(65),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\takelajnik.com\\resources\\assets\\js\\components\\form-add-address.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] form-add-address.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-30372028", Component.options)
+  } else {
+    hotAPI.reload("data-v-30372028", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 65 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "panel panel-default"
+  }, [_c('div', {
+    staticClass: "panel-heading"
+  }, [_vm._v("Address of operations")]), _vm._v(" "), _c('div', {
+    staticClass: "panel-body"
+  }, [_c('form', {
+    staticClass: "form-horizontal"
+  }, [_c('div', {
+    staticClass: "form-group"
+  }, [_c('label', {
+    staticClass: "col-md-4 control-label",
+    attrs: {
+      "for": "loading-location"
+    }
+  }, [_vm._v("Loading Point")]), _vm._v(" "), _c('div', {
+    staticClass: "col-md-6"
+  }, [_c('input', {
+    staticClass: "form-control",
+    attrs: {
+      "type": "text",
+      "name": "loading-location",
+      "value": "",
+      "required": "",
+      "autofocus": ""
+    }
+  })])]), _vm._v(" "), _c('div', {
+    staticClass: "form-group"
+  }, [_c('div', {
+    staticClass: "col-md-6 col-md-offset-4"
+  }, [_c('button', {
+    staticClass: "btn btn-primary",
+    attrs: {
+      "type": "submit"
+    }
+  }, [_vm._v("\r\n                      Add Destination or Additional point\r\n                    ")])])])])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-30372028", module.exports)
+  }
+}
+
+/***/ }),
+/* 66 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(67),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\takelajnik.com\\resources\\assets\\js\\components\\buttons-select-service.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] buttons-select-service.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-452e834e", Component.options)
+  } else {
+    hotAPI.reload("data-v-452e834e", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 67 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "row"
+  }, [_c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-lg btn-block",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Такелажные работы")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-lg btn-block",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Uslugi Gruzchikov")])]), _vm._v(" "), _c('div', {
+    staticClass: "col-sm-4"
+  }, [_c('button', {
+    staticClass: "btn btn-primary btn-lg btn-block",
+    attrs: {
+      "type": "button"
+    }
+  }, [_vm._v("Zakaz Spectechniki")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-452e834e", module.exports)
+  }
+}
+
+/***/ }),
+/* 68 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            show: false
+        };
+    }
+});
+
+/***/ }),
+/* 69 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var Component = __webpack_require__(2)(
+  /* script */
+  null,
+  /* template */
+  __webpack_require__(70),
+  /* scopeId */
+  null,
+  /* cssModules */
+  null
+)
+Component.options.__file = "C:\\xampp\\htdocs\\takelajnik.com\\resources\\assets\\js\\components\\form-add-carrier-proposal.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
+if (Component.options.functional) {console.error("[vue-loader] form-add-carrier-proposal.vue: functional components are not supported with templates, they should use render functions.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5f011123", Component.options)
+  } else {
+    hotAPI.reload("data-v-5f011123", Component.options)
+  }
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 70 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _vm._m(0)
+},staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
+  return _c('div', {
+    staticClass: "form-group"
+  }, [_c('textarea', {
+    staticClass: "form-control",
+    attrs: {
+      "name": "proposal",
+      "rows": "3"
+    }
+  }), _vm._v(" "), _c('div', {
+    staticClass: "text-right"
+  }, [_c('div', {
+    staticClass: "btn btn-success btn-sm"
+  }, [_vm._v("Add your offer")])])])
+}]}
+module.exports.render._withStripped = true
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+     require("vue-hot-reload-api").rerender("data-v-5f011123", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

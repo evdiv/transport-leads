@@ -1,5 +1,5 @@
 <template>
-	<div class="panel-body">
+    <div class="panel panel-default">
 
         <label class="radio-inline">
             <input type="radio" name="customer" value="register" @click="displayRegisterForm" checked>Register

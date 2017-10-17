@@ -58,6 +58,22 @@ class Order extends Model
     }
 
 
+    public function getRecent() {
+
+        $orders = Order::where([
+                ['active', '=', '1'],
+                ['completed', '<>', '1']
+            ])->limit(20)->get();
+
+        foreach ($orders as &$order) {
+            $order['cargos'] = self::find($order->id)->cargos;
+            $order['takelaj'] = self::find($order->id)->takelaj;
+        }
+
+        return $orders;
+    }
+
+
     public function getActiveCreatedByUser() {
 
         $orders = User::find(Auth::user()->id)->orders()->where([

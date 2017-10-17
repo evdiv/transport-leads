@@ -7,8 +7,10 @@
         <div class="col-md-4">
 
             <div class="list-group">
-                <a class="list-group-item active" href="{{ route('home') }}">Active Orders</a>
-                <a class="list-group-item" href="{{ route('user.completed.orders')}}">Completed Orders</a>
+                <a class="list-group-item {{ !empty($active) ? 'active': '' }}" href="{{ route('home') }}">Active Orders</a>
+
+                <a class="list-group-item {{ !empty($completed) ? 'active': '' }}" href="{{ route('user.completed.orders')}}">Completed Orders</a>
+
                 <a class="list-group-item" href="{{ route('order.create') }}">Сделать заказ</a>
             </div>
 
@@ -17,11 +19,21 @@
         <div class="col-md-8">
 
             @foreach($orders->all() as $order)
+
+                <!-- Order for Takelaj -->
                 @if(isset($order->takelaj)) 
-                    <!-- Display Takelag Order -->
-                    @include('users.admin.partials.display-takelaj-order')
+                    @include('orders.partials.preview-takelaj')
                 @endif
 
+                <!-- Order for Gruzchiki -->
+                @if(isset($order->gruzchiki)) 
+                    @include('orders.partials.preview-gruzchiki')
+                @endif
+
+                <!-- Order for Auto and Special Equipment -->
+                @if(isset($order->auto)) 
+                    @include('orders.partials.preview-auto')
+                @endif
 
             @endforeach
 
