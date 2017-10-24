@@ -4,7 +4,7 @@
 
     <div class="album text-muted">
         <div class="container">
-
+            
             <h3>{{ $order->title }}</h3>
             <p>{{ $order->description }}</p>
 

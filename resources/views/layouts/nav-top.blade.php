@@ -21,47 +21,41 @@
 
             <ul class="nav navbar-nav navbar-right">
 
-
-
                 <li class="dropdown">
-
-                @if (Auth::guest())
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Войти <span class="caret"></span></a>
-                @else
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                        {{ Auth::user()->name }} <span class="caret"></span>
+
+                        @if(Auth::guard('web')->check())
+                            {{ Auth::user()->name }} 
+
+                        @elseif(Auth::guard('web-carrier')->check())
+                            {{ Auth::guard('web-carrier')->user()->name }}
+
+                        @else
+                            Войти
+                        @endif
                     </a>
-                @endif
-
-                <ul class="dropdown-menu">
-                    <!-- Authentication Links -->
-                    @if (Auth::guest())
-                        <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
-                        <li><a href="{{ route('login') }}">Войти как заказчик</a></li>
-                        <li><a href="{{ route('admin.login') }}">Как админ</a></li>
-                    @else
-                            
-                            @if(Auth::guard('web')->check())
-                                <li><a href="{{ route('home') }}">My Orders</a></li> 
-                                <li><a href="{{ route('logout') }}">Logout</a></li>
-                            @endif
 
 
-                            @if(Auth::guard('web-admin')->check())
-                                <li><a href="{{ route('admin.logout') }}">Admin Logout</a></li>
-                            @endif
+                    <ul class="dropdown-menu">
+                        <!-- Authentication Links -->
+                        @if(Auth::guard('web')->check())
+                            <li><a href="{{ route('home') }}">My Orders</a></li> 
+                            <li><a href="{{ route('logout') }}">Logout</a></li>
+                        
+                        @elseif(Auth::guard('web-carrier')->check())
+                            <li><a href="{{ route('carrier.logout') }}">Carrier Logout</a></li>
 
+                        @elseif(Auth::guard('web-admin')->check())
+                            <li><a href="{{ route('admin.logout') }}">Admin Logout</a></li>
 
-                            @if(Auth::guard('web-carrier')->check())
-                                <li><a href="{{ route('carrier.logout') }}">Carrier Logout</a></li>
-                            @endif
-                            
-                    @endif
+                        @else
+                            <li><a href="{{ route('carrier.login') }}">Как перевозчик</a></li>
+                            <li><a href="{{ route('login') }}">Войти как заказчик</a></li>
+                            <li><a href="{{ route('admin.login') }}">Как админ</a></li>
 
-
-
-
+                        @endif
                     </ul>
+
                 </li>
             </ul>
         </div><!-- /.navbar-collapse -->
