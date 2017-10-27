@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Order;
 use App\User;
+use App\Proposal;
 use App\Takelaj;
 use App\Cargo;
 use Auth;
@@ -20,10 +21,15 @@ class OrdersController extends Controller
     }
 
 
+
     public function show($id) {
         $order = Order::find($id);
+        $order->showProposalForm = Proposal::showForm($id);
+        $order->showProposalButton = Proposal::showButton();
+
         return view('orders.show', compact('order'));
     }
+
 
 
     public function create() {

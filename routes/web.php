@@ -4,48 +4,36 @@
 Route::get('/', 'OrdersController@index');
 
 
+Route::get('/orders/create', 'OrdersController@create')->name('order.create');
+Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
+Route::post('/orders/', 'OrdersController@store')->name('order.submit');
+
+Route::post('/proposals', 'ProposalController@store')->name('proposal.submit');
+
 
 Route::get('/takelaj', 'TakelajController@index');
-
 Route::get('/takelaj/create', 'TakelajController@create');
-
 Route::post('/takelaj/', 'TakelajController@store');
-
 Route::get('/takelaj/{order}', 'TakelajController@show');
-
 Route::put('/takelaj/{order}', 'TakelajController@update');
-
-Route::post('/takelaj/{order}/comments', 'CommentsController@store');
 
 
 
 Route::get('/carriers/', 'CarriersController@index');
-
 Route::get('/carriers/create', 'CarriersController@create');
-
 Route::post('/carriers/', 'CarriersController@store');
-
 Route::get('/carriers/{carrier}', 'CarriersController@show');
-
 Route::put('/carriers/{carrier}', 'CarriersController@update');
 
 
 
 Route::get('/users/', 'UsersController@index');
-
 Route::get('/user/create', 'UsersController@create');
-
 Route::post('/users/', 'UsersController@store');
-
 Route::get('/users/{user}', 'UsersController@show');
-
 Route::put('/users/{user}', 'UsersController@update');
 
 
-
-Route::get('/orders/create', 'OrdersController@create')->name('order.create');
-Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
-Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
 Auth::routes();
 

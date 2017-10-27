@@ -11,21 +11,27 @@ class Carrier extends Authenticatable
 
     protected $guard = 'web-carrier';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+
     protected $fillable = [
         'name', 'email', 'phone', 'location', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
+
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function proposals() {
+        return $this->hasMany('App\Proposal');
+    }  
+
+
+    public function canAddProposal($order_id) {
+
+        $result = Proposal::whereRaw('order_id = ' . $order_id . ' and carrier_id = ' . $this->id)->count();
+        return !$result;
+    }
+
 }
+

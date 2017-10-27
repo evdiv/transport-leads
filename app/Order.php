@@ -12,13 +12,13 @@ class Order extends Model
 {
     protected $guarded = [];
 
-    public function comments() {
-        return $this->hasMany(Comment::class);
+    public function proposals() {
+        return $this->hasMany(Proposal::class);
     }
 
-    public function addComment($body) {
+    public function addProposal($amount, $body) {
 
-        $this->comments()->create(compact('body'));
+        $this->proposals()->create(compact('amount', 'body'));
     }
 
     public function cargos() {

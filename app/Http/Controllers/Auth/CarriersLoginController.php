@@ -54,7 +54,7 @@ class CarriersLoginController extends Controller
 
     public function logout()
     {
-        $this->guard('web-carrier')->logout();
+        Auth::guard('web-carrier')->logout();
         return redirect('/');
     }
 
