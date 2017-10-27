@@ -5,27 +5,33 @@
     <div class="album text-muted">
         <div class="container">
             
-            <h3>{{ $order->title }}</h3>
-            <p>{{ $order->description }}</p>
+              <!-- Order for Takelaj -->
+                @if(isset($order->takelaj)) 
+                    @include('orders.partials.display-takelaj')
+                @endif
+
+                <!-- Order for Gruzchiki -->
+                @if(isset($order->gruzchiki)) 
+                    @include('orders.partials.display-gruzchiki')
+                @endif
+
+                <!-- Order for Auto and Special Equipment -->
+                @if(isset($order->auto)) 
+                    @include('orders.partials.display-auto')
+                @endif
+
+                @if(Auth::guard('web-carrier')->check())
+                
+                    <!-- JS Add Carrier Proposal -->
+                    <form-add-carrier-proposal></form-add-carrier-proposal>
+                
+                @endif 
 
             <div class="comments">
                 @foreach($order->comments as $comment)
                     {{ $comment->body }}
                 @endforeach
             </div>
-
-            <form method="POST" action="/orders/{{ $order->id }}/comments">
-
-                {{ csrf_field() }}
-
-                <div class="form-group">
-                    <label for="body">Description</label>
-                    <textarea class="form-control" name="body" rows="6" required></textarea>
-                </div>
-
-                <button type="submit" class="btn btn-primary">Add Comment</button>
-            </form>
-
 
         </div>
     </div>

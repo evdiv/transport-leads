@@ -21,13 +21,7 @@
                 @if(isset($order->auto)) 
                     @include('orders.partials.preview-auto')
                 @endif
-
-                @if(Auth::guard('web-carrier')->check())
                 
-                    <!-- JS Add Carrier Proposal -->
-                    <form-add-carrier-proposal></form-add-carrier-proposal>
-                
-                @endif
             </div>   
 
         @endforeach
