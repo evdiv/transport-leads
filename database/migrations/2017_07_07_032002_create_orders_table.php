@@ -18,6 +18,7 @@ class CreateOrdersTable extends Migration
             $table->integer('user_id');
             $table->text('note')->nullable();
             $table->integer('active')->default(1);
+            $table->integer('in_process')->default(0);
             $table->integer('completed')->default(0);
             $table->timestamps();
         });

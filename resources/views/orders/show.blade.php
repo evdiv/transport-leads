@@ -37,7 +37,7 @@
                     <form-add-carrier-proposal></form-add-carrier-proposal>
 
 
-                    <form class="form-horizontal" method="POST" action="{{ route('proposal.submit') }}">
+                    <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/proposals">
 
                         {{ csrf_field() }}
 

@@ -9,7 +9,7 @@ Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
 Route::post('/proposals', 'ProposalController@store')->name('proposal.submit');
-
+Route::post('/orders/{order}/proposals', 'ProposalController@storeProposal');
 
 Route::get('/takelaj', 'TakelajController@index');
 Route::get('/takelaj/create', 'TakelajController@create');
@@ -20,9 +20,9 @@ Route::put('/takelaj/{order}', 'TakelajController@update');
 
 
 Route::get('/carriers/', 'CarriersController@index');
+Route::get('/carriers/{carrier}', 'CarriersController@show');
 Route::get('/carriers/create', 'CarriersController@create');
 Route::post('/carriers/', 'CarriersController@store');
-Route::get('/carriers/{carrier}', 'CarriersController@show');
 Route::put('/carriers/{carrier}', 'CarriersController@update');
 
 

@@ -53,8 +53,18 @@ class Order extends Model
         return $this->hasOne('App\Gruzchik');
     }
 
+
     public function takelaj() {
         return $this->hasOne('App\Takelaj');
+    }
+
+
+    public function scopeProposable($query) {
+        return $query->where([
+            ['active', '=', '1'],
+            ['in_proccess', '<>', '1'],
+            ['completed', '<>', '1']
+        ]); 
     }
 
 
