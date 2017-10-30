@@ -9,7 +9,10 @@ Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
 Route::post('/proposals', 'ProposalController@store')->name('proposal.submit');
-Route::post('/orders/{order}/proposals', 'ProposalController@storeProposal');
+Route::post('/orders/{order}/proposals', 'ProposalController@store');
+Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
+
+
 
 Route::get('/takelaj', 'TakelajController@index');
 Route::get('/takelaj/create', 'TakelajController@create');
@@ -64,9 +67,9 @@ Route::prefix('carrier')->group(function() {
 	Route::post('/login', 'Auth\CarriersLoginController@login')->name('carrier.login.submit');
 	Route::get('/logout', 'Auth\CarriersLoginController@logout')->name('carrier.logout');
 
-	Route::get('/', 'CarriersController@index')->name('carrier.dashboard');
-	Route::get('/add-info', 'CarriersController@edit')->name('carrier.add-info');
-	Route::post('/add-info', 'CarriersController@update')->name('carrier.add-info.submit');
+	Route::get('/', 'Admin\CarriersDashboardController@index')->name('carrier.dashboard');
+	Route::get('/add-info', 'Admin\CarriersDashboardController@edit')->name('carrier.add-info');
+	Route::post('/add-info', 'Admin\CarriersDashboardController@update')->name('carrier.add-info.submit');
 
 
 	// Password reset routes

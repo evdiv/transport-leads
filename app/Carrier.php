@@ -13,7 +13,7 @@ class Carrier extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'phone', 'location', 'password',
+        'name', 'email', 'phone', 'location', 'description', 'password',
     ];
 
 

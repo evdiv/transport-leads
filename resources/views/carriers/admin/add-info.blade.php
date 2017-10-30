@@ -6,10 +6,12 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Введите расположение и вид деятельности Вашей компании</div>
+
+                <div class="panel-heading">Add description, расположение и вид деятельности Вашей компании</div>
                 <div class="panel-body">
                     <form class="form-horizontal" method="POST" action="{{ route('carrier.add-info.submit') }}">
                         {{ csrf_field() }}
+
 
                         <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
                             <label for="location" class="col-md-4 control-label">Регион или Город</label>
@@ -20,6 +22,22 @@
                                 @if ($errors->has('location'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('location') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+
+                        <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
+                            <label for="description" class="col-md-4 control-label">Company Description</label>
+
+                            <div class="col-md-6">
+
+                                <textarea id="description" name="description" class="form-control" rows="6">{{  old('description', $carrier->description) }}</textarea>
+
+                                @if ($errors->has('description'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('description') }}</strong>
                                     </span>
                                 @endif
                             </div>

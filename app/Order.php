@@ -68,6 +68,16 @@ class Order extends Model
     }
 
 
+    public function hasAcceptedProposal() {
+        foreach ($this->proposals as $proposal) {
+            if($proposal->accepted) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public function getRecent() {
 
         $orders = Order::where([

@@ -22,6 +22,21 @@ class Proposal extends Model
 
     
 
+    public function canBeAccepted() {
+       $User = Auth::guard('web')->user(); 
+
+       if(!$User || $User->id != $this->order->user_id) {
+            return false;
+       }
+
+       if($this->order->in_process || $this->order->completed || !$this->order->active) {
+            return false;
+       }
+
+       return true;
+    }
+
+
     public static function showForm($order_id) {
 
     	if(Auth::guard('web-carrier')->check()) {

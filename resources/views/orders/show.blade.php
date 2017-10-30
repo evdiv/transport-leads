@@ -30,7 +30,6 @@
                 </div>
 
 
-
                 @if($order->showProposalForm)
                     <!-- Add Proposal from Carrier -->
 

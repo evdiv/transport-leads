@@ -21,12 +21,14 @@ class OrdersController extends Controller
     }
 
 
-
     public function show($id) {
         $order = Order::find($id);
-        $order->showProposalForm = Proposal::showForm($id);
-        $order->showProposalButton = Proposal::showButton();
 
+        if(!$order->hasAcceptedProposal()) {
+            $order->showProposalForm = Proposal::showForm($id);
+            $order->showProposalButton = Proposal::showButton();
+        }
+        
         return view('orders.show', compact('order'));
     }
 

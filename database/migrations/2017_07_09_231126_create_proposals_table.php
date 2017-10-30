@@ -19,6 +19,7 @@ class CreateProposalsTable extends Migration
             $table->integer('carrier_id')->nullable();
             $table->integer('amount');
             $table->string('body');
+            $table->integer('accepted')->default(0);
             $table->timestamps();
         });
     }
