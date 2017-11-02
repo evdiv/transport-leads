@@ -5,22 +5,27 @@
     <div class="container">
 
         @foreach($orders as $order)
+            
+            @if($order->in_process)
+                <div class="panel panel-success">
+            @else
+                <div class="panel panel-info">
+            @endif
 
-            <div class="panel panel-default">
-              <!-- Order for Takelaj -->
-                @if(isset($order->takelaj)) 
-                    @include('orders.partials.preview-takelaj')
-                @endif
+            <!-- Order for Takelaj -->
+            @if(isset($order->takelaj)) 
+                @include('orders.partials.preview-takelaj')
+            @endif
 
-                <!-- Order for Gruzchiki -->
-                @if(isset($order->gruzchiki)) 
-                    @include('orders.partials.preview-gruzchiki')
-                @endif
+            <!-- Order for Gruzchiki -->
+            @if(isset($order->gruzchiki)) 
+                @include('orders.partials.preview-gruzchiki')
+            @endif
 
-                <!-- Order for Auto and Special Equipment -->
-                @if(isset($order->auto)) 
-                    @include('orders.partials.preview-auto')
-                @endif
+            <!-- Order for Auto and Special Equipment -->
+            @if(isset($order->auto)) 
+                @include('orders.partials.preview-auto')
+            @endif
                 
             </div>   
 
