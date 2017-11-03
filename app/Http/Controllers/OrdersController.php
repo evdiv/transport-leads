@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use App\User;
 use App\Proposal;
+use App\Comment;
 use App\Takelaj;
 use App\Cargo;
 use Auth;

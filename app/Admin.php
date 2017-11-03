@@ -35,4 +35,9 @@ class Admin extends Authenticatable
         $this->notify(new AdminResetPasswordNotification($token));
     }
 
+
+    public function comments() {
+        return $this->morphMany('App\Comment', 'commentable');
+    }
+
 }

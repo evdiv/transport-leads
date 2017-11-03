@@ -21,8 +21,35 @@
                 @endif
 
 
-                <!-- Proposals from Carriers -->
+                <!-- Show Comments -->
+                <ul class="list-group">
+                    @foreach($order->comments as $comment)
+                        @include('orders.partials.display-comment')
+                    @endforeach
+                </ul>
 
+
+                <!-- Show Comments Form -->
+                @if($order->commentsAllowed())
+
+                    <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/comments">
+
+                        {{ csrf_field() }}
+
+                        <div class="form-group">
+
+                            <textarea name="body" class="form-control" rows="2"></textarea>
+
+                            <div class='text-right'>
+                                <button type="submit" class='btn btn-primary btn-sm'>Add Comment</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+
+                @endif
+
+                <!-- Proposals from Carriers -->
                 <div class="list-group">
                     @foreach($order->proposals as $proposal)
                         @include('orders.partials.preview-proposal')
@@ -30,11 +57,10 @@
                 </div>
 
 
+
                 @if($order->showProposalForm)
                     <!-- Add Proposal from Carrier -->
-
                     <form-add-carrier-proposal></form-add-carrier-proposal>
-
 
                     <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/proposals">
 

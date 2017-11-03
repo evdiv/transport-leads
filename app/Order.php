@@ -12,14 +12,46 @@ class Order extends Model
 {
     protected $guarded = [];
 
+
     public function proposals() {
         return $this->hasMany(Proposal::class);
     }
 
-    public function addProposal($amount, $body) {
 
+    public function comments() {
+        return $this->hasMany(Comment::class);
+    }
+
+
+    public function user() {
+        return $this->hasOne(User::class);
+    }
+
+
+    public function addProposal($amount, $body) {
         $this->proposals()->create(compact('amount', 'body'));
     }
+
+
+    public function addComment($body) {
+
+        if(Auth::guard('web')->check()) {
+            $commentable_id = Auth::guard('web')->user()->id;
+            $commentable_type = "App\User";
+        
+        } elseif(Auth::guard('web-carrier')->check()) {
+            $commentable_id = Auth::guard('web-carrier')->user()->id;
+            $commentable_type = "App\Carrier";
+        
+        } elseif(Auth::guard('web-admin')->check()) {
+            $commentable_id = Auth::guard('web-admin')->user()->id;
+            $commentable_type = "App\Admin";
+        }
+
+        $this->comments()->create(compact('body', 'commentable_id', 'commentable_type'));
+    }    
+
+
 
     public function cargos() {
         return $this->hasMany('App\Cargo');
@@ -67,6 +99,12 @@ class Order extends Model
         ]); 
     }
 
+    public function scopeActiveIncomplete($query) {
+        return $query->where([
+            ['active', '=', '1'],
+            ['completed', '<>', '1']
+        ]); 
+    }
 
     public function hasAcceptedProposal() {
         foreach ($this->proposals as $proposal) {
@@ -123,6 +161,25 @@ class Order extends Model
         }
 
         return $orders;
+    }
+
+
+
+    public function commentsAllowed() {
+
+        if(Auth::guard('web-carrier')->check()) {
+            return true;
+        }
+
+        if(Auth::guard('web-admin')->check()) {
+            return true;
+        }
+
+        if(Auth::guard('web')->check() && Auth::guard('web')->user()->id == $this->user_id) {
+            return true;
+        }
+
+        return false;
     }
 
 }
