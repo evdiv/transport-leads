@@ -8,9 +8,11 @@ Route::get('/orders/create', 'OrdersController@create')->name('order.create');
 Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
-Route::post('/proposals', 'ProposalController@store')->name('proposal.submit');
+
+
 Route::post('/orders/{order}/proposals', 'ProposalController@store');
 Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
+Route::post('/orders/{order}/comments', 'CommentController@store');
 
 
 
