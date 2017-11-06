@@ -42,7 +42,6 @@ class OrdersController extends Controller
 
     public function store(Request $request) {
 
-
         if (!Auth::check() && $request->customer == 'login') {
 
             if (!Auth::attempt(['email' => $request->email, 
@@ -75,7 +74,6 @@ class OrdersController extends Controller
             $User = Auth::user();
         }
 
-
         $Order = Order::create([
             'user_id' => $User->id,
             'note' => $request->note]);
@@ -86,13 +84,19 @@ class OrdersController extends Controller
             'montaj' => $request->montaj,
             'peremeshenie' => $request->peremeshenie,
             'razbor' => $request->razbor,
-            ]);
+        ]);
 
         $cargos = json_decode($request['order-takelaj-data'], true);
 
         foreach ($cargos as $cargo) {
             $cargo['order_id'] = $Order->id;
             $Cargo = Cargo::create($cargo);
+        }
+
+        for ($i = 0; $i < count($request->locations); $i++) {
+                $pogruzka = ($i == 0) ? 1 : 0;
+                $name = $request->locations[$i];
+             $Order->addLocation($name, $pogruzka);
         }
 
         return redirect('/home');

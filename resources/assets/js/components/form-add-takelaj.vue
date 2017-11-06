@@ -45,7 +45,7 @@
         <div v-for="(cargo, index) in cargos">
             <div class="alert alert-success alert-dismissible" role="alert">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close" @click="removeCargo(index)">
-                    <i class="fa fa-times-circle" aria-hidden="true"></i>
+                    <i class="fa fa-trash-o fa-2x" aria-hidden="true"></i>
                 </button>
                 Груз: <b>{{ cargo.name }}</b>, Вес: <b>{{ cargo.weight }}</b> <br/>
                 Размеры: длина {{ cargo.length }}, ширина {{ cargo.width }}, высота {{ cargo.height }}

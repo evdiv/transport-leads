@@ -41,7 +41,7 @@
                             <textarea name="body" class="form-control" rows="2"></textarea>
 
                             <div class='text-right'>
-                                <button type="submit" class='btn btn-primary btn-sm'>Add Comment</button>
+                                <button type="submit" class='btn btn-primary btn-sm'>Добавить комментарий</button>
                             </div>
                         </div>
                         

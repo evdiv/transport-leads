@@ -52,6 +52,15 @@ class Order extends Model
     }    
 
 
+    public function locations() {
+        return $this->hasMany('App\Location');
+    }
+
+
+    public function addLocation($name, $pogruzka) {
+        $this->locations()->create(compact('name', 'pogruzka'));
+    }
+
 
     public function cargos() {
         return $this->hasMany('App\Cargo');
