@@ -82,6 +82,6 @@
             @endforeach
             </tr>
           </table>
-        
+          
     </div>
 </div><!--/.col-panel-->

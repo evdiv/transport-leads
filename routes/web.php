@@ -8,12 +8,11 @@ Route::get('/orders/create', 'OrdersController@create')->name('order.create');
 Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 Route::post('/orders/', 'OrdersController@store')->name('order.submit');
 
-
-
 Route::post('/orders/{order}/proposals', 'ProposalController@store');
 Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
 Route::post('/orders/{order}/comments', 'CommentController@store');
 
+Route::post('/proposals/{proposal}/message', 'MessageController@store');
 
 
 Route::get('/takelaj', 'TakelajController@index');
@@ -23,7 +22,6 @@ Route::get('/takelaj/{order}', 'TakelajController@show');
 Route::put('/takelaj/{order}', 'TakelajController@update');
 
 
-
 Route::get('/carriers/', 'CarriersController@index');
 Route::get('/carriers/{carrier}', 'CarriersController@show');
 Route::get('/carriers/create', 'CarriersController@create');
@@ -31,13 +29,11 @@ Route::post('/carriers/', 'CarriersController@store');
 Route::put('/carriers/{carrier}', 'CarriersController@update');
 
 
-
 Route::get('/users/', 'UsersController@index');
 Route::get('/user/create', 'UsersController@create');
 Route::post('/users/', 'UsersController@store');
 Route::get('/users/{user}', 'UsersController@show');
 Route::put('/users/{user}', 'UsersController@update');
-
 
 
 Auth::routes();

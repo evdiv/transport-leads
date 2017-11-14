@@ -32,6 +32,11 @@ class Carrier extends Authenticatable
     }
 
 
+    public function messages() {
+        return $this->morphMany('App\Message', 'postedfrom');
+    }    
+
+
     public function canAddProposal($order_id) {
 
         $result = Proposal::whereRaw('order_id = ' . $order_id . ' and carrier_id = ' . $this->id)->count();

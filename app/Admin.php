@@ -40,4 +40,9 @@ class Admin extends Authenticatable
         return $this->morphMany('App\Comment', 'commentable');
     }
 
+
+    public function messages() {
+        return $this->morphMany('App\Message', 'postedfrom');
+    }
+
 }

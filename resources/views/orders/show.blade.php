@@ -27,8 +27,6 @@
                         @include('orders.partials.display-comment')
                     @endforeach
                 </ul>
-
-
                 <!-- Show Comments Form -->
                 @if($order->commentsAllowed())
 

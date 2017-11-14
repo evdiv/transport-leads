@@ -20,7 +20,11 @@ class Proposal extends Model
         return $this->belongsTo(Carrier::class);
     }
 
-    
+
+    public function messages() {
+        return $this->hasMany(Message::class);
+    }    
+
 
     public function canBeAccepted() {
        $User = Auth::guard('web')->user(); 
@@ -34,6 +38,25 @@ class Proposal extends Model
        }
 
        return true;
+    }
+
+
+    public function canMessageBeAdded() {
+        $User = Auth::guard('web')->user(); 
+        $Carrier = Auth::guard('web-carrier')->user(); 
+
+        if($this->order->in_process || $this->order->completed || !$this->order->active) {
+            return false;
+        }
+
+        if($User && $User->id == $this->order->user_id) {
+            return true;
+
+        } elseif($Carrier && $Carrier->id == $this->carrier_id) {
+            return true;
+        }
+
+       return false;
     }
 
 
@@ -67,6 +90,22 @@ class Proposal extends Model
     	return $show;
     }
 
+    public function addMessage($body) {
 
+        if(Auth::guard('web')->check()) {
+            $postedfrom_id = Auth::guard('web')->user()->id;
+            $postedfrom_type = "App\User";
+        
+        } elseif(Auth::guard('web-carrier')->check()) {
+            $postedfrom_id = Auth::guard('web-carrier')->user()->id;
+            $postedfrom_type = "App\Carrier";
+        
+        } elseif(Auth::guard('web-admin')->check()) {
+            $postedfrom_id = Auth::guard('web-admin')->user()->id;
+            $postedfrom_type = "App\Admin";
+        }
+
+        $this->messages()->create(compact('body', 'postedfrom_id', 'postedfrom_type'));
+    }
 
 }
