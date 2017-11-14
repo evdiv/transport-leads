@@ -56,10 +56,10 @@
 
         <div class="col-sm-6">
 
-                <div class="input-group">
-                    <div class="input-group-addon">Количество едениц груза</div>
-                    <input type="number" v-model="cargo.quantity"  class="form-control">
-                </div>
+            <div class="input-group">
+                <div class="input-group-addon">Количество едениц груза</div>
+                <input type="number" v-model="cargo.quantity"  class="form-control">
+            </div>
 
         </div>
     </div>
@@ -78,9 +78,15 @@
             <textarea class="form-control" v-model="cargo.description" rows="3"></textarea>
         </div>
 
-        <div class="col-sm-6 col-sm-offset-3 ">
-             <button class="btn btn-success btn-block" @click="addCargo">Сохранить груз</button>
+
+        <div class="col-sm-4 col-sm-offset-2">
+            <button class="btn btn-success btn-block" @click="addCargo">Сохранить груз</button>
         </div>
+
+        <div class="col-sm-4">
+            <button class="btn btn-warning btn-block" @click="closeFrom">Cancel</button>
+        </div>
+
     </div>
 
 
@@ -96,8 +102,12 @@
         },
 
         methods: {
-            addCargo: function () {
+            addCargo: function() {
                 this.$emit("addCargo", this.cargo);
+            },
+
+            closeFrom: function() {
+                this.$emit("closeFrom"); 
             }
         }
     }    
