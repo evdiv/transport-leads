@@ -1,44 +1,35 @@
 @extends('layouts.master')
 
 @section ('content')
+	
+	{{-- Page header  --}}
+	<section class="hero is-info">
+	  	<div class="hero-body">
+	    <div class="container">
+	      <h1 class="title">
+	        Primary title
+	      </h1>
+	      <h2 class="subtitle">
+	        Primary subtitle
+	      </h2>
+	    </div>
+	  </div>
+	</section>
 
-    <div class="container">
+	{{-- Intro Text --}}
+	<div class="container">
+  		<div class="notification">
+    		Description of the service.
+  		</div>
+	</div>
 
-        @foreach($orders as $order)
-            
-            @if($order->in_process)
-                <div class="panel panel-success">
-            @else
-                <div class="panel panel-info">
-            @endif
-
-            <!-- Order for Takelaj -->
-            @if(isset($order->takelaj)) 
-                @include('orders.partials.preview-takelaj')
-            @endif
-
-            <!-- Order for Gruzchiki -->
-            @if(isset($order->gruzchiki)) 
-                @include('orders.partials.preview-gruzchiki')
-            @endif
-
-            <!-- Order for Auto and Special Equipment -->
-            @if(isset($order->auto)) 
-                @include('orders.partials.preview-auto')
-            @endif
-                
-            </div>   
-
-        @endforeach
-
-    </div>
+	
+	<!-- Vue JS component for adding multiple goods -->
+	<div class="container">
+		<orders-table></orders-table>
+	</div>
 
 @endsection
 
-@section ('footer')
-
-    <p>&copy; Footer</p>
-
-@endsection
 
 

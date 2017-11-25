@@ -1,21 +1,7 @@
 <template>
 	<div>
-		<!-- JS Buttons for selecting the required Service -->
-		<div class="row" v-if="this.step0">
-	        <div class="col-sm-4">
-	            <button type="button" class="btn btn-primary btn-lg btn-block" @click="selectTakelaj">
-	            Такелажные работы</button>
-	        </div>
-	        <div class="col-sm-4">
-	            <button type="button" class="btn btn-primary btn-lg btn-block" @click="selectGruzchiki">
-	            Uslugi Gruzchikov</button>
-	        </div>
-	        <div class="col-sm-4">
-	            <button type="button" class="btn btn-primary btn-lg btn-block" @click="selectAuto">
-	            Zakaz Spectechniki</button>
-	        </div>
-	    </div>
 
+		<select-type></select-type>
 
     	<slot name="form-add-order-open"></slot>
 
@@ -75,6 +61,8 @@
 </template>
 
 <script>
+	import SelectType from './add-order-select-type'
+
 	export default {
 		data: function() {
 			return {
@@ -127,6 +115,9 @@
 				this.step3 = false;
 				this.step4 = false;
 			}
+		},
+		components: {
+			SelectType
 		}
 	}
 </script>

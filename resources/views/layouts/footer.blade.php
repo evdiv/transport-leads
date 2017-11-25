@@ -1,5 +1,5 @@
-<footer class="text-muted">
+<footer class="footer">
     <div class="container">
-        @yield('footer')
+    	<p>&copy; Long and McQuade Footer</p>
     </div>
 </footer>
