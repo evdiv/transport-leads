@@ -20,7 +20,7 @@ Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 Route::get('/takelaj', 'TakelajController@index');
 Route::get('/takelaj/create', 'TakelajController@create')->name('create.takelaj');
 Route::get('/takelaj/{id}', 'TakelajController@show');
-Route::post('/takelaj/', 'TakelajController@store');
+Route::post('/takelaj/', 'TakelajController@store')->name('submit.takelaj');
 Route::put('/takelaj/{id}', 'TakelajController@update');
 
 
