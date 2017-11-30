@@ -10,9 +10,12 @@ require('./bootstrap');
 window.Vue = require('vue');
 
 import Buefy from 'buefy';
+import VueFormWizard from 'vue-form-wizard';
 import store from './store';
 
 
+
+import 'vue-form-wizard/dist/vue-form-wizard.min.css';
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -20,6 +23,7 @@ import store from './store';
  */
 
 Vue.use(Buefy);
+Vue.use(VueFormWizard);
 
 Vue.component('form-cargo', require('./components/form-cargo.vue')); 
 Vue.component('form-add-cargo', require('./components/form-add-cargo.vue'));
@@ -30,10 +34,8 @@ Vue.component('form-add-auto', require('./components/form-add-auto.vue'));
 Vue.component('form-add-address', require('./components/form-add-address.vue'));
 Vue.component('form-add-carrier-proposal', require('./components/form-add-carrier-proposal.vue'));
 
-
-
-Vue.component('form-wizard', require('./components/add-order-form-wizard.vue'));
 Vue.component('orders-table', require('./components/orders-table.vue'));
+Vue.component('switcher', require('./components/switcher.vue'));
 
 
 const app = new Vue({
