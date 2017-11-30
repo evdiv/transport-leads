@@ -31,8 +31,6 @@ Vue.component('form-add-address', require('./components/form-add-address.vue'));
 Vue.component('form-add-carrier-proposal', require('./components/form-add-carrier-proposal.vue'));
 
 
-
-Vue.component('form-wizard', require('./components/add-order-form-wizard.vue'));
 Vue.component('orders-table', require('./components/orders-table.vue'));
 
 
