@@ -4,14 +4,14 @@
 	
     @include('layouts.hero')
 
-	<section class="hero is-medium">
+	<section class="hero">
 	  	<div class="hero-body">
 		    <div class="container">
 				<div class="buttons">
-  					<a  href="{{ route('create.takelaj') }}" class="button is-success is-large">
-  					Register for Lessons 1</a>
-  					<a  href="{{ route('carrier.register') }}" class="button is-warning is-large">Register for Lessons 2</a>
-  					<a  href="{{ route('carrier.register') }}" class="button is-danger is-large">Register for Lessons 3</a>
+  					<a  href="{{ route('create.takelaj') }}" class="button is-link">
+  					Lesson Registration</a>
+  					<a  href="#" class="button is-link">Lesson Registration</a>
+  					<a  href="#" class="button is-link">Lesson Registration</a>
 				</div>
 
 		    </div>

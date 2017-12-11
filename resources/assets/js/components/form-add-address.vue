@@ -1,60 +1,88 @@
 <template>
-<div class="panel panel-default">
-    <div class="panel-heading">
-    Адрес и время проведения работ</div>
-    <div class="panel-body">
+    <div>
 
-        <div class="form-group">
-            <label for="date" class="col-md-4 control-label">Дата работ</label>
 
-            <div class="col-md-6">
-                <input type="date" class="form-control" name="date" value="">
+    <div class="field is-horizontal">
+        <div class="field-body">
+            
+
+            <div class="field">
+                <div class="field-label is-normal">
+                    <label class="label">To</label>
+                </div>
+
+                <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input class="input" type="email" placeholder="Recipient email">
+                      </p>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="field">
+                <div class="field-label is-normal">
+                    <label class="label">To</label>
+                </div>
+
+                <div class="field-body">
+                    <div class="field">
+                      <p class="control">
+                        <input class="input" type="email" placeholder="Recipient email">
+                      </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="field">
+        <div class="field-body">
+
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control">
+                    <input type="text" class="input" name="locations[]" value="" required>
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label for="time" class="col-md-4 control-label">Время работ</label>
-
-            <div class="col-md-6">
-                <input type="time" class="form-control" name="time" value="">
-            </div>
-        </div>
+    </div>
 
 
-        <div class="form-group">
-            <label for="location" class="col-md-4 control-label">Пункт погрузки</label>
+            
 
-            <div class="col-md-6">
-                <input type="text" class="form-control" name="locations[]" value="" required>
-            </div>
-        </div>
+       </div>
+    </div>
+
+
+
+
+
+
+
+
 
         <div v-for="location in locations">
-            <div class="form-group">
-                <label for="location" class="col-md-4 control-label">Пункт дозагрузки/выгрузки</label>
-
-                <div class="col-md-6">
+            <div class="field">
+                <label class="label">Address</label>
+                <div class="control">
                     <input type="text" class="form-control" name="locations[]" value="" required>
                 </div>
 
-                <div class="col-md-2 pull-left">
-                    <a href="#" @click.prevent="deleteLocation"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
-                </div>
+                <a href="#" @click.prevent="deleteLocation"><i class="fa fa-trash-o fa-2x" aria-hidden="true"></i></a>
+
             </div>
         </div>
 
-
         <div class="form-group">
-            <div class="col-md-6 col-md-offset-4">
-                <button class="btn btn-primary" @click="addLocation">
-                  Add Destination or Additional point
-                </button>
-            </div>
+            <button class="btn btn-primary" @click="addLocation"> Add Address</button>
         </div>
 
     </div>
-</div>
-
 </template>
 
 <script>

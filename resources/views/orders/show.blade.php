@@ -39,7 +39,7 @@
                             <textarea name="body" class="form-control" rows="2"></textarea>
 
                             <div class='text-right'>
-                                <button type="submit" class='btn btn-primary btn-sm'>Добавить комментарий</button>
+                                <button type="submit" class='btn btn-primary btn-sm'>Add comment</button>
                             </div>
                         </div>
                         

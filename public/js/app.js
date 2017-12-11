@@ -11904,7 +11904,6 @@ Vue.component('form-add-gruzchiki', __webpack_require__(61));
 Vue.component('form-add-auto', __webpack_require__(64));
 Vue.component('form-add-address', __webpack_require__(67));
 Vue.component('form-add-carrier-proposal', __webpack_require__(70));
-
 Vue.component('orders-table', __webpack_require__(72));
 Vue.component('switcher', __webpack_require__(75));
 
@@ -32133,6 +32132,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -32160,240 +32166,269 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [
-            _vm._v("Название Груза")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.name,
-                expression: "cargo.name"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.cargo.name },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "name", $event.target.value)
-              }
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-4" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [_vm._v("Длина")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.length,
-                expression: "cargo.length"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number" },
-            domProps: { value: _vm.cargo.length },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "length", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
+  return _c("div", { staticClass: "box" }, [
+    _c("div", { staticClass: "field" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Lesson Name")]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-sm-4" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [_vm._v("Ширина")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.width,
-                expression: "cargo.width"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number" },
-            domProps: { value: _vm.cargo.width },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "width", $event.target.value)
-              }
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-4" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [_vm._v("Высота")]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.height,
-                expression: "cargo.height"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number" },
-            domProps: { value: _vm.cargo.height },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "height", $event.target.value)
-              }
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [
-            _vm._v("Вес еденицы груза")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.weight,
-                expression: "cargo.weight"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "text" },
-            domProps: { value: _vm.cargo.weight },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "weight", $event.target.value)
-              }
-            }
-          }),
-          _vm._v(" "),
-          _c("div", { staticClass: "input-group-addon" }, [_vm._v("тонн")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-6" }, [
-        _c("div", { staticClass: "input-group" }, [
-          _c("div", { staticClass: "input-group-addon" }, [
-            _vm._v("Количество едениц груза")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.cargo.quantity,
-                expression: "cargo.quantity"
-              }
-            ],
-            staticClass: "form-control",
-            attrs: { type: "number" },
-            domProps: { value: _vm.cargo.quantity },
-            on: {
-              input: function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.$set(_vm.cargo, "quantity", $event.target.value)
-              }
-            }
-          })
-        ])
-      ])
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-12" }, [
-        _vm._v("\r\n            Описание груза\r\n            "),
-        _c("textarea", {
+      _c("div", { staticClass: "control" }, [
+        _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.cargo.description,
-              expression: "cargo.description"
+              value: _vm.cargo.name,
+              expression: "cargo.name"
             }
           ],
-          staticClass: "form-control",
-          attrs: { rows: "3" },
-          domProps: { value: _vm.cargo.description },
+          staticClass: "input",
+          attrs: { type: "text", placeholder: "Lesson Name" },
+          domProps: { value: _vm.cargo.name },
           on: {
             input: function($event) {
               if ($event.target.composing) {
                 return
               }
-              _vm.$set(_vm.cargo, "description", $event.target.value)
+              _vm.$set(_vm.cargo, "name", $event.target.value)
             }
           }
         })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-4 col-sm-offset-2" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-success btn-block",
-            on: { click: _vm.addCargo }
-          },
-          [_vm._v("Сохранить груз")]
-        )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-sm-4" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-warning btn-block",
-            on: { click: _vm.closeFrom }
-          },
-          [_vm._v("Cancel")]
-        )
       ])
+    ]),
+    _vm._v(" "),
+    _c("label", { staticClass: "label" }, [_vm._v("Details")]),
+    _vm._v(" "),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _c("div", { staticClass: "field-body" }, [
+        _c("div", { staticClass: "field has-addons" }, [
+          _vm._m(0, false, false),
+          _vm._v(" "),
+          _c("p", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cargo.length,
+                  expression: "cargo.length"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "number", placeholder: "Day 1" },
+              domProps: { value: _vm.cargo.length },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cargo, "length", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field has-addons" }, [
+          _vm._m(1, false, false),
+          _vm._v(" "),
+          _c("p", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cargo.width,
+                  expression: "cargo.width"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "number", placeholder: "Day 1" },
+              domProps: { value: _vm.cargo.width },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cargo, "width", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field has-addons" }, [
+          _vm._m(2, false, false),
+          _vm._v(" "),
+          _c("p", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cargo.height,
+                  expression: "cargo.height"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "number", placeholder: "Day 1" },
+              domProps: { value: _vm.cargo.height },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cargo, "height", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field has-addons" }, [
+          _vm._m(3, false, false),
+          _vm._v(" "),
+          _c("p", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cargo.weight,
+                  expression: "cargo.weight"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "text", placeholder: "Day 1" },
+              domProps: { value: _vm.cargo.weight },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cargo, "weight", $event.target.value)
+                }
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _vm._m(4, false, false)
+      ])
+    ]),
+    _vm._v(" "),
+    _vm._m(5, false, false),
+    _vm._v(" "),
+    _c("div", { staticClass: "level-right" }, [
+      _c(
+        "button",
+        { staticClass: "button is-success ", on: { click: _vm.addCargo } },
+        [_vm._v("Save Info")]
+      )
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control" }, [
+      _c("span", { staticClass: "select" }, [
+        _c("select", [
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control" }, [
+      _c("span", { staticClass: "select" }, [
+        _c("select", [
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control" }, [
+      _c("span", { staticClass: "select" }, [
+        _c("select", [
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control" }, [
+      _c("span", { staticClass: "select" }, [
+        _c("select", [
+          _c("option", [_vm._v("1")]),
+          _vm._v(" "),
+          _c("option", [_vm._v("2")])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field has-addons has-addons-right" }, [
+      _c("p", { staticClass: "control" }, [
+        _c("a", { staticClass: "button is-link" }, [
+          _c("i", {
+            staticClass: "fa fa-minus",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "control" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { type: "text", placeholder: "Number" }
+        })
+      ]),
+      _vm._v(" "),
+      _c("p", { staticClass: "control" }, [
+        _c("a", { staticClass: "button is-link" }, [
+          _c("i", {
+            staticClass: "fa fa-plus",
+            attrs: { "aria-hidden": "true" }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("a", { staticClass: "button is-success is-outlined is-small" }, [
+        _c("i", {
+          staticClass: "fa fa-plus",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("  Add Lesson Description")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -33898,6 +33933,34 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -33921,156 +33984,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "panel panel-default" }, [
-    _c("div", { staticClass: "panel-heading" }, [
-      _vm._v("\r\n    Адрес и время проведения работ")
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "panel-body" },
-      [
-        _vm._m(0, false, false),
-        _vm._v(" "),
-        _vm._m(1, false, false),
-        _vm._v(" "),
-        _vm._m(2, false, false),
-        _vm._v(" "),
-        _vm._l(_vm.locations, function(location) {
-          return _c("div", [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "label",
-                {
-                  staticClass: "col-md-4 control-label",
-                  attrs: { for: "location" }
-                },
-                [_vm._v("Пункт дозагрузки/выгрузки")]
-              ),
-              _vm._v(" "),
-              _vm._m(3, true, false),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-2 pull-left" }, [
-                _c(
-                  "a",
-                  {
-                    attrs: { href: "#" },
-                    on: {
-                      click: function($event) {
-                        $event.preventDefault()
-                        _vm.deleteLocation($event)
-                      }
-                    }
-                  },
-                  [
-                    _c("i", {
-                      staticClass: "fa fa-trash-o fa-2x",
-                      attrs: { "aria-hidden": "true" }
-                    })
-                  ]
-                )
-              ])
-            ])
-          ])
-        }),
-        _vm._v(" "),
-        _c("div", { staticClass: "form-group" }, [
-          _c("div", { staticClass: "col-md-6 col-md-offset-4" }, [
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-primary",
-                on: { click: _vm.addLocation }
-              },
-              [
-                _vm._v(
-                  "\r\n                  Add Destination or Additional point\r\n                "
-                )
-              ]
-            )
-          ])
-        ])
-      ],
-      2
-    )
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-4 control-label", attrs: { for: "date" } },
-        [_vm._v("Дата работ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "date", name: "date", value: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-4 control-label", attrs: { for: "time" } },
-        [_vm._v("Время работ")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "time", name: "time", value: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group" }, [
-      _c(
-        "label",
-        { staticClass: "col-md-4 control-label", attrs: { for: "location" } },
-        [_vm._v("Пункт погрузки")]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: { type: "text", name: "locations[]", value: "", required: "" }
-        })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-6" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: { type: "text", name: "locations[]", value: "", required: "" }
-      })
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
+module.exports={render:function(){},staticRenderFns:[]}
 if (false) {
   module.hot.accept()
   if (module.hot.data) {

@@ -1,9 +1,9 @@
-<section class="hero is-info">
+<section class="hero is-primary">
 	<div class="hero-body">
 	    <div class="container">
-		    <h1 class="title">Long and McQuade Educational</h1>
+		    <h1 class="title">Long and McQuade Test Website</h1>
 		    <h2 class="subtitle">
-		       Lessons / Teachers
+		       Instruments / Lessons / Teachers
 		    </h2>
 	    </div>
 	</div>

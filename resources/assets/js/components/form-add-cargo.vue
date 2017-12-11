@@ -1,93 +1,100 @@
 <template>  
-<div>
+<div class="box">
 
-    <div class="row">
-        <div class="col-sm-12">
 
-            <div class="input-group">
-                <div class="input-group-addon">Название Груза</div>
-                <input type="text" v-model="cargo.name" class="form-control">
-            </div>
-
+    <div class="field">
+        <label class="label">Lesson Name</label>
+        <div class="control">
+            <input class="input" type="text" v-model="cargo.name" placeholder="Lesson Name">
         </div>
-    </div>        
+    </div>
 
-    <div class="row">
-        <div class="col-sm-4">
-    
-            <div class="input-group">
-                <div class="input-group-addon">Длина</div>
-                <input type="number" v-model="cargo.length" class="form-control">
+    <label class="label">Details</label>
+    <div class="field is-horizontal">
+        <div class="field-body">
+            <div class="field has-addons">
+                <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="input" type="number" v-model="cargo.length" placeholder="Day 1">
+                </p>
             </div>
 
-        </div>
-       
-
-        <div class="col-sm-4">
-
-                <div class="input-group">
-                    <div class="input-group-addon">Ширина</div>
-                    <input type="number" v-model="cargo.width"  class="form-control">
-                </div>
-
-        </div>    
-
-        <div class="col-sm-4">
-   
-            <div class="input-group">
-                <div class="input-group-addon">Высота</div>
-                <input type="number" v-model="cargo.height"  class="form-control">
+            <div class="field has-addons">
+                <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="input" type="number" v-model="cargo.width" placeholder="Day 1">
+                </p>
             </div>
-   
-        </div>    
-    </div>        
 
+            <div class="field has-addons">
+                <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="input" type="number" v-model="cargo.height" placeholder="Day 1">
+                </p>
+            </div>
 
-    <div class="row">
-        <div class="col-sm-6">
+            <div class="field has-addons">
+                <p class="control">
+                    <span class="select">
+                        <select>
+                            <option>1</option>
+                            <option>2</option>
+                        </select>
+                    </span>
+                </p>
+                <p class="control">
+                    <input class="input" type="text" v-model="cargo.weight" placeholder="Day 1">
+                </p>
+            </div>
 
-                <div class="input-group">
-                    <div class="input-group-addon">Вес еденицы груза</div>
-                    <input type="text" v-model="cargo.weight"  class="form-control">
-                    <div class="input-group-addon">тонн</div>
-                </div>
+            <div class="field has-addons has-addons-right">
+                  <p class="control">
+                    <a class="button is-link"><i class="fa fa-minus" aria-hidden="true"></i></a>
+                  </p>
 
-        </div>  
+                  <p class="control">
+                    <input class="input" type="text" placeholder="Number">
+                  </p>
 
-        <div class="col-sm-6">
-
-            <div class="input-group">
-                <div class="input-group-addon">Количество едениц груза</div>
-                <input type="number" v-model="cargo.quantity"  class="form-control">
+                  <p class="control">
+                    <a class="button is-link"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                  </p>
             </div>
 
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-sm-12">
 
-            <!-- Прикрепить Схему строповки -->
-
-            <!-- Прикрепить упаковочный лист -->
-            
-            <!-- Прикрепить Фото оборудования -->
-
-            <!-- Прикрепить Фото места проведения работ -->
-            Описание груза
-            <textarea class="form-control" v-model="cargo.description" rows="3"></textarea>
-        </div>
-
-
-        <div class="col-sm-4 col-sm-offset-2">
-            <button class="btn btn-success btn-block" @click="addCargo">Сохранить груз</button>
-        </div>
-
-        <div class="col-sm-4">
-            <button class="btn btn-warning btn-block" @click="closeFrom">Cancel</button>
-        </div>
-
+    <div class="field">
+        <a class="button is-success is-outlined is-small"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Lesson Description</a>
     </div>
+
+
+    <div class="level-right">
+        <button class="button is-success " @click="addCargo">Save Info</button>
+    </div>
+
 
 
 </div>
