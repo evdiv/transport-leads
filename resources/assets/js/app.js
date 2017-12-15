@@ -36,6 +36,8 @@ Vue.component('form-add-carrier-proposal', require('./components/form-add-carrie
 Vue.component('orders-table', require('./components/orders-table.vue'));
 Vue.component('switcher', require('./components/switcher.vue'));
 
+Vue.component('add-order-form-wizard', require('./components/add-order-form-wizard.vue'));
+
 
 const app = new Vue({
     el: '#app',

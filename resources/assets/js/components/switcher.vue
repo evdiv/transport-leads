@@ -1,23 +1,27 @@
 <template>
     <section>
-        <div class="field">
-            <b-switch>Default</b-switch>
-        </div>
+
         <div class="field">
             <b-switch v-model="isSwitched">
-                {{ isSwitched }}
+                <span v-if="isSwitched">
+                    Register
+                </span>
+                <span v-else>
+                    Already Registered
+                </span>
             </b-switch>
         </div>
-        <div class="field">
-            <b-switch v-model="isSwitchedCustom"
-                true-value="Yes"
-                false-value="No">
-                {{ isSwitchedCustom }}
-            </b-switch>
+        
+        <div class="box">
+            <div v-if="isSwitched">
+                <slot name="first"></slot>
+            </div>
+
+            <div v-if="!isSwitched">
+                <slot name="second"></slot>
+            </div>
         </div>
-        <div class="field">
-            <b-switch disabled>Disabled</b-switch>
-        </div>
+
     </section>
 </template>
 
@@ -25,8 +29,7 @@
     export default {
         data() {
             return {
-                isSwitched: false,
-                isSwitchedCustom: 'Yes'
+                isSwitched: false
             }
         }
     }

@@ -11841,11 +11841,24 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 /* harmony default export */ __webpack_exports__["a"] = (new __WEBPACK_IMPORTED_MODULE_1_vuex__["a" /* default */].Store({
 	state: {
 		orders: [],
-		service: ''
+		service: '',
+		cargos: [],
+		isCargoFormShown: true
 	},
+
 	mutations: {
 		selectService: function selectService(state, text) {
 			state.service = text;
+		},
+		addCargo: function addCargo(state, cargo) {
+
+			this.state.cargos.push(cargo);
+
+			//Hide the Cargo Form
+			this.state.isCargoFormShown = false;
+		},
+		removeCargo: function removeCargo(state, index) {
+			this.state.cargos.splice(index, 1);
 		}
 	}
 }));
@@ -11906,6 +11919,8 @@ Vue.component('form-add-address', __webpack_require__(67));
 Vue.component('form-add-carrier-proposal', __webpack_require__(70));
 Vue.component('orders-table', __webpack_require__(72));
 Vue.component('switcher', __webpack_require__(75));
+
+Vue.component('add-order-form-wizard', __webpack_require__(94));
 
 var app = new Vue({
   el: '#app',
@@ -31720,6 +31735,10 @@ module.exports = function (css) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(90)
+}
 var normalizeComponent = __webpack_require__(1)
 /* script */
 var __vue_script__ = __webpack_require__(47)
@@ -31728,7 +31747,7 @@ var __vue_template__ = __webpack_require__(48)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
-var __vue_styles__ = null
+var __vue_styles__ = injectStyle
 /* scopeId */
 var __vue_scopeId__ = null
 /* moduleIdentifier (server only) */
@@ -31797,58 +31816,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            show: true,
-            showCargoForm: false,
-            cargos: [],
-            orderTakelajData: '',
-            showBtnNextStep: false
+
+            isCargoFormHidden: false
         };
     },
 
+    computed: {
+        cargos: function cargos() {
+            return this.$store.state.cargos;
+        }
+    },
+
     methods: {
-        showAddCargoForm: function showAddCargoForm() {
-            this.showCargoForm = true;
+        showCargoForm: function showCargoForm() {
+            this.$store.state.isCargoFormShown = true;
         },
-
-        addCargo: function addCargo(cargo) {
-            this.cargos.push(cargo);
-            this.showCargoForm = false;
-            this.showBtnNextStep = true;
-            this.updateOrderTakelaj();
-        },
-
-        closeCargoFrom: function closeCargoFrom() {
-            this.showCargoForm = false;
-        },
-
         removeCargo: function removeCargo(index) {
-            this.cargos.splice(index, 1);
-            this.updateOrderTakelaj();
-        },
-
-        updateOrderTakelaj: function updateOrderTakelaj() {
-            this.orderTakelajData = JSON.stringify(this.cargos);
-        },
-        goToNextStep: function goToNextStep() {
-            this.$emit("goToNextStep");
+            this.$store.commit('removeCargo', index);
         }
     }
 });
@@ -31861,117 +31850,59 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm.show
-      ? _c("div", { staticClass: "panel panel-default" }, [
-          _c("div", { staticClass: "panel-heading" }, [
-            _vm._v("Cargo \n\n                "),
-            _c(
-              "div",
-              {
-                staticClass: "btn btn-xs btn-success",
-                on: { click: _vm.showAddCargoForm }
-              },
-              [
-                _c("i", {
-                  staticClass: "fa fa-plus",
-                  attrs: { "aria-hidden": "true" }
-                }),
-                _vm._v(" Add Cargo")
-              ]
-            )
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "panel-body" },
-            [
-              _vm._l(_vm.cargos, function(cargo, index) {
-                return _c("div", [
-                  _c(
-                    "div",
-                    {
-                      staticClass: "alert alert-success alert-dismissible",
-                      attrs: { role: "alert" }
-                    },
-                    [
-                      _c(
-                        "button",
-                        {
-                          staticClass: "close",
-                          attrs: {
-                            type: "button",
-                            "data-dismiss": "alert",
-                            "aria-label": "Close"
-                          },
-                          on: {
-                            click: function($event) {
-                              _vm.removeCargo(index)
-                            }
-                          }
-                        },
-                        [
-                          _c("i", {
-                            staticClass: "fa fa-trash-o fa-2x",
-                            attrs: { "aria-hidden": "true" }
-                          })
-                        ]
-                      ),
-                      _vm._v("\n                    Груз: "),
-                      _c("b", [_vm._v(_vm._s(cargo.name))]),
-                      _vm._v(", Вес: "),
-                      _c("b", [_vm._v(_vm._s(cargo.weight))]),
-                      _vm._v(" "),
-                      _c("br"),
-                      _vm._v(
-                        "\n                    Размеры: длина " +
-                          _vm._s(cargo.length) +
-                          ", ширина " +
-                          _vm._s(cargo.width) +
-                          ", высота " +
-                          _vm._s(cargo.height) +
-                          "\n                "
-                      )
-                    ]
-                  )
-                ])
-              }),
-              _vm._v(" "),
-              _vm.showCargoForm
-                ? _c("form-add-cargo", {
-                    on: {
-                      addCargo: _vm.addCargo,
-                      closeFrom: _vm.closeCargoFrom
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "columns" },
+        _vm._l(_vm.cargos, function(cargo, index) {
+          return _c("div", { staticClass: "column" }, [
+            _c("article", { staticClass: "message is-primary" }, [
+              _c("div", { staticClass: "message-header" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(cargo.name) +
+                    "\n                    "
+                ),
+                _c("span", {
+                  staticClass: "delete",
+                  on: {
+                    click: function($event) {
+                      _vm.removeCargo(index)
                     }
-                  })
-                : _vm._e(),
+                  }
+                })
+              ]),
               _vm._v(" "),
-              _c("input", {
-                staticClass: "form-control",
-                attrs: { name: "order-takelaj-data", type: "hidden" },
-                domProps: { value: _vm.orderTakelajData }
-              })
-            ],
-            2
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-sm-6 col-sm-offset-3" }, [
-        _vm.showBtnNextStep
-          ? _c(
-              "div",
-              {
-                staticClass: "btn btn-sm btn-default btn-block",
-                on: { click: _vm.goToNextStep }
-              },
-              [_vm._v(" Next")]
-            )
-          : _vm._e()
-      ])
-    ])
-  ])
+              _c("div", { staticClass: "message-body" }, [
+                _vm._v(
+                  "\n                    " +
+                    _vm._s(cargo.weight) +
+                    " " +
+                    _vm._s(cargo.dimention) +
+                    ", \n                    " +
+                    _vm._s(cargo.length) +
+                    " " +
+                    _vm._s(cargo.size) +
+                    ", " +
+                    _vm._s(cargo.width) +
+                    ", \n                    " +
+                    _vm._s(cargo.height) +
+                    ", " +
+                    _vm._s(cargo.description) +
+                    "\n                "
+                )
+              ])
+            ])
+          ])
+        })
+      ),
+      _vm._v(" "),
+      this.$store.state.isCargoFormShown ? _c("form-add-cargo") : _vm._e()
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -32139,21 +32070,139 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            cargo: {}
+            cargo: {
+                name: '',
+                qty: 1,
+                weight: '',
+                size: "meters",
+                dimention: "tonns"
+            },
+
+            showDescriptionField: false
         };
     },
 
+    computed: {
+        saveBtnDisabled: function saveBtnDisabled() {
+            if (this.cargo.name != "" && this.cargo.weight != "") {
+                return false;
+            }
+            return true;
+        }
+    },
+
     methods: {
-        addCargo: function addCargo() {
-            this.$emit("addCargo", this.cargo);
+        saveCargo: function saveCargo() {
+
+            this.$store.commit('addCargo', this.cargo);
+
+            this.cargo = {};
+            this.cargo.qty = 1;
+            this.cargo.size = "meters";
+            this.cargo.dimention = "tonns";
         },
 
-        closeFrom: function closeFrom() {
-            this.$emit("closeFrom");
+        reduceQty: function reduceQty() {
+            this.qty = this.cargo.qty - 1 > 0 ? this.qty - 1 : 1;
         }
     }
 });
@@ -32167,161 +32216,418 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "box" }, [
-    _c("div", { staticClass: "field" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Lesson Name")]),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _vm._m(0, false, false),
       _vm._v(" "),
-      _c("div", { staticClass: "control" }, [
-        _c("input", {
-          directives: [
-            {
-              name: "model",
-              rawName: "v-model",
-              value: _vm.cargo.name,
-              expression: "cargo.name"
-            }
-          ],
-          staticClass: "input",
-          attrs: { type: "text", placeholder: "Lesson Name" },
-          domProps: { value: _vm.cargo.name },
-          on: {
-            input: function($event) {
-              if ($event.target.composing) {
-                return
+      _c("div", { staticClass: "field-body" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("div", { staticClass: "control" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.cargo.name,
+                  expression: "cargo.name"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "text", placeholder: "Lesson Name" },
+              domProps: { value: _vm.cargo.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.cargo, "name", $event.target.value)
+                }
               }
-              _vm.$set(_vm.cargo, "name", $event.target.value)
-            }
-          }
-        })
+            })
+          ])
+        ])
       ])
     ]),
-    _vm._v(" "),
-    _c("label", { staticClass: "label" }, [_vm._v("Details")]),
     _vm._v(" "),
     _c("div", { staticClass: "field is-horizontal" }, [
+      _vm._m(1, false, false),
+      _vm._v(" "),
       _c("div", { staticClass: "field-body" }, [
-        _c("div", { staticClass: "field has-addons" }, [
-          _vm._m(0, false, false),
-          _vm._v(" "),
-          _c("p", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cargo.length,
-                  expression: "cargo.length"
-                }
-              ],
-              staticClass: "input",
-              attrs: { type: "number", placeholder: "Day 1" },
-              domProps: { value: _vm.cargo.length },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.cargo, "length", $event.target.value)
-                }
-              }
-            })
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _vm._m(2, false, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "control" }, [
+              _c("div", { staticClass: "select" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cargo.size,
+                        expression: "cargo.size"
+                      }
+                    ],
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.cargo,
+                          "size",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", [_vm._v("meters")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("sm")])
+                  ]
+                )
+              ])
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "field has-addons" }, [
-          _vm._m(1, false, false),
-          _vm._v(" "),
-          _c("p", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cargo.width,
-                  expression: "cargo.width"
-                }
-              ],
-              staticClass: "input",
-              attrs: { type: "number", placeholder: "Day 1" },
-              domProps: { value: _vm.cargo.width },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _vm._m(3, false, false),
+            _vm._v(" "),
+            _c("p", { staticClass: "control is-expanded" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cargo.length,
+                    expression: "cargo.length"
                   }
-                  _vm.$set(_vm.cargo, "width", $event.target.value)
+                ],
+                staticClass: "input",
+                attrs: { type: "number", placeholder: "Length" },
+                domProps: { value: _vm.cargo.length },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cargo, "length", $event.target.value)
+                  }
                 }
-              }
-            })
+              })
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "field has-addons" }, [
-          _vm._m(2, false, false),
-          _vm._v(" "),
-          _c("p", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cargo.height,
-                  expression: "cargo.height"
-                }
-              ],
-              staticClass: "input",
-              attrs: { type: "number", placeholder: "Day 1" },
-              domProps: { value: _vm.cargo.height },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _vm._m(4, false, false),
+            _vm._v(" "),
+            _c("p", { staticClass: "control is-expanded" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cargo.height,
+                    expression: "cargo.height"
                   }
-                  _vm.$set(_vm.cargo, "height", $event.target.value)
+                ],
+                staticClass: "input",
+                attrs: { type: "number", placeholder: "Length" },
+                domProps: { value: _vm.cargo.height },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cargo, "height", $event.target.value)
+                  }
                 }
-              }
-            })
+              })
+            ])
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "field has-addons" }, [
-          _vm._m(3, false, false),
-          _vm._v(" "),
-          _c("p", { staticClass: "control" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.cargo.weight,
-                  expression: "cargo.weight"
-                }
-              ],
-              staticClass: "input",
-              attrs: { type: "text", placeholder: "Day 1" },
-              domProps: { value: _vm.cargo.weight },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _vm._m(5, false, false),
+            _vm._v(" "),
+            _c("p", { staticClass: "control is-expanded" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cargo.width,
+                    expression: "cargo.width"
                   }
-                  _vm.$set(_vm.cargo, "weight", $event.target.value)
+                ],
+                staticClass: "input",
+                attrs: { type: "number", placeholder: "Length" },
+                domProps: { value: _vm.cargo.width },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cargo, "width", $event.target.value)
+                  }
                 }
-              }
-            })
+              })
+            ])
           ])
-        ]),
-        _vm._v(" "),
-        _vm._m(4, false, false)
+        ])
       ])
     ]),
     _vm._v(" "),
-    _vm._m(5, false, false),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _vm._m(6, false, false),
+      _vm._v(" "),
+      _c("div", { staticClass: "field-body" }, [
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _c("div", { staticClass: "control" }, [
+              _c("div", { staticClass: "select" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.cargo.dimention,
+                        expression: "cargo.dimention"
+                      }
+                    ],
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.cargo,
+                          "dimention",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", [_vm._v("tonns")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("kg")])
+                  ]
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "control is-expanded" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cargo.weight,
+                    expression: "cargo.weight"
+                  }
+                ],
+                staticClass: "input",
+                attrs: { type: "number", placeholder: "Weight" },
+                domProps: { value: _vm.cargo.weight },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cargo, "weight", $event.target.value)
+                  }
+                }
+              })
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field is-expanded" }, [
+          _c("div", { staticClass: "field has-addons" }, [
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "a",
+                { staticClass: "button is-link", on: { click: _vm.reduceQty } },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-minus",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "control" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.cargo.qty,
+                    expression: "cargo.qty"
+                  }
+                ],
+                staticClass: "input",
+                attrs: { type: "text", placeholder: "Number" },
+                domProps: { value: _vm.cargo.qty },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.cargo, "qty", $event.target.value)
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("p", { staticClass: "control" }, [
+              _c(
+                "a",
+                {
+                  staticClass: "button is-link",
+                  on: {
+                    click: function($event) {
+                      _vm.cargo.qty += 1
+                    }
+                  }
+                },
+                [
+                  _c("i", {
+                    staticClass: "fa fa-plus",
+                    attrs: { "aria-hidden": "true" }
+                  })
+                ]
+              )
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _c("div", { staticClass: "field-label is-normal" }),
+      _vm._v(" "),
+      !this.showDescriptionField
+        ? _c("div", { staticClass: "field-body" }, [
+            _c(
+              "a",
+              {
+                staticClass: "button is-success is-outlined is-small",
+                on: {
+                  click: function($event) {
+                    _vm.showDescriptionField = true
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-plus",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("  Add Lesson Description")
+              ]
+            )
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      this.showDescriptionField
+        ? _c("div", { staticClass: "field-body" }, [
+            _c(
+              "a",
+              {
+                staticClass: "button is-danger is-outlined is-small",
+                on: {
+                  click: function($event) {
+                    _vm.showDescriptionField = false
+                  }
+                }
+              },
+              [
+                _c("i", {
+                  staticClass: "fa fa-minus",
+                  attrs: { "aria-hidden": "true" }
+                }),
+                _vm._v("  Remove Lesson Description")
+              ]
+            )
+          ])
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _c("div", { staticClass: "field-label is-normal" }),
+      _vm._v(" "),
+      this.showDescriptionField
+        ? _c("div", { staticClass: "field-body" }, [
+            _c("div", { staticClass: "field is-expanded" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.cargo.description,
+                      expression: "cargo.description"
+                    }
+                  ],
+                  staticClass: "textarea",
+                  attrs: { placeholder: "Description of the required Lesson" },
+                  domProps: { value: _vm.cargo.description },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.cargo, "description", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "level-right" }, [
       _c(
-        "button",
-        { staticClass: "button is-success ", on: { click: _vm.addCargo } },
-        [_vm._v("Save Info")]
+        "a",
+        {
+          staticClass: "button is-success ",
+          attrs: { disabled: _vm.saveBtnDisabled },
+          on: { click: _vm.saveCargo }
+        },
+        [
+          _c("i", {
+            staticClass: "fa fa-plus",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v("  Save Lesson")
+        ]
       )
     ])
   ])
@@ -32331,14 +32637,16 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("p", { staticClass: "control" }, [
-      _c("span", { staticClass: "select" }, [
-        _c("select", [
-          _c("option", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")])
-        ])
-      ])
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Lesson Name")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Details")])
     ])
   },
   function() {
@@ -32346,12 +32654,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "control" }, [
-      _c("span", { staticClass: "select" }, [
-        _c("select", [
-          _c("option", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")])
-        ])
+      _c("a", { staticClass: "button is-static" }, [
+        _vm._v("\r\n                        Length\r\n                    ")
       ])
     ])
   },
@@ -32360,12 +32664,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "control" }, [
-      _c("span", { staticClass: "select" }, [
-        _c("select", [
-          _c("option", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")])
-        ])
+      _c("a", { staticClass: "button is-static" }, [
+        _vm._v("\r\n                        Length\r\n                    ")
       ])
     ])
   },
@@ -32374,12 +32674,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("p", { staticClass: "control" }, [
-      _c("span", { staticClass: "select" }, [
-        _c("select", [
-          _c("option", [_vm._v("1")]),
-          _vm._v(" "),
-          _c("option", [_vm._v("2")])
-        ])
+      _c("a", { staticClass: "button is-static" }, [
+        _vm._v("\r\n                        Length\r\n                    ")
       ])
     ])
   },
@@ -32387,30 +32683,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field has-addons has-addons-right" }, [
-      _c("p", { staticClass: "control" }, [
-        _c("a", { staticClass: "button is-link" }, [
-          _c("i", {
-            staticClass: "fa fa-minus",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "control" }, [
-        _c("input", {
-          staticClass: "input",
-          attrs: { type: "text", placeholder: "Number" }
-        })
-      ]),
-      _vm._v(" "),
-      _c("p", { staticClass: "control" }, [
-        _c("a", { staticClass: "button is-link" }, [
-          _c("i", {
-            staticClass: "fa fa-plus",
-            attrs: { "aria-hidden": "true" }
-          })
-        ])
+    return _c("p", { staticClass: "control" }, [
+      _c("a", { staticClass: "button is-static" }, [
+        _vm._v("\r\n                        Length\r\n                    ")
       ])
     ])
   },
@@ -32418,14 +32693,8 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field" }, [
-      _c("a", { staticClass: "button is-success is-outlined is-small" }, [
-        _c("i", {
-          staticClass: "fa fa-plus",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v("  Add Lesson Description")
-      ])
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Number of lessons")])
     ])
   }
 ]
@@ -33984,7 +34253,174 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports={render:function(){},staticRenderFns:[]}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "box" },
+    [
+      _vm._m(0, false, false),
+      _vm._v(" "),
+      _c("div", { staticClass: "field is-horizontal" }, [
+        _vm._m(1, false, false),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "field-body" },
+          [
+            _c(
+              "b-field",
+              [
+                _c("b-datepicker", {
+                  attrs: {
+                    placeholder: "Click to select...",
+                    icon: "calendar-today"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "b-field",
+              [
+                _c("b-timepicker", {
+                  attrs: {
+                    placeholder: "Type or select time...",
+                    icon: "clock",
+                    readonly: false
+                  }
+                })
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
+      _c("hr"),
+      _vm._v(" "),
+      _vm._l(_vm.locations, function(location) {
+        return _c("div", { staticClass: "field is-horizontal" }, [
+          _vm._m(2, true, false),
+          _vm._v(" "),
+          _c("div", { staticClass: "field-body" }, [
+            _vm._m(3, true, false),
+            _vm._v(" "),
+            _c("div", { staticClass: "field is-grouped" }, [
+              _vm._m(4, true, false),
+              _vm._v(" "),
+              _c("p", { staticClass: "control" }, [
+                _c("a", {
+                  staticClass: "delete is-large",
+                  attrs: { href: "#" },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      _vm.deleteLocation($event)
+                    }
+                  }
+                })
+              ])
+            ])
+          ])
+        ])
+      }),
+      _vm._v(" "),
+      _c("div", { staticClass: "level-right" }, [
+        _c(
+          "div",
+          { staticClass: "button is-success", on: { click: _vm.addLocation } },
+          [
+            _c("i", {
+              staticClass: "fa fa-plus",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v("  Add Builling Address")
+          ]
+        )
+      ])
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field is-horizontal" }, [
+      _c("div", { staticClass: "field-label is-normal" }, [
+        _c("label", { staticClass: "label" }, [_vm._v("Address")])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "field-body" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("p", { staticClass: "control is-expanded" }, [
+            _c("input", {
+              staticClass: "input",
+              attrs: { type: "text", name: "City", placeholder: "City" }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "field" }, [
+          _c("p", { staticClass: "control is-expanded" }, [
+            _c("input", {
+              staticClass: "input",
+              attrs: { type: "text", name: "Street", placeholder: "Street" }
+            })
+          ])
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Date and Time")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Billing Address")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field" }, [
+      _c("p", { staticClass: "control is-expanded" }, [
+        _c("input", {
+          staticClass: "input",
+          attrs: { name: "billingCity[]", type: "text", placeholder: "City" }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "control is-expanded" }, [
+      _c("input", {
+        staticClass: "input",
+        attrs: { name: "billingAddress[]", type: "text", placeholder: "Street" }
+      })
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
@@ -34440,12 +34876,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
-            isSwitched: false,
-            isSwitchedCustom: 'Yes'
+            isSwitched: false
         };
     }
 });
@@ -34462,13 +34901,6 @@ var render = function() {
     _c(
       "div",
       { staticClass: "field" },
-      [_c("b-switch", [_vm._v("Default")])],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "field" },
       [
         _c(
           "b-switch",
@@ -34481,44 +34913,23 @@ var render = function() {
               expression: "isSwitched"
             }
           },
-          [_vm._v("\n            " + _vm._s(_vm.isSwitched) + "\n        ")]
-        )
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "field" },
-      [
-        _c(
-          "b-switch",
-          {
-            attrs: { "true-value": "Yes", "false-value": "No" },
-            model: {
-              value: _vm.isSwitchedCustom,
-              callback: function($$v) {
-                _vm.isSwitchedCustom = $$v
-              },
-              expression: "isSwitchedCustom"
-            }
-          },
           [
-            _vm._v(
-              "\n            " + _vm._s(_vm.isSwitchedCustom) + "\n        "
-            )
+            _vm.isSwitched
+              ? _c("span", [_vm._v("\n                Register\n            ")])
+              : _c("span", [
+                  _vm._v("\n                Already Registered\n            ")
+                ])
           ]
         )
       ],
       1
     ),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "field" },
-      [_c("b-switch", { attrs: { disabled: "" } }, [_vm._v("Disabled")])],
-      1
-    )
+    _c("div", { staticClass: "box" }, [
+      _vm.isSwitched ? _c("div", [_vm._t("first")], 2) : _vm._e(),
+      _vm._v(" "),
+      !_vm.isSwitched ? _c("div", [_vm._t("second")], 2) : _vm._e()
+    ])
   ])
 }
 var staticRenderFns = []
@@ -34536,6 +34947,647 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(91);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(92)("0b8ed24a", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0bbd528a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./form-cargo.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-0bbd528a\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./form-cargo.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(43)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.bottom-space {\n    margin-bottom: 10px;\n}\n\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+  MIT License http://www.opensource.org/licenses/mit-license.php
+  Author Tobias Koppers @sokra
+  Modified by Evan You @yyx990803
+*/
+
+var hasDocument = typeof document !== 'undefined'
+
+if (typeof DEBUG !== 'undefined' && DEBUG) {
+  if (!hasDocument) {
+    throw new Error(
+    'vue-style-loader cannot be used in a non-browser environment. ' +
+    "Use { target: 'node' } in your Webpack config to indicate a server-rendering environment."
+  ) }
+}
+
+var listToStyles = __webpack_require__(93)
+
+/*
+type StyleObject = {
+  id: number;
+  parts: Array<StyleObjectPart>
+}
+
+type StyleObjectPart = {
+  css: string;
+  media: string;
+  sourceMap: ?string
+}
+*/
+
+var stylesInDom = {/*
+  [id: number]: {
+    id: number,
+    refs: number,
+    parts: Array<(obj?: StyleObjectPart) => void>
+  }
+*/}
+
+var head = hasDocument && (document.head || document.getElementsByTagName('head')[0])
+var singletonElement = null
+var singletonCounter = 0
+var isProduction = false
+var noop = function () {}
+
+// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
+// tags it will allow on a page
+var isOldIE = typeof navigator !== 'undefined' && /msie [6-9]\b/.test(navigator.userAgent.toLowerCase())
+
+module.exports = function (parentId, list, _isProduction) {
+  isProduction = _isProduction
+
+  var styles = listToStyles(parentId, list)
+  addStylesToDom(styles)
+
+  return function update (newList) {
+    var mayRemove = []
+    for (var i = 0; i < styles.length; i++) {
+      var item = styles[i]
+      var domStyle = stylesInDom[item.id]
+      domStyle.refs--
+      mayRemove.push(domStyle)
+    }
+    if (newList) {
+      styles = listToStyles(parentId, newList)
+      addStylesToDom(styles)
+    } else {
+      styles = []
+    }
+    for (var i = 0; i < mayRemove.length; i++) {
+      var domStyle = mayRemove[i]
+      if (domStyle.refs === 0) {
+        for (var j = 0; j < domStyle.parts.length; j++) {
+          domStyle.parts[j]()
+        }
+        delete stylesInDom[domStyle.id]
+      }
+    }
+  }
+}
+
+function addStylesToDom (styles /* Array<StyleObject> */) {
+  for (var i = 0; i < styles.length; i++) {
+    var item = styles[i]
+    var domStyle = stylesInDom[item.id]
+    if (domStyle) {
+      domStyle.refs++
+      for (var j = 0; j < domStyle.parts.length; j++) {
+        domStyle.parts[j](item.parts[j])
+      }
+      for (; j < item.parts.length; j++) {
+        domStyle.parts.push(addStyle(item.parts[j]))
+      }
+      if (domStyle.parts.length > item.parts.length) {
+        domStyle.parts.length = item.parts.length
+      }
+    } else {
+      var parts = []
+      for (var j = 0; j < item.parts.length; j++) {
+        parts.push(addStyle(item.parts[j]))
+      }
+      stylesInDom[item.id] = { id: item.id, refs: 1, parts: parts }
+    }
+  }
+}
+
+function createStyleElement () {
+  var styleElement = document.createElement('style')
+  styleElement.type = 'text/css'
+  head.appendChild(styleElement)
+  return styleElement
+}
+
+function addStyle (obj /* StyleObjectPart */) {
+  var update, remove
+  var styleElement = document.querySelector('style[data-vue-ssr-id~="' + obj.id + '"]')
+
+  if (styleElement) {
+    if (isProduction) {
+      // has SSR styles and in production mode.
+      // simply do nothing.
+      return noop
+    } else {
+      // has SSR styles but in dev mode.
+      // for some reason Chrome can't handle source map in server-rendered
+      // style tags - source maps in <style> only works if the style tag is
+      // created and inserted dynamically. So we remove the server rendered
+      // styles and inject new ones.
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  if (isOldIE) {
+    // use singleton mode for IE9.
+    var styleIndex = singletonCounter++
+    styleElement = singletonElement || (singletonElement = createStyleElement())
+    update = applyToSingletonTag.bind(null, styleElement, styleIndex, false)
+    remove = applyToSingletonTag.bind(null, styleElement, styleIndex, true)
+  } else {
+    // use multi-style-tag mode in all other cases
+    styleElement = createStyleElement()
+    update = applyToTag.bind(null, styleElement)
+    remove = function () {
+      styleElement.parentNode.removeChild(styleElement)
+    }
+  }
+
+  update(obj)
+
+  return function updateStyle (newObj /* StyleObjectPart */) {
+    if (newObj) {
+      if (newObj.css === obj.css &&
+          newObj.media === obj.media &&
+          newObj.sourceMap === obj.sourceMap) {
+        return
+      }
+      update(obj = newObj)
+    } else {
+      remove()
+    }
+  }
+}
+
+var replaceText = (function () {
+  var textStore = []
+
+  return function (index, replacement) {
+    textStore[index] = replacement
+    return textStore.filter(Boolean).join('\n')
+  }
+})()
+
+function applyToSingletonTag (styleElement, index, remove, obj) {
+  var css = remove ? '' : obj.css
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = replaceText(index, css)
+  } else {
+    var cssNode = document.createTextNode(css)
+    var childNodes = styleElement.childNodes
+    if (childNodes[index]) styleElement.removeChild(childNodes[index])
+    if (childNodes.length) {
+      styleElement.insertBefore(cssNode, childNodes[index])
+    } else {
+      styleElement.appendChild(cssNode)
+    }
+  }
+}
+
+function applyToTag (styleElement, obj) {
+  var css = obj.css
+  var media = obj.media
+  var sourceMap = obj.sourceMap
+
+  if (media) {
+    styleElement.setAttribute('media', media)
+  }
+
+  if (sourceMap) {
+    // https://developer.chrome.com/devtools/docs/javascript-debugging
+    // this makes source maps inside style tags work properly in Chrome
+    css += '\n/*# sourceURL=' + sourceMap.sources[0] + ' */'
+    // http://stackoverflow.com/a/26603875
+    css += '\n/*# sourceMappingURL=data:application/json;base64,' + btoa(unescape(encodeURIComponent(JSON.stringify(sourceMap)))) + ' */'
+  }
+
+  if (styleElement.styleSheet) {
+    styleElement.styleSheet.cssText = css
+  } else {
+    while (styleElement.firstChild) {
+      styleElement.removeChild(styleElement.firstChild)
+    }
+    styleElement.appendChild(document.createTextNode(css))
+  }
+}
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, exports) {
+
+/**
+ * Translates the list format produced by css-loader into something
+ * easier to manipulate.
+ */
+module.exports = function listToStyles (parentId, list) {
+  var styles = []
+  var newStyles = {}
+  for (var i = 0; i < list.length; i++) {
+    var item = list[i]
+    var id = item[0]
+    var css = item[1]
+    var media = item[2]
+    var sourceMap = item[3]
+    var part = {
+      id: parentId + ':' + i,
+      css: css,
+      media: media,
+      sourceMap: sourceMap
+    }
+    if (!newStyles[id]) {
+      styles.push(newStyles[id] = { id: id, parts: [part] })
+    } else {
+      newStyles[id].parts.push(part)
+    }
+  }
+  return styles
+}
+
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(97)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(95)
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\add-order-form-wizard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7af14922", Component.options)
+  } else {
+    hotAPI.reload("data-v-7af14922", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			errorMsg: null
+		};
+	},
+
+
+	methods: _defineProperty({
+		onComplete: function onComplete() {
+			console.log("Lesson Registration Form Submitted");
+			return true;
+		},
+		validateFirstStep: function validateFirstStep() {
+			console.log("Lesson Registation First Step");
+			return true;
+		},
+		validateSecondStep: function validateSecondStep() {
+			console.log("Lesson Registation Second Step");
+			return true;
+		},
+		showCargoForm: function showCargoForm() {
+			this.$store.state.isCargoFormShown = true;
+		}
+	}, 'onComplete', function onComplete() {
+		alert('Yay. Done!');
+	}),
+
+	computed: {
+		showCargoFormBtn: function showCargoFormBtn() {
+			return this.$store.state.isCargoFormShown ? 0 : 1;
+		}
+	},
+
+	created: function created() {
+		console.log("is cargo form shown " + this.$store.state.isCargoFormShown);
+	},
+
+
+	components: {
+		FormWizard: __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__["FormWizard"],
+		TabContent: __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__["TabContent"]
+	}
+});
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "form-wizard",
+        {
+          attrs: {
+            color: "#428bca",
+            title: "Lessons Registration Form",
+            subtitle:
+              "To ensure consistency and help ensure your musical success, your weekly lesson is scheduled on the same day and time each week. Please let us know your preferences and we will do our best to find a teacher and time that will work for your schedule.",
+            "back-button-text": "Go back!",
+            "next-button-text": "Go next!",
+            "error-color": "#e74c3c",
+            "finish-button-text": "Submit"
+          },
+          on: { "on-complete": _vm.onComplete },
+          scopedSlots: _vm._u([
+            {
+              key: "custom-buttons-right",
+              fn: function(props) {
+                return _vm.showCargoFormBtn == 1
+                  ? [
+                      props.activeTabIndex == 0
+                        ? _c("span", [
+                            _c(
+                              "span",
+                              {
+                                staticClass: "button is-success",
+                                on: { click: _vm.showCargoForm }
+                              },
+                              [
+                                _c("i", {
+                                  staticClass: "fa fa-plus",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("  Add new Lesson\n\t\t\t        ")
+                              ]
+                            )
+                          ])
+                        : _vm._e()
+                    ]
+                  : undefined
+              }
+            }
+          ])
+        },
+        [
+          _c(
+            "tab-content",
+            {
+              attrs: {
+                title: "Request a lesson time",
+                "before-change": _vm.validateFirstStep
+              }
+            },
+            [_c("form-cargo")],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "tab-content",
+            {
+              attrs: {
+                title: "Personal Information",
+                "before-change": _vm.validateSecondStep
+              }
+            },
+            [_c("form-add-address")],
+            1
+          ),
+          _vm._v(" "),
+          !!this.$slots.first || !!this.$slots.second
+            ? _c(
+                "tab-content",
+                { attrs: { title: "Complete" } },
+                [
+                  _c("switcher", [
+                    _c(
+                      "div",
+                      { attrs: { slot: "first" }, slot: "first" },
+                      [_vm._t("first")],
+                      2
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { attrs: { slot: "second" }, slot: "second" },
+                      [_vm._t("second")],
+                      2
+                    )
+                  ])
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.errorMsg
+            ? _c("div", [
+                _c("span", { staticClass: "error" }, [
+                  _vm._v(_vm._s(_vm.errorMsg))
+                ])
+              ])
+            : _vm._e()
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7af14922", module.exports)
+  }
+}
+
+/***/ }),
+/* 97 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(98);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(92)("4dd64a06", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7af14922\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./add-order-form-wizard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-7af14922\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./add-order-form-wizard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(43)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\nspan.error{\n  \t\tcolor:#e74c3c;\n  \t\tfont-size:20px;\n  \t\tdisplay:-webkit-box;\n  \t\tdisplay:-ms-flexbox;\n  \t\tdisplay:flex;\n  \t\t-webkit-box-pack:center;\n  \t\t    -ms-flex-pack:center;\n  \t\t        justify-content:center;\n}\ndiv.wizard-card-footer {\n\tpadding-top: 40px !important;\n}\n", ""]);
+
+// exports
+
 
 /***/ })
 /******/ ]);

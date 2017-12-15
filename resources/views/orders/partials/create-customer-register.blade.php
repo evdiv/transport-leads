@@ -1,63 +1,137 @@
-    <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-        <label for="name" class="col-md-4 control-label">Your Name</label>
+<div class="field is-horizontal">
 
-        <div class="col-md-6">
-            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+    <div class="field-label is-normal">
+        <label class="label">Your Name</label>
+    </div>
 
-            @if ($errors->has('name'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
+    <div class="field-body">
+
+        <div class="field">
+            <p class="control has-icons-left">
+
+                @if ($errors->has('name'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                @endif
+
+                <input class="input" type="text" placeholder="Your Name" name="name" value="{{ old('name') }}">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-user"></i>
                 </span>
-            @endif
+            </p>
         </div>
+
+    </div>
+</div>
+
+
+<div class="field is-horizontal">
+
+    <div class="field-label is-normal">
+        <label class="label">Your Email</label>
     </div>
 
-    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-        <label for="email" class="col-md-4 control-label">E-Mail</label>
+    <div class="field-body">
 
-        <div class="col-md-6">
-            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+        <div class="field">
+            <p class="control has-icons-left">
 
-            @if ($errors->has('email'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
+                @if ($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                @endif
+
+                <input class="input" type="email" placeholder="Email" name="email" value="" value="{{ old('email') }}">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-envelope"></i>
                 </span>
-            @endif
+            </p>
         </div>
+
+    </div>
+</div>
+
+
+<div class="field is-horizontal">
+
+    <div class="field-label is-normal">
+        <label class="label">Your Phone</label>
     </div>
 
-    <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-        <label for="phone" class="col-md-4 control-label">Phone</label>
+    <div class="field-body">
 
-        <div class="col-md-6">
-            <input id="phone" type="text" class="form-control" name="phone" value="{{ old('phone') }}" required>
+        <div class="field">
+            <p class="control has-icons-left">
 
-            @if ($errors->has('phone'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('phone') }}</strong>
+                @if ($errors->has('phone'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('phone') }}</strong>
+                    </span>
+                @endif
+
+                <input class="input" type="text" placeholder="Contact Phone" name="name" value="{{ old('phone') }}" >
+                <span class="icon is-small is-left">
+                    <i class="fa fa-phone"></i>
                 </span>
-            @endif
+            </p>
         </div>
     </div>
+</div>
 
-    <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-        <label for="password" class="col-md-4 control-label">Password</label>
 
-        <div class="col-md-6">
-            <input id="password" type="password" class="form-control" name="password" required>
+<div class="field is-horizontal">
 
-            @if ($errors->has('password'))
-                <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
+    <div class="field-label is-normal">
+        <label class="label">Password</label>
+    </div>
+
+    <div class="field-body">
+
+
+        <div class="field">
+            <p class="control has-icons-left">
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+
+                <input class="input" type="password" placeholder="Password" name="password">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
                 </span>
-            @endif
+            </p>
         </div>
     </div>
+</div>
 
-    <div class="form-group">
-        <label for="password-confirm" class="col-md-4 control-label">Repeat Password</label>
 
-        <div class="col-md-6">
-            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+
+<div class="field is-horizontal">
+
+    <div class="field-label is-normal">
+        <label class="label">Repeat Password</label>
+    </div>
+
+    <div class="field-body">
+
+        <div class="field">
+            <p class="control has-icons-left">
+
+                @if ($errors->has('password'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                @endif
+
+                <input class="input" type="password" placeholder="Repeat Password" name="password">
+                <span class="icon is-small is-left">
+                    <i class="fa fa-lock"></i>
+                </span>
+            </p>
         </div>
     </div>
+</div>
