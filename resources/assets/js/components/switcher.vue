@@ -2,7 +2,7 @@
     <section>
 
         <div class="field">
-            <b-switch v-model="isSwitched">
+            <b-switch v-model="isSwitched" @input="isNewUser">
                 <span v-if="isSwitched">
                     Register
                 </span>
@@ -12,6 +12,7 @@
             </b-switch>
         </div>
         
+
         <div class="box">
             <div v-if="isSwitched">
                 <slot name="first"></slot>
@@ -26,10 +27,18 @@
 </template>
 
 <script>
+
     export default {
         data() {
             return {
                 isSwitched: false
+            }
+        },
+        methods: {
+            isNewUser() {
+                if(this.isSwitched) {
+                    this.$store.state.newOrder.registered = true;
+                }
             }
         }
     }

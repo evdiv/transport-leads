@@ -30,15 +30,12 @@
 
     export default {
         data: function () {
-            return {
-
-                isCargoFormHidden: false
-            }
+            return {}
         },
 
         computed: {
             cargos() {
-                return this.$store.state.cargos
+                return this.$store.state.newOrder.cargos
             }
 
         },
@@ -54,10 +51,3 @@
         }
     }    
 </script>                
-
-<style>
-    .bottom-space {
-        margin-bottom: 10px;
-    }
-    
-</style>

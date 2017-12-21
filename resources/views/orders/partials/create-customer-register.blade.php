@@ -15,7 +15,7 @@
                     </span>
                 @endif
 
-                <input class="input" type="text" placeholder="Your Name" name="name" value="{{ old('name') }}">
+                <input class="input" type="text" placeholder="Your Name" name="name" v-model=$store.state.newOrder.name value="{{ old('name') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-user"></i>
                 </span>
@@ -43,7 +43,7 @@
                     </span>
                 @endif
 
-                <input class="input" type="email" placeholder="Email" name="email" value="" value="{{ old('email') }}">
+                <input class="input" type="email" placeholder="Email" name="email" v-model=$store.state.newOrder.email value="{{ old('email') }}">
                 <span class="icon is-small is-left">
                     <i class="fa fa-envelope"></i>
                 </span>
@@ -71,7 +71,7 @@
                     </span>
                 @endif
 
-                <input class="input" type="text" placeholder="Contact Phone" name="name" value="{{ old('phone') }}" >
+                <input class="input" type="text" placeholder="Contact Phone" name="name" v-model=$store.state.newOrder.phone value="{{ old('phone') }}" >
                 <span class="icon is-small is-left">
                     <i class="fa fa-phone"></i>
                 </span>
@@ -99,7 +99,7 @@
                     </span>
                 @endif
 
-                <input class="input" type="password" placeholder="Password" name="password">
+                <input class="input" type="password" placeholder="Password" name="password" v-model=$store.state.newOrder.pass>
                 <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                 </span>
@@ -127,7 +127,7 @@
                     </span>
                 @endif
 
-                <input class="input" type="password" placeholder="Repeat Password" name="password">
+                <input class="input" type="password" placeholder="Repeat Password" name="password" v-model=$store.state.newOrder.repeatPass>
                 <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                 </span>

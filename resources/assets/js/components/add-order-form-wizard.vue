@@ -10,6 +10,7 @@
            	finish-button-text="Submit"
 			@on-complete="onComplete">
 
+
 		  	<tab-content 
 		  		title="Request a lesson time" 
 		  		:before-change="validateFirstStep">
@@ -18,23 +19,44 @@
 
 
 		  	<tab-content 
-		  		title="Personal Information"
+		  		title="Address and Date"
 		  		:before-change="validateSecondStep">
 		     	<form-add-address></form-add-address>
 		   	</tab-content>
 
 			
-			<tab-content title="Complete" v-if="!!this.$slots.first || !!this.$slots.second">
+			<tab-content 
+				title="Personal Information" 
+				:before-change="validateThirdStep"
+				v-if="!!this.$slots.first || !!this.$slots.second">
 				<switcher>
 					<div slot="first"><slot name="first"></slot></div>
 					<div slot="second"><slot name="second"></slot></div>
 				</switcher>	
 			</tab-content>
+
+
+			<tab-content title="Check and Submit">
+				<h3>Check your details</h3>
+
+		        <!-- List of all Added Lessons -->
+
+		        <div v-for="(cargo, index) in this.$store.state.newOrder.cargos"  class="column">
+                    {{ cargo.name }}
+                    {{ cargo.weight }} {{ cargo.dimention }}, 
+                    {{ cargo.length }} {{ cargo.size }}, {{ cargo.width }}, 
+                    {{ cargo.height }}, {{ cargo.description }}
+		        </div>
+
+				City {{ this.$store.state.newOrder.city }} <br />
+				Street: {{ this.$store.state.newOrder.street }} <br />
+				Date: {{ this.$store.state.newOrder.date }} <br />
+			</tab-content>
 			
 
-    		<div v-if="errorMsg">
-      			<span class="error">{{errorMsg}}</span>
-    		</div>
+		    <div v-if="errorMsg" class="notification is-danger validation-error">
+		      	{{errorMsg}}
+		    </div>
 
 
 	    	<template v-if="showCargoFormBtn == 1" slot="custom-buttons-right" slot-scope="props">
@@ -70,20 +92,63 @@
 			},
 
 			validateFirstStep() {
-				console.log("Lesson Registation First Step");
-				return true;
+				if(this.$store.state.newOrder.cargos.length > 0) {
+					this.errorMsg = null;
+					return true;
+				} 
+				this.errorMsg = "You have to add at least one lesson";
+				return false;
 			},
 
 			validateSecondStep() {
-				console.log("Lesson Registation Second Step");
+				if(!!this.$store.state.newOrder.city
+				 	&& !!this.$store.state.newOrder.street 
+				 	&& !!this.$store.state.newOrder.date) {
+
+					this.errorMsg = null;
+					return true;
+				} 
+
+				this.errorMsg = "Enter your full address and date";
+				return false;
+			},
+
+
+			validateThirdStep() {
+
+				if(this.$store.state.newOrder.registered) {
+
+					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.pass) {
+
+						this.errorMsg = "All fields are required";
+						return false;
+					}
+				
+				} else {
+
+					if(!this.$store.state.newOrder.name || !this.$store.state.newOrder.email 
+						|| !this.$store.state.newOrder.phone || !this.$store.state.newOrder.pass) {
+
+						this.errorMsg = "All fields are required";
+						return false;
+					
+					} else if(this.$store.state.newOrder.pass != this.$store.state.newOrder.repeatPass) {
+						
+						this.errorMsg = "Passwords don't match";
+						return false;
+					}
+				}
+
+				this.errorMsg = null;
 				return true;
 			},
+
 
 			showCargoForm() {
                 this.$store.state.isCargoFormShown = true;
             },
 
-            onComplete: function(){
+            onComplete(){
           		alert('Yay. Done!');
        		}
 		},
@@ -91,7 +156,7 @@
 		computed: {
 			showCargoFormBtn() {
 				return (this.$store.state.isCargoFormShown) ? 0 : 1;
-			}
+			} 
 		},
 
 		created() {
@@ -107,14 +172,11 @@
 
 
 <style>
-	span.error{
-  		color:#e74c3c;
-  		font-size:20px;
-  		display:flex;
-  		justify-content:center;
+	div.validation-error {
+		margin-top: 20px;
 	}
 
 	div.wizard-card-footer {
-	padding-top: 40px !important;
+		padding-top: 40px !important;
 	}
 </style>
