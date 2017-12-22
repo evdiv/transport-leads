@@ -77,7 +77,6 @@
 	import {FormWizard, TabContent} from 'vue-form-wizard'
 	import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
-
 	export default {
 		data() {
 			return {
@@ -86,10 +85,6 @@
 		},
 
 		methods: {
-			onComplete() {
-				console.log("Lesson Registration Form Submitted");
-				return true;
-			},
 
 			validateFirstStep() {
 				if(this.$store.state.newOrder.cargos.length > 0) {
@@ -149,7 +144,7 @@
             },
 
             onComplete(){
-          		alert('Yay. Done!');
+            	this.$store.dispatch('postTakelajOrder');
        		}
 		},
 
