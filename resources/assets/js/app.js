@@ -23,12 +23,11 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css';
  */
 
 Vue.use(Buefy);
-Vue.use(VueFormWizard);
+Vue.use(VueFormWizard); 
 
 
 Vue.component('form-cargo', require('./components/form-cargo.vue')); 
 Vue.component('form-add-cargo', require('./components/form-add-cargo.vue'));
-Vue.component('form-add-order', require('./components/form-add-order.vue'));
 Vue.component('form-add-takelaj', require('./components/form-add-takelaj.vue'));
 Vue.component('form-add-gruzchiki', require('./components/form-add-gruzchiki.vue'));
 Vue.component('form-add-auto', require('./components/form-add-auto.vue'));

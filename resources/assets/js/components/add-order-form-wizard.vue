@@ -8,13 +8,17 @@
            	next-button-text="Go next!"
            	error-color="#e74c3c"
            	finish-button-text="Submit"
-			@on-complete="onComplete">
+			@on-complete="onComplete"
+			v-if=!this.orderPosted>
 
 
 		  	<tab-content 
 		  		title="Request a lesson time" 
 		  		:before-change="validateFirstStep">
+
+		  		<form-add-takelaj></form-add-takelaj>
 		    	<form-cargo></form-cargo>
+
 		  	</tab-content>
 
 
@@ -30,27 +34,52 @@
 				:before-change="validateThirdStep"
 				v-if="!!this.$slots.first || !!this.$slots.second">
 				<switcher>
-					<div slot="first"><slot name="first"></slot></div>
-					<div slot="second"><slot name="second"></slot></div>
+					<div slot="first">
+						<slot name="first"></slot>
+					</div>
+
+					<div slot="second">
+						<slot name="second"></slot>
+					</div>
 				</switcher>	
 			</tab-content>
 
 
 			<tab-content title="Check and Submit">
-				<h3>Check your details</h3>
 
-		        <!-- List of all Added Lessons -->
+				<article class="message">
+				  <div class="message-header">
+				    <p>Check your details</p>
+				  </div>
 
-		        <div v-for="(cargo, index) in this.$store.state.newOrder.cargos"  class="column">
-                    {{ cargo.name }}
-                    {{ cargo.weight }} {{ cargo.dimention }}, 
-                    {{ cargo.length }} {{ cargo.size }}, {{ cargo.width }}, 
-                    {{ cargo.height }}, {{ cargo.description }}
-		        </div>
+				  <div class="message-body">
+				        <!-- List of all Added Lessons -->
 
-				City {{ this.$store.state.newOrder.city }} <br />
-				Street: {{ this.$store.state.newOrder.street }} <br />
-				Date: {{ this.$store.state.newOrder.date }} <br />
+				        <div v-for="(cargo, index) in this.$store.state.newOrder.cargos"  class="column">
+		                    {{ cargo.name }}
+		                    {{ cargo.weight }} {{ cargo.dimention }}, 
+		                    {{ cargo.length }} {{ cargo.size }}, {{ cargo.width }}, 
+		                    {{ cargo.height }}, {{ cargo.description }}
+				        </div>
+
+						City {{ this.$store.state.newOrder.city }} <br />
+						Street: {{ this.$store.state.newOrder.street }} <br />
+						Date: {{ this.$store.state.newOrder.date }} <br />
+
+						<hr />
+
+						<div class="field">
+						  	<label class="label">Add Message to the order</label>
+						  	<div class="control">
+						    	<textarea class="textarea" 
+						    		placeholder="Message to the order"
+						    		v-model=$store.state.newOrder.note></textarea>
+						  	</div>
+						</div>
+
+				  </div>
+				</article>				
+	
 			</tab-content>
 			
 
@@ -69,6 +98,15 @@
 
 		</form-wizard>
 
+
+		<div class="columns is-mobile" v-if=this.orderPosted has-icon>
+		  	<div class="column is-half is-offset-one-quarter">
+		  		<div class="notification" >
+					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> Your order has been posted.
+				</div>
+		  	</div>
+		</div>
+		
 	</div>
 </template>
 
@@ -80,7 +118,8 @@
 	export default {
 		data() {
 			return {
-				errorMsg: null
+				errorMsg: null,
+				orderPosted: false
 			}
 		},
 
@@ -144,7 +183,7 @@
             },
 
             onComplete(){
-            	this.$store.dispatch('postTakelajOrder');
+            	this.orderPosted = this.$store.dispatch('postTakelajOrder');
        		}
 		},
 
