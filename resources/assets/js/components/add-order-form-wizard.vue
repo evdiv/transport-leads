@@ -19,6 +19,8 @@
 		  		<form-add-takelaj></form-add-takelaj>
 		    	<form-cargo></form-cargo>
 
+		    	<div @click="sendOrder">send order</div>
+
 		  	</tab-content>
 
 
@@ -102,7 +104,7 @@
 		<div class="columns is-mobile" v-if=this.orderPosted has-icon>
 		  	<div class="column is-half is-offset-one-quarter">
 		  		<div class="notification" >
-					<i class="fa fa-check-circle fa-2x" aria-hidden="true"></i> Your order has been posted.
+					<i class="fa fa-check-circle fa-lg" aria-hidden="true"></i> Your order has been posted.
 				</div>
 		  	</div>
 		</div>
@@ -112,6 +114,7 @@
 
 <script>
 
+	import Axios from 'axios'
 	import {FormWizard, TabContent} from 'vue-form-wizard'
 	import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
@@ -126,11 +129,13 @@
 		methods: {
 
 			validateFirstStep() {
+
 				if(this.$store.state.newOrder.cargos.length > 0) {
 					this.errorMsg = null;
 					return true;
 				} 
 				this.errorMsg = "You have to add at least one lesson";
+
 				return false;
 			},
 
@@ -149,7 +154,6 @@
 
 
 			validateThirdStep() {
-
 				if(this.$store.state.newOrder.registered) {
 
 					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.pass) {
@@ -183,7 +187,11 @@
             },
 
             onComplete(){
-            	this.orderPosted = this.$store.dispatch('postTakelajOrder');
+            	//this.orderPosted = this.$store.dispatch('postTakelajOrder');
+       		},
+
+       		sendOrder() {
+       			Axios.post('/contact', {name: 'Eugene'});
        		}
 		},
 
@@ -194,7 +202,7 @@
 		},
 
 		created() {
-			console.log("is cargo form shown " + this.$store.state.isCargoFormShown);
+
 		},
 
 		components: {

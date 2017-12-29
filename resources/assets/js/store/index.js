@@ -44,14 +44,8 @@ export default new Vuex.Store({
 
 	actions: {
 		postTakelajOrder() {
-			Axios.post('/takelaj/', 
-				this.state.newOrder)
-			.then(function (response) { 
-			    return true;
-			  })
-  			.catch(function (error) {
-			    return false;
-			  });
+
+			Axios.post('/takelaj/', this.state.newOrder);
 		}
 	} 
 });
