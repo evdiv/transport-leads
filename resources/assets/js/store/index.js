@@ -45,7 +45,7 @@ export default new Vuex.Store({
 	actions: {
 		postTakelajOrder() {
 
-			Axios.post('/takelaj/', this.state.newOrder);
+			Axios.post('/takelaj', this.state.newOrder);
 		}
 	} 
 });

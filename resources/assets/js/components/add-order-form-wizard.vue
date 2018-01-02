@@ -19,8 +19,6 @@
 		  		<form-add-takelaj></form-add-takelaj>
 		    	<form-cargo></form-cargo>
 
-		    	<div @click="sendOrder">send order</div>
-
 		  	</tab-content>
 
 
@@ -114,7 +112,6 @@
 
 <script>
 
-	import Axios from 'axios'
 	import {FormWizard, TabContent} from 'vue-form-wizard'
 	import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
@@ -156,7 +153,7 @@
 			validateThirdStep() {
 				if(this.$store.state.newOrder.registered) {
 
-					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.pass) {
+					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.password) {
 
 						this.errorMsg = "All fields are required";
 						return false;
@@ -164,13 +161,20 @@
 				
 				} else {
 
-					if(!this.$store.state.newOrder.name || !this.$store.state.newOrder.email 
-						|| !this.$store.state.newOrder.phone || !this.$store.state.newOrder.pass) {
+					 if(!this.$store.state.newOrder.name || !this.$store.state.newOrder.email 
+						|| !this.$store.state.newOrder.phone || !this.$store.state.newOrder.password) {
 
 						this.errorMsg = "All fields are required";
 						return false;
-					
-					} else if(this.$store.state.newOrder.pass != this.$store.state.newOrder.repeatPass) {
+
+
+					} else if(this.$store.state.newOrder.password.length < 6) {
+
+						this.errorMsg = "Password length should be at least 6 characters";
+						return false;
+
+
+					} else if(this.$store.state.newOrder.password != this.$store.state.newOrder.repeatPassword) {
 						
 						this.errorMsg = "Passwords don't match";
 						return false;
@@ -187,12 +191,9 @@
             },
 
             onComplete(){
-            	//this.orderPosted = this.$store.dispatch('postTakelajOrder');
-       		},
-
-       		sendOrder() {
-       			Axios.post('/contact', {name: 'Eugene'});
+            	this.orderPosted = this.$store.dispatch('postTakelajOrder');
        		}
+
 		},
 
 		computed: {

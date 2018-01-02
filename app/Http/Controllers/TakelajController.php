@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\User;
 use App\Order;
+use App\Takelaj;
+use App\Cargo;
 use Auth;
 
 
@@ -27,26 +29,63 @@ class TakelajController extends Controller
         return view('orders.takelaj-create');
     }
 
-    public function store() {
 
-        // $User = User::create([
-        //     'name' => $request->name,
-        //     'email' => $request->email,
-        //     'phone' => $request->phone,
-        //     'password' => bcrypt($request->password),
-        // ]);
+    public function store(Request $request) {
 
 
-        // User::create([
-        //     'name' => 'fdfdfdfdfd',
-        //     'email' => 'fdfdfd@fdfdf.ca',
-        //     'phone' => '4343434343',
-        //     'password' => bcrypt('343434343'),
-        // ]);
-        return response()->json(['response' => 'data has been submitted1']);
-        exit;
+        if(Auth::check()) {
+            $User = Auth::user();
         
-        // return true; 
+        } elseif ($request->registered == '1') {
+
+            if (!Auth::attempt(['email' => $request->email, 
+                                'password' => $request->password])) {
+                
+                return back()->withInput();
+            }
+
+            $User = Auth::user();
+
+        } else {
+
+            $this->validate(request(), [
+                'name' => 'required|string|max:255',
+                'email' => 'required|string|email|max:255|unique:carriers',
+                'password' => 'required|string|min:6',
+            ]); 
+
+            $User = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'password' => bcrypt($request->password),
+            ]);
+
+            Auth::loginUsingId($User->id, true);
+        } 
+
+
+        $Order = Order::create([
+            'user_id' => $User->id,
+            'note' => $request->note]);
+
+        Takelaj::create([
+            'order_id' => $Order->id,
+            'demontaj' => $request->demontaj,
+            'montaj' => $request->montaj,
+            'peremeshenie' => $request->peremeshenie,
+            'razbor' => $request->razbor,
+        ]);
+
+
+        foreach ($request->cargos as $cargo) {
+            $cargo['order_id'] = $Order->id;
+            $Cargo = Cargo::create($cargo);
+        }
+
+
+        return response()->json(['response' => 'data has been submitted3']);
+        exit;
     }
 
     public function edit($id) {

@@ -33,7 +33,7 @@
 
         <div class="field">
             <p class="control has-icons-left">
-                <input class="input" type="password" placeholder="Password" name="password" v-model=$store.state.newOrder.pass>
+                <input class="input" type="password" placeholder="Password" name="password" v-model=$store.state.newOrder.password>
                 <span class="icon is-small is-left">
                     <i class="fa fa-lock"></i>
                 </span>
