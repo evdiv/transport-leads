@@ -64,17 +64,19 @@ class TakelajController extends Controller
             Auth::loginUsingId($User->id, true);
         } 
 
-
         $Order = Order::create([
             'user_id' => $User->id,
-            'note' => $request->note]);
+            'date' => $request->date,
+            'time' => $request->time,
+            'note' => $request->note
+        ]);
 
         Takelaj::create([
             'order_id' => $Order->id,
             'demontaj' => $request->demontaj,
             'montaj' => $request->montaj,
             'peremeshenie' => $request->peremeshenie,
-            'razbor' => $request->razbor,
+            'razbor' => $request->razbor
         ]);
 
 
@@ -84,9 +86,12 @@ class TakelajController extends Controller
         }
 
 
-        return response()->json(['response' => 'data has been submitted3']);
-        exit;
+        $Order->addLocation($request->city, $request->address);
+        $Order->addDestination($request->destinationCity, $request->destinationAddress);
+
+        return response()->json(['response' => 'data has been submitted']);
     }
+
 
     public function edit($id) {
 

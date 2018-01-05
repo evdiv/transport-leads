@@ -12,8 +12,7 @@ export default new Vuex.Store({
 		newOrder: {
 			service: "",
 			registered: false,
-			cargos: [],
-			destinations: []
+			cargos: []
 		}
 	},
 
@@ -30,22 +29,16 @@ export default new Vuex.Store({
 
 		removeCargo(state, index) {
 			this.state.newOrder.cargos.splice(index, 1);
-		},
-
-		addDestination(state, destination) {
-
-			this.state.newOrder.destinations.push(destination);
-		},
-
-		removeDestination(state, index) {
-			this.state.newOrder.destinations.splice(index, 1);
 		}
 	},
 
 	actions: {
 		postTakelajOrder() {
-
 			Axios.post('/takelaj', this.state.newOrder);
+		},
+
+		getOrders() {
+			return Axios.get('/get-orders');
 		}
 	} 
 });

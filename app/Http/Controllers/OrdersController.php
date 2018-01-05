@@ -14,11 +14,12 @@ use Auth;
 
 class OrdersController extends Controller
 {
-    public function index() {
 
+    public function index() {
         $Order = new Order;
         $orders = $Order->getRecent();
-        return view('orders.index', compact('orders'));
+        
+        return $orders;
     }
 
 

@@ -1,19 +1,23 @@
 <template>
     <section>
+        
+
+        <div style="text-align:center;" v-if="loader">
+            <i class="fa fa-refresh fa-spin fa-4x fa-fw"></i><span class="sr-only">Loading...</span>
+        </div>
 
         <b-field grouped group-multiline>
 
             <b-select v-model="perPage" :disabled="!isPaginated">
-                <option value="5">5 per page</option>
-                <option value="10">10 per page</option>
-                <option value="15">15 per page</option>
-                <option value="20">20 per page</option>
+                <option value="25">25 per page</option>
+                <option value="50">50 per page</option>
+                <option value="100">100 per page</option>
             </b-select>
 
         </b-field>
 
         <b-table
-            :data="tableData"
+            :data="lessons"
             :paginated="isPaginated"
             :per-page="perPage"
             detailed
@@ -22,9 +26,30 @@
 
             <template slot-scope="props">
 
-                <b-table-column label="Cargo Type">
-                    <i class="mdi mdi-forklift"></i> {{ props.row.first_name }}
+                <b-table-column label="Cargo">
+                   
+                    <div v-for="cargo in props.row.cargos">
+
+                       <i class="mdi mdi-forklift"></i>  {{ cargo.name }}, {{ cargo.weight }} {{ cargo.dimention }}<br/>
+
+                        <span class="tag is-info" v-if="cargo.length > 0">
+                            length: {{ cargo.length }} {{ cargo.size }}</span>
+
+                        <span class="tag is-info" v-if="cargo.width > 0" >
+                            width: {{ cargo.width }} {{ cargo.size }}</span>
+
+                        <span class="tag is-info" v-if="cargo.height > 0">
+                            height: {{ cargo.height }} {{ cargo.size }}</span>
+                    </div>
                 </b-table-column>
+
+
+                <b-table-column label="Total Weight">
+                    <template v-for="cargo in props.row.cargos">
+                        {{ cargo.weight }} {{ cargo.dimention }}
+                    </template>
+                </b-table-column>
+
 
                 <b-table-column label="Location">
                     <b-icon icon="map-marker" type="is-danger" size="is-small"></b-icon> {{ props.row.last_name }}
@@ -72,23 +97,37 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            const tableData = [
-                { 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' },
-                { 'id': 2, 'first_name': 'John', 'last_name': 'Jacobs', 'date': '2016-12-15 06:00:53', 'gender': 'Male' },
-                { 'id': 3, 'first_name': 'Tina', 'last_name': 'Gilbert', 'date': '2016-04-26 06:26:28', 'gender': 'Female' },
-                { 'id': 4, 'first_name': 'Clarence', 'last_name': 'Flores', 'date': '2016-04-10 10:28:46', 'gender': 'Male' },
-                { 'id': 5, 'first_name': 'Anne', 'last_name': 'Lee', 'date': '2016-12-06 14:38:38', 'gender': 'Female' }
-            ]
 
+    export default {
+        mounted() {
+            this.getLessons();
+        },
+
+        data() {
             return {
-                tableData,
+                lessons: [],
                 isPaginated: true,
+                loader: true,
                 defaultSortDirection: 'asc',
                 isHoverable: true,
-                perPage: 5
+                perPage: 25,
+                testProp: 66
             }
-        }
+        },
+
+        methods: {
+            getLessons() {
+                this.$store.dispatch('getOrders')
+                    .then((response) => {
+                       this.lessons = response.data;
+                       this.loader = false;
+
+                       console.log(this.lessons);
+                    })
+                    .catch((error) => {
+                        console.log(error);
+                    });
+            }
+        },
     }
 </script>

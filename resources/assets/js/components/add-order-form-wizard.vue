@@ -102,7 +102,9 @@
 		<div class="columns is-mobile" v-if=this.orderPosted has-icon>
 		  	<div class="column is-half is-offset-one-quarter">
 		  		<div class="notification" >
-					<i class="fa fa-check-circle fa-lg" aria-hidden="true"></i> Your order has been posted.
+					<div style="text-align:center;">
+					 	Your order has been posted. In 2 sec you will be redirected to the orders page.
+					</div>
 				</div>
 		  	</div>
 		</div>
@@ -138,7 +140,7 @@
 
 			validateSecondStep() {
 				if(!!this.$store.state.newOrder.city
-				 	&& !!this.$store.state.newOrder.street 
+				 	&& !!this.$store.state.newOrder.address 
 				 	&& !!this.$store.state.newOrder.date) {
 
 					this.errorMsg = null;
@@ -191,7 +193,14 @@
             },
 
             onComplete(){
+
             	this.orderPosted = this.$store.dispatch('postTakelajOrder');
+
+            	if(this.orderPosted) {
+            		setTimeout(function() {
+            			location.href = "/orders";
+            		}, 2000);
+            	}
        		}
 
 		},

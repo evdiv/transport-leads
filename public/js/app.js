@@ -30301,8 +30301,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		newOrder: {
 			service: "",
 			registered: false,
-			cargos: [],
-			destinations: []
+			cargos: []
 		}
 	},
 
@@ -30317,20 +30316,15 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		},
 		removeCargo: function removeCargo(state, index) {
 			this.state.newOrder.cargos.splice(index, 1);
-		},
-		addDestination: function addDestination(state, destination) {
-
-			this.state.newOrder.destinations.push(destination);
-		},
-		removeDestination: function removeDestination(state, index) {
-			this.state.newOrder.destinations.splice(index, 1);
 		}
 	},
 
 	actions: {
 		postTakelajOrder: function postTakelajOrder() {
-
 			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/takelaj', this.state.newOrder);
+		},
+		getOrders: function getOrders() {
+			return __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/get-orders');
 		}
 	}
 }));
@@ -32172,9 +32166,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -33720,16 +33711,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
-        return {};
+        return {
+            showDestinations: false
+        };
     },
+
 
     methods: {
         addDestination: function addDestination() {
-            this.$store.state.newOrder.destinations.push([]);
+            this.showDestinations = true;
         },
 
         removeDestination: function removeDestination(index) {
-            this.$store.state.newOrder.destinations.splice(index, 1);
+
+            this.$store.state.newOrder.destinationCity = "";
+            this.$store.state.newOrder.destinationAddress = "";
+            this.showDestinations = false;;
         }
 
     }
@@ -33743,199 +33740,193 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "box" },
-    [
-      _c("div", { staticClass: "field is-horizontal" }, [
-        _vm._m(0, false, false),
+  return _c("div", { staticClass: "box" }, [
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _vm._m(0, false, false),
+      _vm._v(" "),
+      _c("div", { staticClass: "field-body" }, [
+        _c("div", { staticClass: "field" }, [
+          _c("p", { staticClass: "control is-expanded" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.$store.state.newOrder.city,
+                  expression: "$store.state.newOrder.city"
+                }
+              ],
+              staticClass: "input",
+              attrs: { type: "text", name: "City", placeholder: "City" },
+              domProps: { value: _vm.$store.state.newOrder.city },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(
+                    _vm.$store.state.newOrder,
+                    "city",
+                    $event.target.value
+                  )
+                }
+              }
+            })
+          ])
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "field-body" }, [
-          _c("div", { staticClass: "field" }, [
-            _c("p", { staticClass: "control is-expanded" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.$store.state.newOrder.city,
-                    expression: "$store.state.newOrder.city"
-                  }
-                ],
-                staticClass: "input",
-                attrs: { type: "text", name: "City", placeholder: "City" },
-                domProps: { value: _vm.$store.state.newOrder.city },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$store.state.newOrder,
-                      "city",
-                      $event.target.value
-                    )
-                  }
+        _c("div", { staticClass: "field" }, [
+          _c("p", { staticClass: "control is-expanded" }, [
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.$store.state.newOrder.address,
+                  expression: "$store.state.newOrder.address"
                 }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "field" }, [
-            _c("p", { staticClass: "control is-expanded" }, [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.$store.state.newOrder.street,
-                    expression: "$store.state.newOrder.street"
+              ],
+              staticClass: "input",
+              attrs: { type: "text", name: "Address", placeholder: "Address" },
+              domProps: { value: _vm.$store.state.newOrder.address },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
-                ],
-                staticClass: "input",
-                attrs: { type: "text", name: "Street", placeholder: "Street" },
-                domProps: { value: _vm.$store.state.newOrder.street },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(
-                      _vm.$store.state.newOrder,
-                      "street",
-                      $event.target.value
-                    )
-                  }
+                  _vm.$set(
+                    _vm.$store.state.newOrder,
+                    "address",
+                    $event.target.value
+                  )
                 }
-              })
-            ])
+              }
+            })
           ])
         ])
-      ]),
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "field is-horizontal" }, [
+      _vm._m(1, false, false),
       _vm._v(" "),
-      _c("div", { staticClass: "field is-horizontal" }, [
-        _vm._m(1, false, false),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "field-body" },
-          [
-            _c(
-              "b-field",
-              [
-                _c("b-datepicker", {
-                  attrs: {
-                    placeholder: "Click to select...",
-                    icon: "calendar-today"
+      _c(
+        "div",
+        { staticClass: "field-body" },
+        [
+          _c(
+            "b-field",
+            [
+              _c("b-datepicker", {
+                attrs: {
+                  placeholder: "Click to select...",
+                  icon: "calendar-today"
+                },
+                model: {
+                  value: _vm.$store.state.newOrder.date,
+                  callback: function($$v) {
+                    _vm.$set(_vm.$store.state.newOrder, "date", $$v)
                   },
-                  model: {
-                    value: _vm.$store.state.newOrder.date,
-                    callback: function($$v) {
-                      _vm.$set(_vm.$store.state.newOrder, "date", $$v)
-                    },
-                    expression: "$store.state.newOrder.date"
-                  }
-                })
-              ],
-              1
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "field" }, [
-              _c("p", { staticClass: "control has-icons-left" }, [
-                _c("span", { staticClass: "select" }, [
-                  _c(
-                    "select",
-                    {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.$store.state.newOrder.time,
-                          expression: "$store.state.newOrder.time"
-                        }
-                      ],
-                      on: {
-                        change: function($event) {
-                          var $$selectedVal = Array.prototype.filter
-                            .call($event.target.options, function(o) {
-                              return o.selected
-                            })
-                            .map(function(o) {
-                              var val = "_value" in o ? o._value : o.value
-                              return val
-                            })
-                          _vm.$set(
-                            _vm.$store.state.newOrder,
-                            "time",
-                            $event.target.multiple
-                              ? $$selectedVal
-                              : $$selectedVal[0]
-                          )
-                        }
+                  expression: "$store.state.newOrder.date"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "field" }, [
+            _c("p", { staticClass: "control has-icons-left" }, [
+              _c("span", { staticClass: "select" }, [
+                _c(
+                  "select",
+                  {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.$store.state.newOrder.time,
+                        expression: "$store.state.newOrder.time"
                       }
-                    },
-                    [
-                      _c("option", { attrs: { selected: "" } }, [
-                        _vm._v("Select time...")
-                      ]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("all day")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("06.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("07.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("08.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("09.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("10.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("11.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("12.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("13.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("14.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("15.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("16.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("17.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("18.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("19.00y")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("20.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("22.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("23.00")]),
-                      _vm._v(" "),
-                      _c("option", [_vm._v("after 24.00")])
-                    ]
-                  )
-                ]),
-                _vm._v(" "),
-                _vm._m(2, false, false)
-              ])
+                    ],
+                    on: {
+                      change: function($event) {
+                        var $$selectedVal = Array.prototype.filter
+                          .call($event.target.options, function(o) {
+                            return o.selected
+                          })
+                          .map(function(o) {
+                            var val = "_value" in o ? o._value : o.value
+                            return val
+                          })
+                        _vm.$set(
+                          _vm.$store.state.newOrder,
+                          "time",
+                          $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        )
+                      }
+                    }
+                  },
+                  [
+                    _c("option", { attrs: { selected: "" } }, [
+                      _vm._v("Select time...")
+                    ]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("all day")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("06.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("07.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("08.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("09.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("10.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("11.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("12.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("13.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("14.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("15.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("16.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("17.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("18.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("19.00y")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("20.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("22.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("23.00")]),
+                    _vm._v(" "),
+                    _c("option", [_vm._v("after 24.00")])
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _vm._m(2, false, false)
             ])
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _c("hr"),
-      _vm._v(" "),
-      _vm._l(_vm.$store.state.newOrder.destinations, function(
-        destination,
-        index
-      ) {
-        return _c("div", { staticClass: "field is-horizontal" }, [
-          _vm._m(3, true, false),
+          ])
+        ],
+        1
+      )
+    ]),
+    _vm._v(" "),
+    _c("hr"),
+    _vm._v(" "),
+    _vm.showDestinations
+      ? _c("div", { staticClass: "field is-horizontal" }, [
+          _vm._m(3, false, false),
           _vm._v(" "),
           _c("div", { staticClass: "field-body" }, [
             _c("div", { staticClass: "field" }, [
@@ -33945,9 +33936,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.$store.state.newOrder.destinations[index].city,
-                      expression:
-                        "$store.state.newOrder.destinations[index].city"
+                      value: _vm.$store.state.newOrder.destinationCity,
+                      expression: "$store.state.newOrder.destinationCity"
                     }
                   ],
                   staticClass: "input",
@@ -33957,7 +33947,7 @@ var render = function() {
                     placeholder: "City"
                   },
                   domProps: {
-                    value: _vm.$store.state.newOrder.destinations[index].city
+                    value: _vm.$store.state.newOrder.destinationCity
                   },
                   on: {
                     input: function($event) {
@@ -33965,8 +33955,8 @@ var render = function() {
                         return
                       }
                       _vm.$set(
-                        _vm.$store.state.newOrder.destinations[index],
-                        "city",
+                        _vm.$store.state.newOrder,
+                        "destinationCity",
                         $event.target.value
                       )
                     }
@@ -33982,10 +33972,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value:
-                        _vm.$store.state.newOrder.destinations[index].address,
-                      expression:
-                        "$store.state.newOrder.destinations[index].address"
+                      value: _vm.$store.state.newOrder.destinationAddress,
+                      expression: "$store.state.newOrder.destinationAddress"
                     }
                   ],
                   staticClass: "input",
@@ -33995,7 +33983,7 @@ var render = function() {
                     placeholder: "Street"
                   },
                   domProps: {
-                    value: _vm.$store.state.newOrder.destinations[index].address
+                    value: _vm.$store.state.newOrder.destinationAddress
                   },
                   on: {
                     input: function($event) {
@@ -34003,8 +33991,8 @@ var render = function() {
                         return
                       }
                       _vm.$set(
-                        _vm.$store.state.newOrder.destinations[index],
-                        "address",
+                        _vm.$store.state.newOrder,
+                        "destinationAddress",
                         $event.target.value
                       )
                     }
@@ -34019,7 +34007,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.preventDefault()
-                      _vm.removeDestination(index)
+                      _vm.removeDestination(_vm.index)
                     }
                   }
                 })
@@ -34027,27 +34015,27 @@ var render = function() {
             ])
           ])
         ])
-      }),
-      _vm._v(" "),
-      _c("div", { staticClass: "level-right" }, [
-        _c(
-          "div",
-          {
-            staticClass: "button is-success",
-            on: { click: _vm.addDestination }
-          },
-          [
-            _c("i", {
-              staticClass: "fa fa-plus",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v("  Add Builling Address")
-          ]
-        )
-      ])
-    ],
-    2
-  )
+      : _vm._e(),
+    _vm._v(" "),
+    _c("div", { staticClass: "level-right" }, [
+      !_vm.showDestinations
+        ? _c(
+            "div",
+            {
+              staticClass: "button is-success",
+              on: { click: _vm.addDestination }
+            },
+            [
+              _c("i", {
+                staticClass: "fa fa-plus",
+                attrs: { "aria-hidden": "true" }
+              }),
+              _vm._v("  Add Builling Address")
+            ]
+          )
+        : _vm._e()
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -34055,7 +34043,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "field-label is-normal" }, [
-      _c("label", { staticClass: "label" }, [_vm._v("Address")])
+      _c("label", { staticClass: "label" }, [_vm._v("City and Address")])
     ])
   },
   function() {
@@ -34287,18 +34275,63 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    mounted: function mounted() {
+        this.getLessons();
+    },
     data: function data() {
-        var tableData = [{ 'id': 1, 'first_name': 'Jesse', 'last_name': 'Simmons', 'date': '2016-10-15 13:43:27', 'gender': 'Male' }, { 'id': 2, 'first_name': 'John', 'last_name': 'Jacobs', 'date': '2016-12-15 06:00:53', 'gender': 'Male' }, { 'id': 3, 'first_name': 'Tina', 'last_name': 'Gilbert', 'date': '2016-04-26 06:26:28', 'gender': 'Female' }, { 'id': 4, 'first_name': 'Clarence', 'last_name': 'Flores', 'date': '2016-04-10 10:28:46', 'gender': 'Male' }, { 'id': 5, 'first_name': 'Anne', 'last_name': 'Lee', 'date': '2016-12-06 14:38:38', 'gender': 'Female' }];
-
         return {
-            tableData: tableData,
+            lessons: [],
             isPaginated: true,
+            loader: true,
             defaultSortDirection: 'asc',
             isHoverable: true,
-            perPage: 5
+            perPage: 25,
+            testProp: 66
         };
+    },
+
+
+    methods: {
+        getLessons: function getLessons() {
+            var _this = this;
+
+            this.$store.dispatch('getOrders').then(function (response) {
+                _this.lessons = response.data;
+                _this.loader = false;
+
+                console.log(_this.lessons);
+            }).catch(function (error) {
+                console.log(error);
+            });
+        }
     }
 });
 
@@ -34313,6 +34346,13 @@ var render = function() {
   return _c(
     "section",
     [
+      _vm.loader
+        ? _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("i", { staticClass: "fa fa-refresh fa-spin fa-4x fa-fw" }),
+            _c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
       _c(
         "b-field",
         { attrs: { grouped: "", "group-multiline": "" } },
@@ -34330,13 +34370,13 @@ var render = function() {
               }
             },
             [
-              _c("option", { attrs: { value: "5" } }, [_vm._v("5 per page")]),
+              _c("option", { attrs: { value: "25" } }, [_vm._v("25 per page")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "10" } }, [_vm._v("10 per page")]),
+              _c("option", { attrs: { value: "50" } }, [_vm._v("50 per page")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "15" } }, [_vm._v("15 per page")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "20" } }, [_vm._v("20 per page")])
+              _c("option", { attrs: { value: "100" } }, [
+                _vm._v("100 per page")
+              ])
             ]
           )
         ],
@@ -34345,7 +34385,7 @@ var render = function() {
       _vm._v(" "),
       _c("b-table", {
         attrs: {
-          data: _vm.tableData,
+          data: _vm.lessons,
           paginated: _vm.isPaginated,
           "per-page": _vm.perPage,
           detailed: "",
@@ -34356,10 +34396,76 @@ var render = function() {
             key: "default",
             fn: function(props) {
               return [
-                _c("b-table-column", { attrs: { label: "Cargo Type" } }, [
-                  _c("i", { staticClass: "mdi mdi-forklift" }),
-                  _vm._v(" " + _vm._s(props.row.first_name) + "\n            ")
-                ]),
+                _c(
+                  "b-table-column",
+                  { attrs: { label: "Cargo" } },
+                  _vm._l(props.row.cargos, function(cargo) {
+                    return _c("div", [
+                      _c("i", { staticClass: "mdi mdi-forklift" }),
+                      _vm._v(
+                        "  " +
+                          _vm._s(cargo.name) +
+                          ", " +
+                          _vm._s(cargo.weight) +
+                          " " +
+                          _vm._s(cargo.dimention)
+                      ),
+                      _c("br"),
+                      _vm._v(" "),
+                      cargo.length > 0
+                        ? _c("span", { staticClass: "tag is-info" }, [
+                            _vm._v(
+                              "\n                        length: " +
+                                _vm._s(cargo.length) +
+                                " " +
+                                _vm._s(cargo.size)
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      cargo.width > 0
+                        ? _c("span", { staticClass: "tag is-info" }, [
+                            _vm._v(
+                              "\n                        width: " +
+                                _vm._s(cargo.width) +
+                                " " +
+                                _vm._s(cargo.size)
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      cargo.height > 0
+                        ? _c("span", { staticClass: "tag is-info" }, [
+                            _vm._v(
+                              "\n                        height: " +
+                                _vm._s(cargo.height) +
+                                " " +
+                                _vm._s(cargo.size)
+                            )
+                          ])
+                        : _vm._e()
+                    ])
+                  })
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-table-column",
+                  { attrs: { label: "Total Weight" } },
+                  [
+                    _vm._l(props.row.cargos, function(cargo) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(cargo.weight) +
+                            " " +
+                            _vm._s(cargo.dimention) +
+                            "\n                "
+                        )
+                      ]
+                    })
+                  ],
+                  2
+                ),
                 _vm._v(" "),
                 _c(
                   "b-table-column",
@@ -35087,6 +35193,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 
 
@@ -35113,7 +35221,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			return false;
 		},
 		validateSecondStep: function validateSecondStep() {
-			if (!!this.$store.state.newOrder.city && !!this.$store.state.newOrder.street && !!this.$store.state.newOrder.date) {
+			if (!!this.$store.state.newOrder.city && !!this.$store.state.newOrder.address && !!this.$store.state.newOrder.date) {
 
 				this.errorMsg = null;
 				return true;
@@ -35154,7 +35262,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 			this.$store.state.isCargoFormShown = true;
 		},
 		onComplete: function onComplete() {
+
 			this.orderPosted = this.$store.dispatch('postTakelajOrder');
+
+			if (this.orderPosted) {
+				setTimeout(function () {
+					location.href = "/orders";
+				}, 2000);
+			}
 		}
 	},
 
@@ -35415,11 +35530,11 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "column is-half is-offset-one-quarter" }, [
       _c("div", { staticClass: "notification" }, [
-        _c("i", {
-          staticClass: "fa fa-check-circle fa-lg",
-          attrs: { "aria-hidden": "true" }
-        }),
-        _vm._v(" Your order has been posted.\n\t\t\t\t")
+        _c("div", { staticStyle: { "text-align": "center" } }, [
+          _vm._v(
+            "\n\t\t\t\t\t \tYour order has been posted. In 2 sec you will be redirected to the orders page.\n\t\t\t\t\t"
+          )
+        ])
       ])
     ])
   }

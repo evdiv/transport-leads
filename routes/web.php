@@ -1,18 +1,19 @@
 <?php
 
 //**************************
-//Static Pages
+// Main Pages
 //**************************
 Route::get('/', 'PageController@index');
 Route::get('/about', 'PageController@about')->name('about');
 Route::get('/contact', 'PageController@contact')->name('contact');
-Route::get('/select-service', 'PageController@select')->name('select.service');
-Route::post('/contact', 'PageController@store')->name('contact.submit');
+Route::get('/select-service', 'PageController@selectService')->name('select.service');
+Route::get('/orders', 'PageController@orders')->name('orders');
+
 
 
 //**************************
 //Order Pages
-Route::get('/orders', 'OrdersController@index')->name('orders');
+Route::get('/get-orders', 'OrdersController@index');
 Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
 
 
