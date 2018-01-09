@@ -39,9 +39,23 @@
                         <!-- User Authentication Links -->
                         @if(Auth::guard('web')->check())
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
-                            <a class="navbar-item" href="{{ route('home') }}">Active Orders</a> 
-                            <a class="navbar-item" href="{{ route('home') }}">Completed Orders</a> 
-                            <a class="navbar-item" href="{{ route('home') }}">Personal Details</a> 
+                            <a class="navbar-item" href="/my-active-orders">
+                                Active Orders&nbsp;&nbsp;
+                                <span class="tag is-success">
+                                    {{ Auth::user()->getNumberOfActiveOrders() }}
+                                </span>
+                            </a> 
+
+
+                            <a class="navbar-item" href="/my-complete-orders">
+                                Completed Orders&nbsp;&nbsp;                                
+                                <span class="tag is-light">
+                                    {{ Auth::user()->getNumberOfCompleteOrders() }}
+                                </span>
+                            </a> 
+
+
+                            <a class="navbar-item" href="/my-details">Personal Details</a>
                             <a class="navbar-item" href="{{ route('logout') }}">Logout</a>
                         
                         <!-- Carrier Authentication Links -->
@@ -49,7 +63,7 @@
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
                             <a class="navbar-item" href="{{ route('home') }}">Orders with my Offer</a> 
                             <a class="navbar-item" href="{{ route('home') }}">Completed Orders</a> 
-                            <a class="navbar-item" href="{{ route('home') }}">Personal Details</a> 
+                            <a class="navbar-item" href="/my-details">Personal Details</a> 
                             <a class="navbar-item" href="{{ route('carrier.logout') }}">Logout</a>
 
 

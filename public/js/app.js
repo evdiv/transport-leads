@@ -30323,8 +30323,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 		postTakelajOrder: function postTakelajOrder() {
 			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/takelaj', this.state.newOrder);
 		},
-		getOrders: function getOrders() {
-			return __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/get-orders');
+		getOrders: function getOrders(state, payload) {
+			var userId = payload.userId || 0,
+			    userActiveOrders = payload.userActiveOrders || 0,
+			    userCompleteOrders = payload.userCompleteOrders || 0;
+
+			return __WEBPACK_IMPORTED_MODULE_2_axios___default.a.get('/get-orders', {
+				params: {
+					userActiveOrders: userActiveOrders,
+					userCompleteOrders: userCompleteOrders
+				}
+			});
 		}
 	}
 }));
@@ -34300,6 +34309,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -34318,16 +34358,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    props: ['user-complete-orders', 'user-active-orders'],
 
     methods: {
         getLessons: function getLessons() {
             var _this = this;
 
-            this.$store.dispatch('getOrders').then(function (response) {
+            this.$store.dispatch('getOrders', {
+                userCompleteOrders: this.userCompleteOrders,
+                userActiveOrders: this.userActiveOrders
+            }).then(function (response) {
                 _this.lessons = response.data;
                 _this.loader = false;
-
-                console.log(_this.lessons);
             }).catch(function (error) {
                 console.log(error);
             });
@@ -34350,6 +34392,16 @@ var render = function() {
         ? _c("div", { staticStyle: { "text-align": "center" } }, [
             _c("i", { staticClass: "fa fa-refresh fa-spin fa-4x fa-fw" }),
             _c("span", { staticClass: "sr-only" }, [_vm._v("Loading...")])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.lessons.length == 0 && !_vm.loader
+        ? _c("div", { staticStyle: { "text-align": "center" } }, [
+            _c("i", {
+              staticClass: "fa fa-exclamation-triangle fa-lg",
+              attrs: { "aria-hidden": "true" }
+            }),
+            _vm._v(" Lessons are not found\n    ")
           ])
         : _vm._e(),
       _vm._v(" "),
@@ -34388,7 +34440,7 @@ var render = function() {
           data: _vm.lessons,
           paginated: _vm.isPaginated,
           "per-page": _vm.perPage,
-          detailed: "",
+          focusable: "",
           "detail-key": "id"
         },
         scopedSlots: _vm._u([
@@ -34396,73 +34448,129 @@ var render = function() {
             key: "default",
             fn: function(props) {
               return [
+                _c("b-table-column", { attrs: { label: "Order #" } }, [
+                  _c("a", { attrs: { href: "/orders/" + props.row.id } }, [
+                    _vm._v(_vm._s(props.row.id))
+                  ])
+                ]),
+                _vm._v(" "),
                 _c(
                   "b-table-column",
                   { attrs: { label: "Cargo" } },
                   _vm._l(props.row.cargos, function(cargo) {
                     return _c("div", [
-                      _c("i", { staticClass: "mdi mdi-forklift" }),
                       _vm._v(
-                        "  " +
+                        "\n                   " +
                           _vm._s(cargo.name) +
-                          ", " +
-                          _vm._s(cargo.weight) +
-                          " " +
-                          _vm._s(cargo.dimention)
+                          " \n\n                    "
                       ),
-                      _c("br"),
-                      _vm._v(" "),
-                      cargo.length > 0
-                        ? _c("span", { staticClass: "tag is-info" }, [
+                      cargo.quantity > 1
+                        ? _c("span", [
                             _vm._v(
-                              "\n                        length: " +
-                                _vm._s(cargo.length) +
-                                " " +
-                                _vm._s(cargo.size)
+                              "\n                       -  " +
+                                _vm._s(cargo.quantity) +
+                                " pieces\n                    "
                             )
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      cargo.width > 0
-                        ? _c("span", { staticClass: "tag is-info" }, [
-                            _vm._v(
-                              "\n                        width: " +
-                                _vm._s(cargo.width) +
-                                " " +
-                                _vm._s(cargo.size)
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      cargo.height > 0
-                        ? _c("span", { staticClass: "tag is-info" }, [
-                            _vm._v(
-                              "\n                        height: " +
-                                _vm._s(cargo.height) +
-                                " " +
-                                _vm._s(cargo.size)
-                            )
-                          ])
-                        : _vm._e()
+                      _c("div", { staticClass: "content is-small" }, [
+                        _vm._v(
+                          "Dimensions of one piece: \n\n                        "
+                        ),
+                        _c("span", { staticClass: "tag is-light" }, [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(cargo.weight) +
+                              " " +
+                              _vm._s(cargo.dimention) +
+                              " \n                        "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        cargo.length > 0
+                          ? _c("span", { staticClass: "tag is-light" }, [
+                              _vm._v(
+                                "\n                            length: " +
+                                  _vm._s(cargo.length) +
+                                  " " +
+                                  _vm._s(cargo.size)
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cargo.width > 0
+                          ? _c("span", { staticClass: "tag is-light" }, [
+                              _vm._v(
+                                "\n                            width: " +
+                                  _vm._s(cargo.width) +
+                                  " " +
+                                  _vm._s(cargo.size)
+                              )
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        cargo.height > 0
+                          ? _c("span", { staticClass: "tag is-light" }, [
+                              _vm._v(
+                                "\n                            height: " +
+                                  _vm._s(cargo.height) +
+                                  " " +
+                                  _vm._s(cargo.size)
+                              )
+                            ])
+                          : _vm._e()
+                      ])
                     ])
                   })
                 ),
                 _vm._v(" "),
                 _c(
                   "b-table-column",
-                  { attrs: { label: "Total Weight" } },
+                  { attrs: { label: "Service" } },
                   [
-                    _vm._l(props.row.cargos, function(cargo) {
-                      return [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(cargo.weight) +
-                            " " +
-                            _vm._s(cargo.dimention) +
-                            "\n                "
-                        )
-                      ]
-                    })
+                    props.row.takelaj
+                      ? [
+                          _c("i", {
+                            staticClass: "fa fa-cogs",
+                            attrs: { "aria-hidden": "true" }
+                          }),
+                          _vm._v(" Takelaj"),
+                          _c("br"),
+                          _vm._v(" "),
+                          props.row.takelaj.demontaj
+                            ? _c("span", { staticClass: "tag is-dark" }, [
+                                _vm._v(
+                                  "\n                        Demontaj\n                    "
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.takelaj.montaj
+                            ? _c("span", { staticClass: "tag is-dark" }, [
+                                _vm._v(
+                                  "\n                        Montaj\n                    "
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.takelaj.peremeshenie
+                            ? _c("span", { staticClass: "tag is-dark" }, [
+                                _vm._v(
+                                  "\n                        Peremeshenie\n                    "
+                                )
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          props.row.takelaj.razbor
+                            ? _c("span", { staticClass: "tag is-dark" }, [
+                                _vm._v(
+                                  "\n                        Razbor\n                    "
+                                )
+                              ])
+                            : _vm._e()
+                        ]
+                      : _vm._e()
                   ],
                   2
                 ),
@@ -34478,14 +34586,27 @@ var render = function() {
                         size: "is-small"
                       }
                     }),
-                    _vm._v(" " + _vm._s(props.row.last_name) + "\n            ")
+                    _vm._v(" "),
+                    _vm._l(props.row.locations, function(location) {
+                      return [
+                        location.pogruzka == 0
+                          ? _c("span", [
+                              _c("i", {
+                                staticClass: "fa fa-arrow-right",
+                                attrs: { "aria-hidden": "true" }
+                              })
+                            ])
+                          : _vm._e(),
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(location.city) +
+                            "\n                "
+                        )
+                      ]
+                    })
                   ],
-                  1
+                  2
                 ),
-                _vm._v(" "),
-                _c("b-table-column", { attrs: { label: "Bids" } }, [
-                  _vm._v("\n               0\n            ")
-                ]),
                 _vm._v(" "),
                 _c(
                   "b-table-column",
@@ -34497,7 +34618,11 @@ var render = function() {
                         "\n            "
                     )
                   ]
-                )
+                ),
+                _vm._v(" "),
+                _c("b-table-column", { attrs: { label: "Bids" } }, [
+                  _vm._v("\n               0\n            ")
+                ])
               ]
             }
           },
@@ -34506,47 +34631,9 @@ var render = function() {
             fn: function(props) {
               return [
                 _c("article", { staticClass: "media" }, [
-                  _c("figure", { staticClass: "media-left" }, [
-                    _c(
-                      "p",
-                      { staticClass: "image is-64x64" },
-                      [
-                        _c("b-icon", {
-                          attrs: {
-                            icon: "forklift",
-                            size: "is-large",
-                            type: "is-info"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
                   _c("div", { staticClass: "media-content" }, [
                     _c("div", { staticClass: "content" }, [
-                      _c("p", [
-                        _c("strong", [
-                          _vm._v(
-                            _vm._s(props.row.id) +
-                              " " +
-                              _vm._s(props.row.first_name) +
-                              " " +
-                              _vm._s(props.row.last_name)
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("small", [
-                          _vm._v("@" + _vm._s(props.row.first_name))
-                        ]),
-                        _vm._v(" "),
-                        _c("small", [_vm._v("31m")]),
-                        _vm._v(" "),
-                        _c("br"),
-                        _vm._v(
-                          "\n                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.\n                            Proin ornare magna eros, eu pellentesque tortor vestibulum ut.\n                            Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.\n                        "
-                        )
-                      ])
+                      _c("p", [_vm._v(_vm._s(props.row.note))])
                     ])
                   ])
                 ])

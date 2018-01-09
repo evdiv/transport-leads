@@ -15,10 +15,19 @@ use Auth;
 class OrdersController extends Controller
 {
 
-    public function index() {
+    public function index(Request $request) {
         $Order = new Order;
-        $orders = $Order->getRecent();
+
+        if($request->userActiveOrders) {
+            $orders = $Order->getActiveCreatedByUser();
         
+        }elseif($request->userCompleteOrders) {
+            $orders = $Order->getCompletedCreatedByUser();
+
+        } else {
+            $orders = $Order->getRecent();
+        }
+
         return $orders;
     }
 
@@ -115,4 +124,5 @@ class OrdersController extends Controller
     public function destroy($id) {
 
     }
+
 }

@@ -37,8 +37,17 @@ export default new Vuex.Store({
 			Axios.post('/takelaj', this.state.newOrder);
 		},
 
-		getOrders() {
-			return Axios.get('/get-orders');
+		getOrders(state, payload) {
+			let userId = payload.userId || 0,
+			    userActiveOrders = payload.userActiveOrders || 0,
+			    userCompleteOrders = payload.userCompleteOrders || 0;
+	
+			return Axios.get('/get-orders', {
+				params: {
+					userActiveOrders: userActiveOrders,
+					userCompleteOrders: userCompleteOrders
+				}
+			});
 		}
 	} 
 });

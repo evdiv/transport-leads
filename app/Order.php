@@ -138,6 +138,7 @@ class Order extends Model
         foreach ($orders as &$order) {
             $order['cargos'] = self::find($order->id)->cargos;
             $order['takelaj'] = self::find($order->id)->takelaj;
+            $order['locations'] = self::find($order->id)->locations;
         }
 
         return $orders;

@@ -9,12 +9,16 @@ Route::get('/contact', 'PageController@contact')->name('contact');
 Route::get('/select-service', 'PageController@selectService')->name('select.service');
 Route::get('/orders', 'PageController@orders')->name('orders');
 
+Route::get('/my-active-orders', 'PageController@getUserActiveOrders');
+Route::get('/my-complete-orders', 'PageController@getUserCompleteOrders');
+Route::get('/my-details', 'PageController@getUserDetails');
 
 
 //**************************
 //Order Pages
 Route::get('/get-orders', 'OrdersController@index');
-Route::get('/orders/{order}', 'OrdersController@show')->name('order.show');
+Route::get('/orders/{order}', 'OrdersController@show');
+
 
 
 //Takelaj 
