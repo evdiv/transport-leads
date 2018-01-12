@@ -1,6 +1,29 @@
 @extends('layouts.master')
 
-@section('content')
+
+@section ('content')
+    
+    @include('layouts.hero')
+
+
+    {{-- About Page Text --}}
+    <section class="section">
+        <div class="container">
+            <div class="content">
+
+                <register-company-form-wizard></register-company-form-wizard>
+
+            </div>
+        </div>
+    </section>
+
+
+@endsection
+
+
+
+
+{{-- 
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -92,4 +115,4 @@
         </div>
     </div>
 </div>
-@endsection
+@endsection --}}

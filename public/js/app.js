@@ -12007,6 +12007,7 @@ Vue.component('orders-table', __webpack_require__(65));
 Vue.component('switcher', __webpack_require__(68));
 
 Vue.component('add-order-form-wizard', __webpack_require__(71));
+Vue.component('register-company-form-wizard', __webpack_require__(90));
 
 var app = new Vue({
   el: '#app',
@@ -34540,33 +34541,41 @@ var render = function() {
                           _vm._v(" "),
                           props.row.takelaj.demontaj
                             ? _c("span", { staticClass: "tag is-dark" }, [
-                                _vm._v(
-                                  "\n                        Demontaj\n                    "
-                                )
+                                _c("i", {
+                                  staticClass: "fa fa-wrench",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("  Demontaj\n                    ")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           props.row.takelaj.montaj
                             ? _c("span", { staticClass: "tag is-dark" }, [
-                                _vm._v(
-                                  "\n                        Montaj\n                    "
-                                )
+                                _c("i", {
+                                  staticClass: "fa fa-wrench",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("  Montaj\n                    ")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           props.row.takelaj.peremeshenie
                             ? _c("span", { staticClass: "tag is-dark" }, [
-                                _vm._v(
-                                  "\n                        Peremeshenie\n                    "
-                                )
+                                _c("i", {
+                                  staticClass: "fa fa-wrench",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("  Peremeshenie\n                    ")
                               ])
                             : _vm._e(),
                           _vm._v(" "),
                           props.row.takelaj.razbor
                             ? _c("span", { staticClass: "tag is-dark" }, [
-                                _vm._v(
-                                  "\n                        Razbor\n                    "
-                                )
+                                _c("i", {
+                                  staticClass: "fa fa-wrench",
+                                  attrs: { "aria-hidden": "true" }
+                                }),
+                                _vm._v("  Razbor\n                    ")
                               ])
                             : _vm._e()
                         ]
@@ -35640,6 +35649,319 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 79 */,
+/* 80 */,
+/* 81 */,
+/* 82 */,
+/* 83 */,
+/* 84 */,
+/* 85 */,
+/* 86 */,
+/* 87 */,
+/* 88 */,
+/* 89 */,
+/* 90 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(91)
+}
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(93)
+/* template */
+var __vue_template__ = __webpack_require__(94)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources\\assets\\js\\components\\register-company-form-wizard.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-386d86f1", Component.options)
+  } else {
+    hotAPI.reload("data-v-386d86f1", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 91 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(92);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(74)("6725a59c", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-386d86f1\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./register-company-form-wizard.vue", function() {
+     var newContent = require("!!../../../../node_modules/css-loader/index.js!../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-386d86f1\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./register-company-form-wizard.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 92 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(15)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\ndiv.validation-error {\n\tmargin-top: 20px;\n}\ndiv.wizard-card-footer {\n\tpadding-top: 40px !important;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_vue_form_wizard_dist_vue_form_wizard_min_css__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+	data: function data() {
+		return {
+			errorMsg: null,
+			orderPosted: false
+		};
+	},
+
+
+	methods: {
+		validateFirstStep: function validateFirstStep() {
+			return true;
+		},
+		validateSecondStep: function validateSecondStep() {
+			return true;
+		},
+		onComplete: function onComplete() {
+			return true;
+		}
+	},
+
+	components: {
+		FormWizard: __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__["FormWizard"],
+		TabContent: __WEBPACK_IMPORTED_MODULE_0_vue_form_wizard__["TabContent"]
+	}
+});
+
+/***/ }),
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      !this.orderPosted
+        ? _c(
+            "form-wizard",
+            {
+              attrs: {
+                color: "#428bca",
+                title: "Company Registration Form",
+                subtitle:
+                  "To ensure consistency and help ensure your musical success, your weekly lesson is scheduled on the same day and time each week. Please let us know your preferences and we will do our best to find a teacher and time that will work for your schedule.",
+                "back-button-text": "Go back!",
+                "next-button-text": "Go next!",
+                "error-color": "#e74c3c",
+                "finish-button-text": "Register"
+              },
+              on: { "on-complete": _vm.onComplete }
+            },
+            [
+              _c("tab-content", {
+                attrs: {
+                  title: "Provided Services",
+                  "before-change": _vm.validateFirstStep
+                }
+              }),
+              _vm._v(" "),
+              _c("tab-content", {
+                attrs: {
+                  title: "Contact Information",
+                  "before-change": _vm.validateSecondStep
+                }
+              }),
+              _vm._v(" "),
+              _c("tab-content", { attrs: { title: "Check and Submit" } }, [
+                _c("article", { staticClass: "message" }, [
+                  _c("div", { staticClass: "message-header" }, [
+                    _c("p", [_vm._v("Check your details")])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "message-body" })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm.errorMsg
+                ? _c(
+                    "div",
+                    { staticClass: "notification is-danger validation-error" },
+                    [
+                      _vm._v(
+                        "\n\t\t      \t" + _vm._s(_vm.errorMsg) + "\n\t\t    "
+                      )
+                    ]
+                  )
+                : _vm._e()
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      this.orderPosted
+        ? _c(
+            "div",
+            { staticClass: "columns is-mobile", attrs: { "has-icon": "" } },
+            [_vm._m(0, false, false)]
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "column is-half is-offset-one-quarter" }, [
+      _c("div", { staticClass: "notification" }, [
+        _c("div", { staticStyle: { "text-align": "center" } }, [
+          _vm._v(
+            "\n\t\t\t\t\t \tYour order has been posted. In 2 sec you will be redirected to the orders page.\n\t\t\t\t\t"
+          )
+        ])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-386d86f1", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

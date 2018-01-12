@@ -70,19 +70,19 @@
                         <i class="fa fa-cogs" aria-hidden="true"></i> Takelaj<br/>
 
                         <span class="tag is-dark" v-if="props.row.takelaj.demontaj">
-                            Demontaj
+                            <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Demontaj
                         </span>
 
                         <span class="tag is-dark" v-if="props.row.takelaj.montaj">
-                            Montaj
+                            <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Montaj
                         </span>        
 
                         <span class="tag is-dark" v-if="props.row.takelaj.peremeshenie">
-                            Peremeshenie
+                            <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Peremeshenie
                         </span>      
 
                         <span class="tag is-dark" v-if="props.row.takelaj.razbor">
-                            Razbor
+                            <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Razbor
                         </span>                                            
 
                     </template>

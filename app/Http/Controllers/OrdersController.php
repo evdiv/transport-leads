@@ -10,7 +10,7 @@ use App\Comment;
 use App\Takelaj;
 use App\Cargo;
 use Auth;
-
+  
 
 class OrdersController extends Controller
 {
