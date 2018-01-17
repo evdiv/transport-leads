@@ -13,6 +13,17 @@ export default new Vuex.Store({
 			service: "",
 			registered: false,
 			cargos: []
+		},
+		newCarrier: {
+			name: "",
+			description: "",
+			maxCargoWeight: 0,
+			maxPeople: 0,
+			maxAutokran:0,
+			maxManipulator:0,
+			maxNizkoramnik:0,
+			maxLifter: 0,
+			maxOpen:0
 		}
 	},
 
@@ -35,6 +46,10 @@ export default new Vuex.Store({
 	actions: {
 		postTakelajOrder() {
 			Axios.post('/takelaj', this.state.newOrder);
+		},
+
+		postCarrier() {
+			Axios.post('/carrier/register', this.state.newCarrier);
 		},
 
 		getOrders(state, payload) {

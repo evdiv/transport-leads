@@ -14,12 +14,14 @@ Route::get('/my-complete-orders', 'PageController@getUserCompleteOrders');
 Route::get('/my-details', 'PageController@getUserDetails');
 
 
-//**************************
 //Order Pages
 Route::get('/get-orders', 'OrdersController@index');
 Route::get('/orders/{order}', 'OrdersController@show');
 
 
+//Carrier Pages
+Route::post('/carrier/register', 'CarriersController@store');
+Route::get('/carrier/register', 'CarriersController@create');
 
 //Takelaj 
 Route::get('/takelaj', 'TakelajController@index');
@@ -43,6 +45,9 @@ Route::get('/auto/{id}', 'AutoController@show');
 Route::get('/auto/create', 'AutoController@create')->name('create.auto');
 Route::post('/auto/', 'AutoController@store');
 Route::put('/auto/{id}', 'AutoController@update');
+
+
+
 
 
 
@@ -122,8 +127,7 @@ Route::prefix('carrier')->group(function() {
 	Route::get('/logout', 'Auth\CarriersLoginController@logout')->name('carrier.logout');
 
 	Route::get('/', 'Admin\CarriersDashboardController@index')->name('carrier.dashboard');
-	Route::get('/add-info', 'Admin\CarriersDashboardController@edit')->name('carrier.add-info');
-	Route::post('/add-info', 'Admin\CarriersDashboardController@update')->name('carrier.add-info.submit');
+	Route::post('/', 'Auth\CarriersRegisterController@store');
 
 
 	// Password reset routes
@@ -131,11 +135,5 @@ Route::prefix('carrier')->group(function() {
 	Route::get('/password/reset', 'Auth\CarriersForgotPasswordController@showLinkRequestForm')->name('carrier.password.request');
 	Route::post('/password/reset', 'Auth\CarriersResetPasswordController@reset');
 	Route::get('/password/reset/{token}', 'Auth\CarriersResetPasswordController@showResetForm')->name('carrier.password.reset');
-
-
-	//Register
-	Route::get('/register', 'Auth\CarriersRegisterController@showRegistrationForm')->name('carrier.register');
-	Route::post('/register', 'Auth\CarriersRegisterController@register')->name('carrier.register.submit');
-
 
 });

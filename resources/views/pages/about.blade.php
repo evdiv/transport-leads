@@ -11,6 +11,7 @@
 	  		<div class="content">
 	  			<h1>About us</h1>
 	  			<p>Content of the About Page</p>
+
 	  		</div>
 	    </div>
   	</section>

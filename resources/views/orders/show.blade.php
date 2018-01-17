@@ -67,7 +67,6 @@
 
 
                     <!-- Add Proposal from Carrier -->
-
                     @if($order->showProposalForm)
                         <form-add-carrier-proposal></form-add-carrier-proposal>
 

@@ -11,7 +11,7 @@
                 <a class="navbar-item" href="{{ route('about') }}">About</a>
                 <a class="navbar-item" href="{{ route('orders') }}">Lessons</a>
                 <a class="navbar-item" href="{{ route('select.service') }}">Create Lesson</a>
-                <a class="navbar-item" href="{{ route('carrier.register') }}">Registration</a>
+                <a class="navbar-item" href="/carrier/register">Registration</a>
                 <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
             </div>
         </div>
@@ -75,11 +75,8 @@
                         @else
                             <a class="navbar-item" href="{{ route('carrier.login') }}">As Teacher</a>
                             <a class="navbar-item" href="{{ route('login') }}">As User</a>
-                            <a class="navbar-item" href="{{ route('admin.login') }}">As Admin</a>
-
                         @endif
                     </div>
-
 
                 </div>
             </div>
