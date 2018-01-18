@@ -18,6 +18,11 @@ Route::get('/my-details', 'PageController@getUserDetails');
 Route::get('/get-orders', 'OrdersController@index');
 Route::get('/orders/{order}', 'OrdersController@show');
 
+Route::post('/orders/{order}/proposals', 'ProposalController@store');
+Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
+Route::post('/orders/{order}/comments', 'CommentController@store');
+Route::post('/proposals/{proposal}/message', 'MessageController@store');
+
 
 //Carrier Pages
 Route::post('/carrier/register', 'CarriersController@store');

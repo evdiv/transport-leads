@@ -37,17 +37,26 @@ class CarriersController extends Controller
             'name' => $request['name'],
             'email' => $request['email'],
             'phone' => $request['phone'],
+            'city' => $request['city'],
+            'address' => $request['address'],
+            'description' => $request['description'],
             'password' => bcrypt($request['password']),
         ]);
 
-        Auth::loginUsingId($Carrier->id, true);
 
+        Service::create([
+            'carrier_id' => $Carrier->id,
+            'max_cargo_weight' => $request['maxCargoWeight'],
+            'max_people' => $request['maxPeople'],
+            'max_autokran' => $request['maxAutokran'],
+            'max_manipulator' => $request['maxManipulator'],
+            'max_nizkoramnik' => $request['maxNizkoramnik'],
+            'max_lifter' => $request['maxLifter'],
+            'max_open' => $request['max_open']
+        ]);
+
+        Auth::guard('web-carrier')->loginUsingId($Carrier->id, true);
+        
         return response()->json(['response' => 'Your account has been created']);
-
     }
-
-
-
-
-
 }
