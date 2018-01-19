@@ -12,8 +12,18 @@ export default new Vuex.Store({
 		newOrder: {
 			service: "",
 			registered: false,
-			cargos: [],
-			destinations: []
+			cargos: []
+		},
+		newCarrier: {
+			name: "",
+			description: "",
+			maxCargoWeight: 0,
+			maxPeople: 0,
+			maxAutokran:0,
+			maxManipulator:0,
+			maxNizkoramnik:0,
+			maxLifter: 0,
+			maxOpen:0
 		}
 	},
 
@@ -30,22 +40,28 @@ export default new Vuex.Store({
 
 		removeCargo(state, index) {
 			this.state.newOrder.cargos.splice(index, 1);
-		},
-
-		addDestination(state, destination) {
-
-			this.state.newOrder.destinations.push(destination);
-		},
-
-		removeDestination(state, index) {
-			this.state.newOrder.destinations.splice(index, 1);
 		}
 	},
 
 	actions: {
 		postTakelajOrder() {
-			Axios.post('/takelaj/', {
-				body: 'Lesson Registration',
+			Axios.post('/takelaj', this.state.newOrder);
+		},
+
+		postCarrier() {
+			Axios.post('/carrier/register', this.state.newCarrier);
+		},
+
+		getOrders(state, payload) {
+			let userId = payload.userId || 0,
+			    userActiveOrders = payload.userActiveOrders || 0,
+			    userCompleteOrders = payload.userCompleteOrders || 0;
+	
+			return Axios.get('/get-orders', {
+				params: {
+					userActiveOrders: userActiveOrders,
+					userCompleteOrders: userCompleteOrders
+				}
 			});
 		}
 	} 

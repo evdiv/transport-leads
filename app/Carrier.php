@@ -13,7 +13,7 @@ class Carrier extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'phone', 'location', 'description', 'password',
+        'name', 'email', 'phone', 'city', 'address', 'description', 'password',
     ];
 
 
@@ -22,22 +22,32 @@ class Carrier extends Authenticatable
     ];
 
 
-    public function proposals() {
+    public function proposals() 
+    {
         return $this->hasMany('App\Proposal');
     }  
 
 
-    public function comments() {
+    public function service() 
+    {
+        return $this->hasOne('App\Service');
+    }
+
+
+    public function comments() 
+    {
         return $this->morphMany('App\Comment', 'commentable');
     }
 
 
-    public function messages() {
+    public function messages() 
+    {
         return $this->morphMany('App\Message', 'postedfrom');
     }    
 
 
-    public function canAddProposal($order_id) {
+    public function canAddProposal($order_id) 
+    {
 
         $result = Proposal::whereRaw('order_id = ' . $order_id . ' and carrier_id = ' . $this->id)->count();
         return !$result;

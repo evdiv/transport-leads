@@ -8,13 +8,17 @@
            	next-button-text="Go next!"
            	error-color="#e74c3c"
            	finish-button-text="Submit"
-			@on-complete="onComplete">
+			@on-complete="onComplete"
+			v-if=!this.orderPosted>
 
 
 		  	<tab-content 
 		  		title="Request a lesson time" 
 		  		:before-change="validateFirstStep">
+
+		  		<form-add-takelaj></form-add-takelaj>
 		    	<form-cargo></form-cargo>
+
 		  	</tab-content>
 
 
@@ -30,27 +34,52 @@
 				:before-change="validateThirdStep"
 				v-if="!!this.$slots.first || !!this.$slots.second">
 				<switcher>
-					<div slot="first"><slot name="first"></slot></div>
-					<div slot="second"><slot name="second"></slot></div>
+					<div slot="first">
+						<slot name="first"></slot>
+					</div>
+
+					<div slot="second">
+						<slot name="second"></slot>
+					</div>
 				</switcher>	
 			</tab-content>
 
 
 			<tab-content title="Check and Submit">
-				<h3>Check your details</h3>
 
-		        <!-- List of all Added Lessons -->
+				<article class="message">
+				  <div class="message-header">
+				    <p>Check your details</p>
+				  </div>
 
-		        <div v-for="(cargo, index) in this.$store.state.newOrder.cargos"  class="column">
-                    {{ cargo.name }}
-                    {{ cargo.weight }} {{ cargo.dimention }}, 
-                    {{ cargo.length }} {{ cargo.size }}, {{ cargo.width }}, 
-                    {{ cargo.height }}, {{ cargo.description }}
-		        </div>
+				  <div class="message-body">
+				        <!-- List of all Added Lessons -->
 
-				City {{ this.$store.state.newOrder.city }} <br />
-				Street: {{ this.$store.state.newOrder.street }} <br />
-				Date: {{ this.$store.state.newOrder.date }} <br />
+				        <div v-for="(cargo, index) in this.$store.state.newOrder.cargos"  class="column">
+		                    {{ cargo.name }}
+		                    {{ cargo.weight }} {{ cargo.dimention }}, 
+		                    {{ cargo.length }} {{ cargo.size }}, {{ cargo.width }}, 
+		                    {{ cargo.height }}, {{ cargo.description }}
+				        </div>
+
+						City {{ this.$store.state.newOrder.city }} <br />
+						Street: {{ this.$store.state.newOrder.street }} <br />
+						Date: {{ this.$store.state.newOrder.date }} <br />
+
+						<hr />
+
+						<div class="field">
+						  	<label class="label">Add Message to the order</label>
+						  	<div class="control">
+						    	<textarea class="textarea" 
+						    		placeholder="Message to the order"
+						    		v-model=$store.state.newOrder.note></textarea>
+						  	</div>
+						</div>
+
+				  </div>
+				</article>				
+	
 			</tab-content>
 			
 
@@ -69,6 +98,17 @@
 
 		</form-wizard>
 
+
+		<div class="columns is-mobile" v-if=this.orderPosted has-icon>
+		  	<div class="column is-half is-offset-one-quarter">
+		  		<div class="notification" >
+					<div style="text-align:center;">
+					 	Your order has been posted. In 2 sec you will be redirected to the orders page.
+					</div>
+				</div>
+		  	</div>
+		</div>
+		
 	</div>
 </template>
 
@@ -80,24 +120,27 @@
 	export default {
 		data() {
 			return {
-				errorMsg: null
+				errorMsg: null,
+				orderPosted: false
 			}
 		},
 
 		methods: {
 
 			validateFirstStep() {
+
 				if(this.$store.state.newOrder.cargos.length > 0) {
 					this.errorMsg = null;
 					return true;
 				} 
 				this.errorMsg = "You have to add at least one lesson";
+
 				return false;
 			},
 
 			validateSecondStep() {
 				if(!!this.$store.state.newOrder.city
-				 	&& !!this.$store.state.newOrder.street 
+				 	&& !!this.$store.state.newOrder.address 
 				 	&& !!this.$store.state.newOrder.date) {
 
 					this.errorMsg = null;
@@ -110,10 +153,9 @@
 
 
 			validateThirdStep() {
-
 				if(this.$store.state.newOrder.registered) {
 
-					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.pass) {
+					if(!this.$store.state.newOrder.email || !this.$store.state.newOrder.password) {
 
 						this.errorMsg = "All fields are required";
 						return false;
@@ -121,13 +163,20 @@
 				
 				} else {
 
-					if(!this.$store.state.newOrder.name || !this.$store.state.newOrder.email 
-						|| !this.$store.state.newOrder.phone || !this.$store.state.newOrder.pass) {
+					 if(!this.$store.state.newOrder.name || !this.$store.state.newOrder.email 
+						|| !this.$store.state.newOrder.phone || !this.$store.state.newOrder.password) {
 
 						this.errorMsg = "All fields are required";
 						return false;
-					
-					} else if(this.$store.state.newOrder.pass != this.$store.state.newOrder.repeatPass) {
+
+
+					} else if(this.$store.state.newOrder.password.length < 6) {
+
+						this.errorMsg = "Password length should be at least 6 characters";
+						return false;
+
+
+					} else if(this.$store.state.newOrder.password != this.$store.state.newOrder.repeatPassword) {
 						
 						this.errorMsg = "Passwords don't match";
 						return false;
@@ -144,8 +193,16 @@
             },
 
             onComplete(){
-            	this.$store.dispatch('postTakelajOrder');
+
+            	this.orderPosted = this.$store.dispatch('postTakelajOrder');
+
+            	if(this.orderPosted) {
+            		setTimeout(function() {
+            			location.href = "/orders";
+            		}, 2000);
+            	}
        		}
+
 		},
 
 		computed: {
@@ -155,7 +212,7 @@
 		},
 
 		created() {
-			console.log("is cargo form shown " + this.$store.state.isCargoFormShown);
+
 		},
 
 		components: {

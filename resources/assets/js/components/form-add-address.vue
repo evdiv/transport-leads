@@ -3,7 +3,7 @@
 
         <div class="field is-horizontal">
             <div class="field-label is-normal">
-                <label class="label">Address</label>
+                <label class="label">City and Address</label>
             </div>
 
             <div class="field-body">
@@ -14,7 +14,7 @@
                 </div>
                 <div class="field">
                     <p class="control is-expanded">
-                        <input class="input" type="text" name="Street" v-model=$store.state.newOrder.street placeholder="Street">
+                        <input class="input" type="text" name="Address" v-model=$store.state.newOrder.address placeholder="Address">
                     </p>
                 </div>
             </div>
@@ -75,7 +75,7 @@
         <hr />
 
 
-        <div v-for="(destination, index) in $store.state.newOrder.destinations" class="field is-horizontal">
+        <div v-if="showDestinations" class="field is-horizontal">
             <div class="field-label is-normal">
                 <label class="label">Billing Address</label>
             </div>
@@ -83,13 +83,13 @@
             <div class="field-body">
                 <div class="field">
                     <p class="control is-expanded">
-                        <input class="input" name="billingCity[]" v-model=$store.state.newOrder.destinations[index].city type="text" placeholder="City">
+                        <input class="input" name="billingCity[]" v-model=$store.state.newOrder.destinationCity type="text" placeholder="City">
                     </p>
                 </div>
 
                 <div class="field is-grouped">
                     <p class="control is-expanded">
-                        <input class="input" name="billingAddress[]" v-model=$store.state.newOrder.destinations[index].address type="text" placeholder="Street">
+                        <input class="input" name="billingAddress[]" v-model=$store.state.newOrder.destinationAddress type="text" placeholder="Street">
                     </p>
 
                     <p class="control">
@@ -101,7 +101,7 @@
 
 
         <div class="level-right">
-            <div class="button is-success" @click="addDestination"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add Builling Address</div>
+            <div class="button is-success" @click="addDestination" v-if="!showDestinations"><i class="fa fa-plus" aria-hidden="true"></i>&nbsp;&nbsp;Add Builling Address</div>
         </div>
 
     </div>
@@ -109,17 +109,22 @@
 
 <script>
     export default {
-        data: function () {
-            return {}
+        data () {
+            return {
+                showDestinations: false
+            }
         },
 
         methods: {
            addDestination: function() {
-                this.$store.state.newOrder.destinations.push([]);
+                this.showDestinations = true;
             },
 
             removeDestination: function(index) {
-                this.$store.state.newOrder.destinations.splice(index, 1);
+
+                this.$store.state.newOrder.destinationCity = "";
+                this.$store.state.newOrder.destinationAddress = "";
+                this.showDestinations = false;;
             }
 
 

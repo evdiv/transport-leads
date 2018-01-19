@@ -9,6 +9,6 @@ class Location extends Model
 	protected $guarded = [];
 
     public function order() {
-    	$this->belongsTo('App\Order');
+    	$this->belongsTo('App\Order')->withDefault();
     }
 }

@@ -24,6 +24,7 @@
     "font-awesome": "*",
     "mdi": "*",
     "vue-form-wizard": "^0.8.0",
+    "vue-slider-component": "^2.4.8",
     "vuex": "^3.0.1"
   }
 }

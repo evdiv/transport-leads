@@ -2,95 +2,178 @@
 
 @section ('content')
 
-    <div class="album text-muted">
-        <div class="container">
-            
-              <!-- Order for Takelaj -->
-                @if(isset($order->takelaj)) 
-                    @include('orders.partials.display-takelaj')
-                @endif
+    @include('layouts.hero')
 
-                <!-- Order for Gruzchiki -->
-                @if(isset($order->gruzchiki)) 
-                    @include('orders.partials.display-gruzchiki')
-                @endif
+        <section class="section">
+            <div class="container">
+                <div class="content">
 
-                <!-- Order for Auto and Special Equipment -->
-                @if(isset($order->auto)) 
-                    @include('orders.partials.display-auto')
-                @endif
+                    <!-- Order for Takelaj -->
+                    @if(isset($order->takelaj)) 
+                        @include('orders.partials.display-takelaj')
+                    @endif
+
+                    <!-- Order for Gruzchiki -->
+                    @if(isset($order->gruzchiki)) 
+                        @include('orders.partials.display-gruzchiki')
+                    @endif
+
+                    <!-- Order for Auto and Special Equipment -->
+                    @if(isset($order->auto)) 
+                        @include('orders.partials.display-auto')
+                    @endif
 
 
-                <!-- Show Comments -->
-                <ul class="list-group">
-                    @foreach($order->comments as $comment)
-                        @include('orders.partials.display-comment')
-                    @endforeach
-                </ul>
-                <!-- Show Comments Form -->
-                @if($order->commentsAllowed())
 
-                    <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/comments">
+                    <!-- Comments Section -->
+                    <article class="message is-info">
+                        <div class="message-body">
 
-                        {{ csrf_field() }}
 
-                        <div class="form-group">
+                        <!-- List of Comments -->
+                        <ul class="list-group">
+                            @foreach($order->comments as $comment)
+                                @include('orders.partials.display-comment')
+                            @endforeach
+                        </ul>
+                        <!--/ List of Comments -->
 
-                            <textarea name="body" class="form-control" rows="2"></textarea>
 
-                            <div class='text-right'>
-                                <button type="submit" class='btn btn-primary btn-sm'>Add comment</button>
+                    <!-- Comments Form -->
+                    @if($order->commentsAllowed())
+
+
+                        <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/comments">
+
+                            {{ csrf_field() }}
+
+                            <div class="field is-horizontal">
+                                <div class="field-label is-normal">
+                                    <label class="label">Add Comment</label>
+                                </div>
+                                  
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <textarea class="textarea" name="body" placeholder="Add your comment here..."></textarea>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
-                        
-                    </form>
 
-                @endif
-
-                <!-- Proposals from Carriers -->
-                <div class="list-group">
-                    @foreach($order->proposals as $proposal)
-                        @include('orders.partials.preview-proposal')
-                    @endforeach
-                </div>
-
-
-
-                @if($order->showProposalForm)
-                    <!-- Add Proposal from Carrier -->
-                    <form-add-carrier-proposal></form-add-carrier-proposal>
-
-                    <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/proposals">
-
-                        {{ csrf_field() }}
-
-                        <input type='hidden' name='order_id' value='{{ $order->id }}'/>
-
-                        <div class="form-group">
-                            <label class="sr-only" for="amout">Amount (in dollars)</label>
                             
-                            <div class="input-group">
-                                <div class="input-group-addon">$</div>
-                                <input type="text" class="form-control" placeholder="Amount" name="amount">
-                                <div class="input-group-addon">.00</div>
+                            <div class="field is-horizontal">
+                              <div class="field-label">
+                                <!-- Left empty for spacing -->
+                              </div>
+                              <div class="field-body">
+                                <div class="field">
+                                  <div class="is-pulled-right control">
+                                    <button class="button is-info">
+                                      Send message
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                                                        
+                        </form>
+                    @endif
+                    <!--/ Comments Form -->
+
+                    
+                    </div>
+                </article>
+
+
+
+                    <!-- Proposals from Carriers -->
+                    <div class="list-group">
+                        @foreach($order->proposals as $proposal)
+                            @include('orders.partials.preview-proposal')
+                        @endforeach
+                    </div>
+                    <!--/ Proposals from Carriers -->
+
+
+
+                    <!-- Add Proposal from Carrier -->
+                    @if($order->showProposalForm)
+                        <form-add-carrier-proposal></form-add-carrier-proposal>
+
+                        <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/proposals">
+
+                            {{ csrf_field() }}
+
+                            <input type='hidden' name='order_id' value='{{ $order->id }}'/>
+
+                            <div class="field is-horizontal">
+                              <div class="field-label">
+                                <label class="label">Add your proposal</label>
+                              </div>
+                              <div class="field-body">
+                                <div class="field is-expanded">
+                                  <div class="field has-addons">
+                                    <p class="control">
+                                      <a class="button is-static">
+                                        $
+                                      </a>
+                                    </p>
+                                    <p class="control is-expanded">
+                                      <input class="input" type="tel" placeholder="Amount (in dollars)">
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
 
-                            <textarea name="body" class="form-control" rows="3"></textarea>
 
-                            <div class='text-right'>
-                                <button type="submit" class='btn btn-success btn-sm'>Add your offer</button>
+                            <div class="field is-horizontal">
+                              <div class="field-label is-normal">
+                              </div>
+                              <div class="field-body">
+                                <div class="field">
+                                  <div class="control">
+                                    <textarea class="textarea" placeholder="Explain how we can help you"></textarea>
+                                  </div>
+                                </div>
+                              </div>
                             </div>
-                        </div>
-                        
-                    </form>
 
-                
-                @elseif($order->showProposalButton) 
-                    <a href="{{ route('carrier.register') }}" class='pull-right btn btn-success'>Register as Carier for making Proposal</a>
-                @endif
 
-        </div>
-    </div>
+                            <div class="field is-horizontal">
+                              <div class="field-label">
+                                <!-- Left empty for spacing -->
+                              </div>
+                              <div class="field-body">
+                                <div class="field">
+                                  <div class="is-pulled-right control">
+                                    <button class="button is-primary">
+                                      Submit Proposal
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            
+                        </form>
+
+                    @elseif($order->showProposalButton) 
+
+                        <a href="/carrier/register" class='pull-right button is-success is-outlined'>
+                            Register as Carier for making Proposal
+                        </a>
+                    @endif
+                    <!--/ Add Proposal from Carrier -->
+
+                </div><!--/ .content -->
+            </div><!--/ .container -->
+        </section><!--/ section-->
+
+
+
 @endsection
 
 

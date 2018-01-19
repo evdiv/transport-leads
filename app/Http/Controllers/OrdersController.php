@@ -10,15 +10,25 @@ use App\Comment;
 use App\Takelaj;
 use App\Cargo;
 use Auth;
-
+  
 
 class OrdersController extends Controller
 {
-    public function index() {
 
+    public function index(Request $request) {
         $Order = new Order;
-        $orders = $Order->getRecent();
-        return view('orders.index', compact('orders'));
+
+        if($request->userActiveOrders) {
+            $orders = $Order->getActiveCreatedByUser();
+        
+        }elseif($request->userCompleteOrders) {
+            $orders = $Order->getCompletedCreatedByUser();
+
+        } else {
+            $orders = $Order->getRecent();
+        }
+
+        return $orders;
     }
 
 
@@ -114,4 +124,5 @@ class OrdersController extends Controller
     public function destroy($id) {
 
     }
+
 }

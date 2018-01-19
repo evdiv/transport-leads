@@ -8,7 +8,7 @@
 	  	<div class="hero-body">
 		    <div class="container">
 
-		    	<form class="form-horizontal" method="POST" action="{{ route('submit.takelaj') }}">
+		    	<form class="form-horizontal" method="POST">
 		    		{{ csrf_field() }}
 
 			    	<add-order-form-wizard>

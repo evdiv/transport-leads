@@ -4,12 +4,13 @@
 	
     @include('layouts.hero')
 
-	<section class="hero is-medium">
-	  	<div class="hero-body">
-		    <div class="container">
-				Contact Page
-		    </div>
-	  </div>
-	</section>
+	<section class="section">
+	    <div class="container">
+	  		<div class="content">
+	  			<h1>Contact</h1>
+	  			<p>Content of the Contact Page</p>
+	  		</div>
+	    </div>
+  	</section>
 
 @endsection

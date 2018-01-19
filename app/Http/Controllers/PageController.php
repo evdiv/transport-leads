@@ -26,8 +26,26 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
-    public function select()
+    public function selectService()
     {
         return view('pages.select-service');
     }
+
+    public function orders() {
+
+        return view('pages.orders');
+    }
+
+    public function getUserActiveOrders() {
+        return view('pages.my-active-orders');
+    }
+
+    public function getUserCompleteOrders() {
+        return view('pages.my-complete-orders');
+    }
+
+    public function getUserDetails() {
+        return view('pages.my-details');
+    }
+
 }

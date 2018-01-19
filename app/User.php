@@ -33,7 +33,16 @@ class User extends Authenticatable
         return $this->hasMany('App\Order');
     }
 
-    
+    public function getNumberOfActiveOrders() {
+        return $this->hasMany('App\Order')->where('completed', 0)->count();
+    }
+
+
+    public function getNumberOfCompleteOrders() {
+        return $this->hasMany('App\Order')->where('completed', 1)->count();
+    }
+
+
     public function comments() {
         return $this->morphMany('App\Comment', 'commentable');
     }

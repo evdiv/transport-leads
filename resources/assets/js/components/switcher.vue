@@ -38,6 +38,8 @@
             isNewUser() {
                 if(this.isSwitched) {
                     this.$store.state.newOrder.registered = true;
+                } else {
+                    this.$store.state.newOrder.registered = false;
                 }
             }
         }

@@ -121,7 +121,6 @@
                     </div>
                   </div>
 
-
                 <p class="control is-expanded">
                     <input class="input" type="number"  v-model="cargo.weight" placeholder="Weight">
                 </p>
@@ -133,17 +132,15 @@
         <div class="field is-expanded">
             <div class="field has-addons">
                   <p class="control">
-                    <a class="button is-link" @click="reduceQty">
-                        <i class="fa fa-minus" aria-hidden="true"></i></a>
+                    <a class="button is-link" @click="reduceQty"><i class="fa fa-minus" aria-hidden="true"></i></a>
                   </p>
 
                   <p class="control">
-                    <input class="input" type="text" placeholder="Number" v-model="cargo.qty">
+                    <input class="input" type="text" placeholder="Number" v-model="cargo.quantity">
                   </p>
 
                   <p class="control">
-                    <a class="button is-link" @click="cargo.qty += 1">
-                        <i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <a class="button is-link" @click="cargo.quantity += 1"><i class="fa fa-plus" aria-hidden="true"></i></a>
                   </p>
             </div>
         </div>
@@ -201,7 +198,7 @@
             return {
                 cargo: {
                     name: '',
-                    qty: 1,
+                    quantity: 1,
                     weight: '',
                     size: "meters",
                     dimention: "tonns"
@@ -226,14 +223,14 @@
                 this.$store.commit('addCargo', this.cargo);
 
                 this.cargo = {};
-                this.cargo.qty = 1;
+                this.cargo.quantity = 1;
                 this.cargo.size = "meters";
                 this.cargo.dimention = "tonns";
 
             },
 
             reduceQty: function() {
-                this.qty = (this.cargo.qty - 1 > 0)  ? this.qty - 1 : 1;
+                this.cargo.quantity = (this.cargo.quantity - 1 > 0)  ? this.cargo.quantity - 1 : 1;
             },
         }
     }    

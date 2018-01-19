@@ -1,87 +1,87 @@
-<div class="panel panel-default">
 
-    <div class="panel-heading">
-        <h3 class="panel-title">
-        Takelajnie Raboty was created at {{ $order->created_at }} </h3>
-                    
-        <!-- Display required services -->
-        @if (isset($order->takelaj->demontaj)) 
-            <span class="label label-info">Demontaj</span>
-        @endif
 
-         @if (isset($order->takelaj->montaj)) 
-            <span class="label label-info">Montaj</span>
-        @endif
+        <h1 class="title"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Takelajnie Raboty 
+            <span class="tag is-white">Created on: {{ $order->created_at }}</span>
+        </h1>
 
-        @if (isset($order->takelaj->peremeshenie)) 
-            <span class="label label-info">Peremeshenie</span>
-        @endif
 
-        @if (isset($order->takelaj->razbor)) 
-            <span class="label label-info">Razbor Perekritiy</span>
+       <p>Required Services: 
+
+            @if (isset($order->takelaj->demontaj)) 
+                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Demontaj</span> 
+            @endif
+
+             @if (isset($order->takelaj->montaj)) 
+                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Montaj</span> 
+            @endif
+
+            @if (isset($order->takelaj->peremeshenie)) 
+                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Peremeshenie</span> 
+            @endif
+
+            @if (isset($order->takelaj->razbor)) 
+                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Razbor Perekritiy</span> 
+            @endif  
+        </p>
+
+
+        <!-- Display Locations -->
+        <p>
+            @foreach($order->locations as $location )
+                
+                @if ($location->pogruzka > 0) 
+                    <i class="fa fa-map-marker" aria-hidden="true"></i> 
+                        Place:  {{ $location->city }}, {{ $location->address }} 
+                @else
+                        <br/><i class="fa fa-map-marker" aria-hidden="true"></i> 
+                        Move to:  {{ $location->city }}, {{ $location->address }} 
+                @endif  
+
+            @endforeach
+        </p>
+
+
+        @if (isset($order->note)) 
+            <div class="notification">{{ $order->note }}</div>
         @endif  
 
-    </div>   
 
-    <div class="panel-body">
-
-        <div class="alert">
-
-            <div class="row">
-                <div class="col-sm-6">
-                    <!--Display Order Note -->  
-                    @if (isset($order->note)) 
-                        <p>{{ $order->note }}</p>
-                    @endif  
-                </div>
-
-                <div class="col-sm-6">
-
-                        @foreach($order->locations as $i => $location)
-                            @if ($location->pogruzka) 
-                                Loading: <b>{{ $location->name }}</b><br/>
-                            
-                            @elseif ($i == count($order->locations) - 1)  
-                                Unloading: <b>{{ $location->name }}</b><br/> 
-
-                            @else  
-                                Transit: <b>{{ $location->name }}</b><br/> 
-                            
-                            @endif  
-                        @endforeach
-                </div>    
-
-
-            </div>
-
-        </div>
 
         <!-- Display list of cargo -->
-          <table class="table">
-            <tr>
-                <th class="col-md-6">Name / Description</th>
-                <th class="col-md-1">Type</th>
-                <th class="col-md-1">Weight</th>
-                <th class="col-md-1">Length</th>
-                <th class="col-md-1">Width</th>
-                <th class="col-md-1">Height</th>
-                <th class="col-md-1">Qty.</th>
-            </tr>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name / Description</th>
+                    <th>Length</th>
+                    <th>Width</th>
+                    <th>Height</th>
+                    <th>Weight</th>
+                    <th>Qty</th>
+                </tr>
+            </thead>
+            <tbody>
 
-            @foreach($order->cargos as $cargo)
-            <tr>
-                <td><a href='#'>{{ $cargo->name }}</a><br/>
-                    {{ $cargo->description }}
-                </td>
-                <td>Type</td>
-                <td>{{ $cargo->weight }}</td>
-                <td>{{ $cargo->length }}</td>
-                <td>{{ $cargo->width }}</td>
-                <td>{{ $cargo->height }}</td>
-                <td>{{ $cargo->quantity }}</td>
-            @endforeach
-            </tr>
-          </table>
-          
-    </div>
-</div><!--/.col-panel-->
+                @php ($cargoCounter = 0)
+                @foreach($order->cargos as $cargo)
+
+                    <tr>
+                        <td>{{++$cargoCounter }}</td>
+                        <td><p>{{ $cargo->name }}<br/>
+                            {{ $cargo->description }}</p>
+                        </td>
+
+                        <td>{{ $cargo->length }} {{ $cargo->size }}</td>
+                        <td>{{ $cargo->width }} {{ $cargo->size }}</td>
+                        <td>{{ $cargo->height }} {{ $cargo->size }}</td>
+                        <td>{{ $cargo->weight }} {{ $cargo->dimention }}</td>
+                        <td>{{ $cargo->quantity }}</td>
+
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>  
+
+
+
+ 
