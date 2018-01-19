@@ -31,11 +31,9 @@
 
 
                         <!-- List of Comments -->
-                        <ul class="list-group">
                             @foreach($order->comments as $comment)
                                 @include('orders.partials.display-comment')
                             @endforeach
-                        </ul>
                         <!--/ List of Comments -->
 
 
