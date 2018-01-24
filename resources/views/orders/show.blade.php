@@ -39,44 +39,7 @@
 
                     <!-- Comments Form -->
                     @if($order->commentsAllowed())
-
-
-                        <form class="form-horizontal" method="POST" action="/orders/{{ $order->id }}/comments">
-
-                            {{ csrf_field() }}
-
-                            <div class="field is-horizontal">
-                                <div class="field-label is-normal">
-                                    <label class="label">Add Comment</label>
-                                </div>
-                                  
-                                <div class="field-body">
-                                    <div class="field">
-                                        <div class="control">
-                                            <textarea class="textarea" name="body" placeholder="Add your comment here..."></textarea>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            
-                            <div class="field is-horizontal">
-                              <div class="field-label">
-                                <!-- Left empty for spacing -->
-                              </div>
-                              <div class="field-body">
-                                <div class="field">
-                                  <div class="is-pulled-right control">
-                                    <button class="button is-info">
-                                      Send message
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                                                        
-                        </form>
+                      <add-order-comment></add-order-comment>
                     @endif
                     <!--/ Comments Form -->
 

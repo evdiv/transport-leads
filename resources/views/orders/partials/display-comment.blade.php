@@ -1,23 +1,26 @@
 <article class="media">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img src="https://bulma.io/images/placeholders/128x128.png">
-    </p>
-  </figure>
-  <div class="media-content">
-    <div class="content">
-      <p>
-        <strong>{{ $comment->commentable->name }}</strong>
-			@if($comment->commentable_type == "App\Carrier")
-				<span class="tag is-rounded">Carrier</span>
-			@endif
+    <figure class="media-left">
+        <p class="image is-64x64">
+            <img src="https://bulma.io/images/placeholders/128x128.png">
+        </p>
+    </figure>
 
-        <br>
-        {{ $comment->body }}
-        <br>
-        <small><a>Reply</a> · {{ $comment->created_at }}</small>
+    <div class="media-content">
+        <div class="content">
+            <p>
+            <strong>{{ $comment->commentable->name }}</strong>
+    			@if($comment->commentable_type == "App\Carrier")
+    				<span class="tag is-rounded">Carrier</span>
+    			@endif
 
-      </p>
+                <br>
+                    {{ $comment->body }}
+                <br>
+            
+                <add-comment-reply>{{ $comment->created_at }}</add-comment-reply>
+
+            </p>
+        </div>
     </div>
-  </div>
 </article>
+
