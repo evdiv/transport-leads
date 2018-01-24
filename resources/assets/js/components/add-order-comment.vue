@@ -8,7 +8,9 @@
         </div>
 
 
-        <form class="form-horizontal" v-if="commentFormIsShown">
+        <form method="POST" :action="getActionUrl" class="form-horizontal" v-if="commentFormIsShown">
+
+            <slot name="csrf"></slot>
 
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
@@ -39,9 +41,9 @@
                                 Hide form
                             </div>
 
-                            <div class="button is-success is-small">
+                            <button type="submit" class="button is-success is-small">
                                 Send message
-                            </div>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -58,6 +60,14 @@
             return {
                 commentFormIsShown: false
             }
-        }
+        },
+
+        computed: {
+            getActionUrl() {
+                return "/orders/" + this.order + "/comments"
+            }
+        },
+
+        props: ['order']
     }    
 </script>   

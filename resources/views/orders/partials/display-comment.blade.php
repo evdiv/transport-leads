@@ -13,12 +13,8 @@
     				<span class="tag is-rounded">Carrier</span>
     			@endif
 
-                <br>
-                    {{ $comment->body }}
-                <br>
-            
-                <add-comment-reply>{{ $comment->created_at }}</add-comment-reply>
-
+                <br>{{ $comment->body }}<br>
+                <small><span class="tag">Added on {{ $comment->created_at }}</span></small>
             </p>
         </div>
     </div>

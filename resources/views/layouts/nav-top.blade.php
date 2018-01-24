@@ -10,8 +10,9 @@
             <div class="navbar-start">
                 <a class="navbar-item" href="{{ route('about') }}">About</a>
                 <a class="navbar-item" href="{{ route('orders') }}">Lessons</a>
+                <a class="navbar-item" href="/carriers">Couriers</a>
                 <a class="navbar-item" href="{{ route('select.service') }}">Create Lesson</a>
-                <a class="navbar-item" href="/carrier/register">Registration</a>
+                <a class="navbar-item" href="/carrier/register">Courier Registration</a>
                 <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
             </div>
         </div>
