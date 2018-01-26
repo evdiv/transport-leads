@@ -7,49 +7,52 @@
             </button>
         </div>
 
+        <article class="message is-info" v-if="commentFormIsShown">
+            <div class="message-body">
+                <form method="POST" :action="getActionUrl" class="form-horizontal" >
 
-        <form method="POST" :action="getActionUrl" class="form-horizontal" v-if="commentFormIsShown">
+                    <slot name="csrf"></slot>
 
-            <slot name="csrf"></slot>
+                    <div class="field is-horizontal">
+                        <div class="field-label is-normal">
+                            <label class="label">Add Comment</label>
 
-            <div class="field is-horizontal">
-                <div class="field-label is-normal">
-                    <label class="label">Add Comment</label>
-
-                </div>
-                  
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control">
-                            <textarea class="textarea" name="body" placeholder="Add your comment here..."></textarea>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-                            
-            <div class="field is-horizontal">
-              <div class="field-label">
-                <!-- Left empty for spacing -->
-              </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="is-pulled-right control">
-
-                            <div class="button is-warning is-small"
-                                @click="commentFormIsShown = !commentFormIsShown">
-                                Hide form
+                          
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="control">
+                                    <textarea class="textarea" name="body" placeholder="Add your comment here..."></textarea>
+                                </div>
                             </div>
-
-                            <button type="submit" class="button is-success is-small">
-                                Send message
-                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
 
-        </form>
+                                    
+                    <div class="field is-horizontal">
+                      <div class="field-label">
+                        <!-- Left empty for spacing -->
+                      </div>
+                        <div class="field-body">
+                            <div class="field">
+                                <div class="is-pulled-right control">
+
+                                    <div class="button is-warning is-small"
+                                        @click="commentFormIsShown = !commentFormIsShown">
+                                        Hide form
+                                    </div>
+
+                                    <button type="submit" class="button is-success is-small">
+                                        Send message
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </article>
 
     </div>
 </template>

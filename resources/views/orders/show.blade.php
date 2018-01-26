@@ -23,12 +23,11 @@
                         @include('orders.partials.display-auto')
                     @endif
 
-
-
+        
+                    @if(count($order->comments) > 0)
                     <!-- Comments Section -->
                     <article class="message is-info">
                         <div class="message-body">
-
 
                         <!-- List of Comments -->
                             @foreach($order->comments as $comment)
@@ -36,20 +35,22 @@
                             @endforeach
                         <!--/ List of Comments -->
 
-
-                    <!-- Comments Form -->
-                    @if($order->commentsAllowed())
-
-                        <add-order-comment :order="{{ $order->id }}">
-                            <template slot="csrf"> {{ csrf_field() }} </template>
-                        </add-order-comment>
-
+                        </div>
+                    </article>
+                    <!--/ Comments Section -->
                     @endif
-                    <!--/ Comments Form -->
 
-                    
-                    </div>
-                </article>
+
+                        <!-- Comments Form -->
+                        @if($order->commentsAllowed())
+                            <add-order-comment :order="{{ $order->id }}">
+                                <template slot="csrf"> {{ csrf_field() }} </template>
+                            </add-order-comment>
+                        @endif
+                        <!--/ Comments Form -->
+
+
+
 
 
 
