@@ -49,20 +49,7 @@ export default new Vuex.Store({
 		},
 
 		postCarrier() {
-			Axios.post('/carrier/register', this.state.newCarrier);
-		},
-
-		getOrders(state, payload) {
-			let userId = payload.userId || 0,
-			    userActiveOrders = payload.userActiveOrders || 0,
-			    userCompleteOrders = payload.userCompleteOrders || 0;
-	
-			return Axios.get('/get-orders', {
-				params: {
-					userActiveOrders: userActiveOrders,
-					userCompleteOrders: userCompleteOrders
-				}
-			});
+			Axios.post('/carriers/', this.state.newCarrier);
 		}
 	} 
 });

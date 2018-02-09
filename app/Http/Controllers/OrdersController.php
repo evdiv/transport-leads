@@ -28,7 +28,7 @@ class OrdersController extends Controller
             $orders = $Order->getRecent();
         }
 
-        return $orders;
+        return view('pages.orders', compact('orders'));
     }
 
 

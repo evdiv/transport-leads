@@ -18,7 +18,7 @@
 	  	
 		<!-- Vue JS component for adding multiple goods -->
 		<div class="container">
-			<orders-table></orders-table>
+			<orders-table :orders="'{{ $orders }}'"></orders-table>
 		</div>
 
 @endsection

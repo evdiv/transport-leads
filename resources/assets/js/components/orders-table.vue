@@ -2,13 +2,8 @@
     <section>
         
 
-        <div style="text-align:center;" v-if="loader">
-            <i class="fa fa-refresh fa-spin fa-4x fa-fw"></i><span class="sr-only">Loading...</span>
-        </div>
-
-
-        <div style="text-align:center;" v-if="lessons.length == 0 && !loader">
-           <i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Lessons are not found
+        <div style="text-align:center;" v-if="orders.length == 0">
+           <i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Lessons not found
         </div>
 
         <b-field grouped group-multiline>
@@ -22,7 +17,7 @@
         </b-field>
 
         <b-table
-            :data="lessons"
+            :data="getOrders"
             :paginated="isPaginated"
             :per-page="perPage"
             focusable
@@ -130,13 +125,8 @@
 <script>
 
     export default {
-        mounted() {
-            this.getLessons();
-        },
-
         data() {
             return {
-                lessons: [],
                 isPaginated: true,
                 loader: true,
                 defaultSortDirection: 'asc',
@@ -145,24 +135,12 @@
                 testProp: 66
             }
         },
-        props: ['user-complete-orders', 'user-active-orders'],
-
-        methods: {
-            getLessons() {
-                this.$store.dispatch('getOrders', 
-                    {
-                        userCompleteOrders: this.userCompleteOrders,
-                        userActiveOrders: this.userActiveOrders
-                    })
-                    .then((response) => {
-                       this.lessons = response.data;
-                       this.loader = false;
-                    })
-                    .catch((error) => {
-                        console.log(error);
-
-                    });
+        computed: {
+            getOrders() {
+                return JSON.parse(this.orders);
             }
         },
+
+        props: ['orders'],
     }
 </script>

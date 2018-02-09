@@ -7,17 +7,15 @@ Route::get('/', 'PageController@index');
 Route::get('/about', 'PageController@about')->name('about');
 Route::get('/contact', 'PageController@contact')->name('contact');
 Route::get('/select-service', 'PageController@selectService')->name('select.service');
-Route::get('/orders', 'PageController@orders')->name('orders');
+Route::get('/orders', 'OrdersController@index')->name('orders');
 
 Route::get('/my-active-orders', 'PageController@getUserActiveOrders');
 Route::get('/my-complete-orders', 'PageController@getUserCompleteOrders');
-Route::get('/my-details', 'PageController@getUserDetails');
-
+Route::get('/account', 'PageController@getUserAccount');
+Route::post('/account', 'PageController@updateUserAccount');
 
 //Order Pages
-Route::get('/get-orders', 'OrdersController@index');
 Route::get('/orders/{order}', 'OrdersController@show');
-
 Route::post('/orders/{order}/proposals', 'ProposalController@store');
 Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
 Route::post('/orders/{order}/comments', 'CommentController@store');
@@ -25,15 +23,20 @@ Route::post('/proposals/{proposal}/message', 'MessageController@store');
 
 
 //Carrier Pages
-Route::post('/carrier/register', 'CarriersController@store');
-Route::get('/carrier/register', 'CarriersController@create');
+Route::get('/carriers/', 'CarriersController@index');
+Route::post('/carriers/', 'CarriersController@store');
+Route::get('/carriers/register', 'CarriersController@create');
+Route::get('/carriers/create', 'CarriersController@create');
+Route::get('/carriers/{carrier}', 'CarriersController@show');
+Route::put('/carriers/{carrier}', 'CarriersController@update');
+
 
 //Takelaj 
 Route::get('/takelaj', 'TakelajController@index');
 Route::get('/takelaj/create', 'TakelajController@create')->name('create.takelaj');
 Route::get('/takelaj/{id}', 'TakelajController@show');
 Route::put('/takelaj/{id}', 'TakelajController@update');
-Route::post('/takelaj', 'TakelajController@store')->name('submit.takelaj');
+Route::post('/takelaj/', 'TakelajController@store')->name('submit.takelaj');
 
 
 //Gruzchiki
@@ -84,14 +87,6 @@ Route::post('/orders/{order}/comments', 'CommentController@store');
 Route::post('/proposals/{proposal}/message', 'MessageController@store');
 */
 
-
-
-
-Route::get('/carriers/', 'CarriersController@index');
-Route::get('/carriers/{carrier}', 'CarriersController@show');
-Route::get('/carriers/create', 'CarriersController@create');
-Route::post('/carriers/', 'CarriersController@store');
-Route::put('/carriers/{carrier}', 'CarriersController@update');
 
 
 Route::get('/users/', 'UsersController@index');

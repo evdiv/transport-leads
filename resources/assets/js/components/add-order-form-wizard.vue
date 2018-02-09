@@ -199,7 +199,7 @@
             	if(this.orderPosted) {
             		setTimeout(function() {
             			location.href = "/orders";
-            		}, 2000);
+            		}, 300);
             	}
        		}
 

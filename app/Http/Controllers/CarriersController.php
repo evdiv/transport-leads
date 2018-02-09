@@ -12,6 +12,15 @@ use Illuminate\Support\Facades\Input;
 class CarriersController extends Controller
 {
 
+    public function index() {
+        $carriers = Carrier::where([
+                ['active', '=', '1']
+        ])->limit(20)->get();
+
+        return view('carriers.index', compact('carriers'));
+    }
+
+
     public function show($id) {
         $carrier = Carrier::find($id);
 

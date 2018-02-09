@@ -21,6 +21,7 @@ class CreateCarriersTable extends Migration
             $table->string('city')->nullable();
             $table->string('address')->nullable();            
             $table->text('description')->nullable();
+            $table->integer('active')->default(0);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
