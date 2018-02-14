@@ -95,7 +95,6 @@ Route::post('/users/', 'UsersController@store');
 Route::get('/users/{user}', 'UsersController@show');
 Route::put('/users/{user}', 'UsersController@update');
 
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
