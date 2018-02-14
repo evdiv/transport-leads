@@ -1,7 +1,7 @@
 
 
         <h1 class="title"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Takelajnie Raboty 
-            <span class="tag is-white">Created on: {{ $order->created_at }}</span>
+            <span class="tag is-white">Created on: {{ $order->created_at->diffForHumans() }}</span>
         </h1>
 
 

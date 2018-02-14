@@ -50,4 +50,5 @@ class User extends Authenticatable
     public function messages() {
         return $this->morphMany('App\Message', 'postedfrom');
     }
+
 }

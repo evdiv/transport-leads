@@ -195,12 +195,6 @@
             onComplete(){
 
             	this.orderPosted = this.$store.dispatch('postTakelajOrder');
-
-            	if(this.orderPosted) {
-            		setTimeout(function() {
-            			location.href = "/orders";
-            		}, 300);
-            	}
        		}
 
 		},

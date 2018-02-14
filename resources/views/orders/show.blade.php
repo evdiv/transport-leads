@@ -42,7 +42,7 @@
 
 
                         <!-- Comments Form -->
-                        @if($order->commentsAllowed())
+                        @if($order->areCommentsAllowed())
                             <add-order-comment :order="{{ $order->id }}">
                                 <template slot="csrf"> {{ csrf_field() }} </template>
                             </add-order-comment>
