@@ -5,8 +5,6 @@
     
     @include('layouts.hero')
 
-
-    {{-- About Page Text --}}
     <section class="section">
         <div class="container">
             <div class="content">
@@ -14,6 +12,5 @@
             </div>
         </div>
     </section>
-
 
 @endsection

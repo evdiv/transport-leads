@@ -12230,7 +12230,6 @@ Vue.component('switcher', __webpack_require__(72));
 
 Vue.component('add-order-form-wizard', __webpack_require__(75));
 Vue.component('register-company-form-wizard', __webpack_require__(81));
-Vue.component('add-order-comment', __webpack_require__(87));
 
 var app = new Vue({
   el: '#app',
@@ -30556,10 +30555,14 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
 	actions: {
 		postTakelajOrder: function postTakelajOrder() {
-			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/takelaj', this.state.newOrder);
+			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/takelaj', this.state.newOrder).then(function (response) {
+				window.location.href = '/orders';
+			});
 		},
 		postCarrier: function postCarrier() {
-			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/carriers/', this.state.newCarrier);
+			__WEBPACK_IMPORTED_MODULE_2_axios___default.a.post('/carriers', this.state.newCarrier).then(function (response) {
+				window.location.href = '/orders';
+			});
 		}
 	}
 }));
@@ -35598,12 +35601,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		onComplete: function onComplete() {
 
 			this.orderPosted = this.$store.dispatch('postTakelajOrder');
-
-			if (this.orderPosted) {
-				setTimeout(function () {
-					location.href = "/orders";
-				}, 300);
-			}
 		}
 	},
 
@@ -36441,12 +36438,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 		onComplete: function onComplete() {
 
 			this.carrierPosted = this.$store.dispatch('postCarrier');
-
-			if (this.carrierPosted) {
-				setTimeout(function () {
-					location.href = "/orders";
-				}, 1000);
-			}
 		}
 	},
 
@@ -37375,262 +37366,9 @@ if (false) {
 }
 
 /***/ }),
-/* 87 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(0)
-/* script */
-var __vue_script__ = __webpack_require__(88)
-/* template */
-var __vue_template__ = __webpack_require__(89)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources\\assets\\js\\components\\add-order-comment.vue"
-if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7e65466d", Component.options)
-  } else {
-    hotAPI.reload("data-v-7e65466d", Component.options)
-' + '  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 88 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    data: function data() {
-        return {
-            commentFormIsShown: false
-        };
-    },
-
-
-    computed: {
-        getActionUrl: function getActionUrl() {
-            return "/orders/" + this.order + "/comments";
-        }
-    },
-
-    props: ['order']
-});
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("div", [
-    !_vm.commentFormIsShown
-      ? _c("div", { staticClass: "control has-text-right" }, [
-          _c(
-            "button",
-            {
-              staticClass: "button is-info",
-              on: {
-                click: function($event) {
-                  _vm.commentFormIsShown = true
-                }
-              }
-            },
-            [
-              _c("i", {
-                staticClass: "fa fa-comment-o",
-                attrs: { "aria-hidden": "true" }
-              }),
-              _vm._v("  Add Comment\n        ")
-            ]
-          )
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.commentFormIsShown
-      ? _c("article", { staticClass: "message is-info" }, [
-          _c("div", { staticClass: "message-body" }, [
-            _c(
-              "form",
-              {
-                staticClass: "form-horizontal",
-                attrs: { method: "POST", action: _vm.getActionUrl }
-              },
-              [
-                _vm._t("csrf"),
-                _vm._v(" "),
-                _vm._m(0, false, false),
-                _vm._v(" "),
-                _c("div", { staticClass: "field is-horizontal" }, [
-                  _c("div", { staticClass: "field-label" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "field-body" }, [
-                    _c("div", { staticClass: "field" }, [
-                      _c("div", { staticClass: "is-pulled-right control" }, [
-                        _c(
-                          "div",
-                          {
-                            staticClass: "button is-warning is-small",
-                            on: {
-                              click: function($event) {
-                                _vm.commentFormIsShown = !_vm.commentFormIsShown
-                              }
-                            }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    Hide form\n                                "
-                            )
-                          ]
-                        ),
-                        _vm._v(" "),
-                        _c(
-                          "button",
-                          {
-                            staticClass: "button is-success is-small",
-                            attrs: { type: "submit" }
-                          },
-                          [
-                            _vm._v(
-                              "\n                                    Send message\n                                "
-                            )
-                          ]
-                        )
-                      ])
-                    ])
-                  ])
-                ])
-              ],
-              2
-            )
-          ])
-        ])
-      : _vm._e()
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "field is-horizontal" }, [
-      _c("div", { staticClass: "field-label is-normal" }, [
-        _c("label", { staticClass: "label" }, [_vm._v("Add Comment")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "field-body" }, [
-        _c("div", { staticClass: "field" }, [
-          _c("div", { staticClass: "control" }, [
-            _c("textarea", {
-              staticClass: "textarea",
-              attrs: { name: "body", placeholder: "Add your comment here..." }
-            })
-          ])
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7e65466d", module.exports)
-  }
-}
-
-/***/ }),
+/* 87 */,
+/* 88 */,
+/* 89 */,
 /* 90 */
 /***/ (function(module, exports) {
 

@@ -113,7 +113,9 @@ class OrdersController extends Controller
             $Order->addLocation($name, $pogruzka);
         }
 
-        return redirect('/home');
+        flash('Your order has been added!')->success();
+
+        return response()->json(['response' => 'true']);
     } 
 
 

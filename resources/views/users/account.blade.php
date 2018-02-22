@@ -8,14 +8,9 @@
 	    <div class="container">
 	  		<div class="content">
 
-			@if(Session::has('message')) 
-				<div> {{ Session::get('message') }}</div>
-			@endif
-
-
-	  			<h1>User Details</h1>
-
 	  			@include('flash::message')
+	  			
+	  			<h1>User Details</h1>
 
 				<form class="form-horizontal" role="form" method="POST" action="{{ url('/account') }}">
   

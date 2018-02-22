@@ -45,11 +45,17 @@ export default new Vuex.Store({
 
 	actions: {
 		postTakelajOrder() {
-			Axios.post('/takelaj', this.state.newOrder);
+			Axios.post('/takelaj', this.state.newOrder)
+					.then(function(response) {
+						window.location.href = '/orders';
+					});
 		},
 
 		postCarrier() {
-			Axios.post('/carriers/', this.state.newCarrier);
+			Axios.post('/carriers', this.state.newCarrier)
+					.then(function(response) {
+						window.location.href = '/orders';
+					});
 		}
 	} 
 });

@@ -38,8 +38,6 @@ Vue.component('switcher', require('./components/switcher.vue'));
 
 Vue.component('add-order-form-wizard', require('./components/add-order-form-wizard.vue'));
 Vue.component('register-company-form-wizard', require('./components/register-company-form-wizard.vue'));
-Vue.component('add-order-comment', require('./components/add-order-comment.vue'));
-
 
 const app = new Vue({
     el: '#app',

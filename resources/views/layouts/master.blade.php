@@ -17,8 +17,6 @@
         <div id="app">
             @include('layouts.nav-top')
 
-            @include('layouts.errors')
-
             @yield('content')
 
             @include('layouts.footer')

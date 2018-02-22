@@ -456,12 +456,6 @@
             onComplete(){
 				
             	this.carrierPosted = this.$store.dispatch('postCarrier');
-
-            	if(this.carrierPosted) {
-            		setTimeout(function() {
-            			location.href = "/orders";
-            		}, 1000);
-            	}
        		}
 		},
 
