@@ -128,13 +128,7 @@ class Order extends Model
     }
 
 
-    public function getRecent() {
-
-        $orders = Order::where([
-                ['active', '=', '1'],
-                ['completed', '<>', '1']
-            ])->limit(20)->get();
-
+    private function withRelatedFields($orders) {
         foreach ($orders as &$order) {
             $order['cargos'] = self::find($order->id)->cargos;
             $order['takelaj'] = self::find($order->id)->takelaj;
@@ -145,40 +139,41 @@ class Order extends Model
     }
 
 
-    public function getActiveCreatedByUser() {
+    public function recent() {
+
+        $orders = Order::where([
+                ['active', '=', '1'],
+                ['completed', '<>', '1']
+            ])->limit(20)->get();
+
+        return self::withRelatedFields($orders);
+    }
+
+
+    public function activeCreatedByUser() {
 
         $orders = User::find(Auth::user()->id)->orders()->where([
                 ['active', '=', '1'],
                 ['completed', '<>', '1']
             ])->get();
 
-        foreach ($orders as &$order) {
-            $order['cargos'] = self::find($order->id)->cargos;
-            $order['takelaj'] = self::find($order->id)->takelaj;
-        }
-
-        return $orders;
+        return self::withRelatedFields($orders);;
     }
 
 
 
-    public function getCompletedCreatedByUser() {
+    public function completedCreatedByUser() {
         $orders = User::find(Auth::user()->id)->orders()->where([
                 ['active', '=', '1'],
                 ['completed', '=', '1']
             ])->get();
 
-        foreach ($orders as &$order) {
-            $order['cargos'] = self::find($order->id)->cargos;
-            $order['takelaj'] = self::find($order->id)->takelaj;
-        }
-
-        return $orders;
+        return self::withRelatedFields($orders);
     }
 
 
 
-    public function commentsAllowed() {
+    public function areCommentsAllowed() {
 
         if(Auth::guard('web-carrier')->check()) {
             return true;

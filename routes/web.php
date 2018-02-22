@@ -7,19 +7,40 @@ Route::get('/', 'PageController@index');
 Route::get('/about', 'PageController@about')->name('about');
 Route::get('/contact', 'PageController@contact')->name('contact');
 Route::get('/select-service', 'PageController@selectService')->name('select.service');
+
+
+//**************************
+// Account Pages
+//**************************
+Route::get('/account', 'UsersController@update');
+Route::post('/account', 'UsersController@store');
+
+
+//**************************
+// Orders Pages
+//**************************
 Route::get('/orders', 'OrdersController@index')->name('orders');
-
-Route::get('/my-active-orders', 'PageController@getUserActiveOrders');
-Route::get('/my-complete-orders', 'PageController@getUserCompleteOrders');
-Route::get('/account', 'PageController@getUserAccount');
-Route::post('/account', 'PageController@updateUserAccount');
-
-//Order Pages
 Route::get('/orders/{order}', 'OrdersController@show');
+Route::get('/active-orders', 'OrdersController@showActiveCreatedByUser')->name('active-orders');
+Route::get('/complete-orders', 'OrdersController@showCompletedCreatedByUser')->name('complete-orders');
+
+
+//**************************
+// Proposals Pages
+//**************************
 Route::post('/orders/{order}/proposals', 'ProposalController@store');
 Route::post('/orders/{order}/accept/{proposal}', 'ProposalController@accept');
+
 Route::post('/orders/{order}/comments', 'CommentController@store');
 Route::post('/proposals/{proposal}/message', 'MessageController@store');
+
+
+//**************************
+// Messages
+//**************************
+Route::get('/messages', 'MessageController@index')->name('messages');
+Route::get('/messages/{message}', 'MessageController@show');
+Route::post('/messages/', 'MessageController@store');
 
 
 //Carrier Pages

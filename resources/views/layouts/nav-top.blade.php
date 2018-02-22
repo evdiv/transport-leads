@@ -40,7 +40,7 @@
                         <!-- User Authentication Links -->
                         @if(Auth::guard('web')->check())
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
-                            <a class="navbar-item" href="/my-active-orders">
+                            <a class="navbar-item" href="{{ route('active-orders') }}">
                                 Active Orders&nbsp;&nbsp;
                                 <span class="tag is-success">
                                     {{ Auth::user()->getNumberOfActiveOrders() }}
@@ -48,7 +48,7 @@
                             </a> 
 
 
-                            <a class="navbar-item" href="/my-complete-orders">
+                            <a class="navbar-item" href="{{ route('complete-orders') }}">
                                 Completed Orders&nbsp;&nbsp;                                
                                 <span class="tag is-light">
                                     {{ Auth::user()->getNumberOfCompleteOrders() }}

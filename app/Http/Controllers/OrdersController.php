@@ -15,20 +15,24 @@ use Auth;
 class OrdersController extends Controller
 {
 
-    public function index(Request $request) {
-        $Order = new Order;
+    public function index(Order $order) {
 
-        if($request->userActiveOrders) {
-            $orders = $Order->getActiveCreatedByUser();
-        
-        }elseif($request->userCompleteOrders) {
-            $orders = $Order->getCompletedCreatedByUser();
+        $orders = $order->recent();
+        return view('orders.index', compact('orders'));
+    }
 
-        } else {
-            $orders = $Order->getRecent();
-        }
 
-        return view('pages.orders', compact('orders'));
+    public function showActiveCreatedByUser(Order $order) {
+
+        $orders = $order->activeCreatedByUser();
+        return view('orders.my-active', compact('orders'));
+    }
+
+
+    public function showCompletedCreatedByUser(Order $order) {
+
+        $orders = $order->completedCreatedByUser();
+        return view('orders.my-completed', compact('orders'));
     }
 
 
@@ -42,7 +46,6 @@ class OrdersController extends Controller
         
         return view('orders.show', compact('order'));
     }
-
 
 
     public function create() {
@@ -104,9 +107,10 @@ class OrdersController extends Controller
         }
 
         for ($i = 0; $i < count($request->locations); $i++) {
-                $pogruzka = ($i == 0) ? 1 : 0;
-                $name = $request->locations[$i];
-             $Order->addLocation($name, $pogruzka);
+
+            $pogruzka = ($i == 0) ? 1 : 0;
+            $name = $request->locations[$i];
+            $Order->addLocation($name, $pogruzka);
         }
 
         return redirect('/home');
