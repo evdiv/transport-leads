@@ -7,6 +7,9 @@
 		<section class="section">
 		    <div class="container">
 		    	<div class="content">
+					
+					@include('flash::message')
+
 					<h1>Available Lessons</h1>
 
 			  		<div class="notification">

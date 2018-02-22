@@ -1,11 +1,7 @@
 @if(count($errors))
-    <div class="container">
-        <div class="alert alert-danger">
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    </div>
+	<b-message type="is-danger">
+		    @foreach($errors->all() as $error)		        
+		        {{ $error }}<br/>
+		    @endforeach
+    </b-message>
 @endif

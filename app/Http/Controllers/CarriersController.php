@@ -52,7 +52,6 @@ class CarriersController extends Controller
             'password' => bcrypt($request['password']),
         ]);
 
-
         Service::create([
             'carrier_id' => $Carrier->id,
             'max_cargo_weight' => $request['maxCargoWeight'],
@@ -65,7 +64,8 @@ class CarriersController extends Controller
         ]);
 
         Auth::guard('web-carrier')->loginUsingId($Carrier->id, true);
-        
-        return response()->json(['response' => 'Your account has been created']);
+        flash('Your account has been created! Now you can add you proposal to the orders.')->success();
+
+        return response()->json(['response' => 'true']);
     }
 }

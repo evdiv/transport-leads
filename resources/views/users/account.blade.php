@@ -7,9 +7,10 @@
 	<section class="section">
 	    <div class="container">
 	  		<div class="content">
-	  			<h1>User Details</h1>
 
 	  			@include('flash::message')
+	  			
+	  			<h1>User Details</h1>
 
 				<form class="form-horizontal" role="form" method="POST" action="{{ url('/account') }}">
   

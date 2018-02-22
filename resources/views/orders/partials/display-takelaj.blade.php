@@ -8,19 +8,19 @@
        <p>Required Services: 
 
             @if (isset($order->takelaj->demontaj)) 
-                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Demontaj</span> 
+                <span class="tag is-dark"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Demontaj</span> 
             @endif
 
              @if (isset($order->takelaj->montaj)) 
-                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Montaj</span> 
+                <span class="tag is-dark"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Montaj</span> 
             @endif
 
             @if (isset($order->takelaj->peremeshenie)) 
-                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Peremeshenie</span> 
+                <span class="tag is-dark"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Peremeshenie</span> 
             @endif
 
             @if (isset($order->takelaj->razbor)) 
-                <span class="tag is-info"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Razbor Perekritiy</span> 
+                <span class="tag is-dark"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Razbor Perekritiy</span> 
             @endif  
         </p>
 
@@ -31,7 +31,7 @@
                 
                 @if ($location->pogruzka > 0) 
                     <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                        Place:  {{ $location->city }}, {{ $location->address }} 
+                        Loading at: {{ $location->city }}, {{ $location->address }} 
                 @else
                         <br/><i class="fa fa-map-marker" aria-hidden="true"></i> 
                         Move to:  {{ $location->city }}, {{ $location->address }} 
