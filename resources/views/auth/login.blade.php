@@ -1,6 +1,9 @@
 @extends('layouts.master')
 
-@section('content')
+@section ('content')
+    
+    @include('layouts.hero')
+
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
