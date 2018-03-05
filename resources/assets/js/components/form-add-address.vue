@@ -126,8 +126,6 @@
                 this.$store.state.newOrder.destinationAddress = "";
                 this.showDestinations = false;;
             }
-
-
         }
     }    
 </script>   

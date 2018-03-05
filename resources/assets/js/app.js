@@ -34,7 +34,9 @@ Vue.component('form-add-address', require('./components/form-add-address.vue'));
 Vue.component('form-add-carrier-proposal', require('./components/form-add-carrier-proposal.vue'));
 Vue.component('orders-table', require('./components/orders-table.vue'));
 Vue.component('carriers-table', require('./components/carriers-table.vue'));
+Vue.component('proposal', require('./components/proposal.vue'));
 Vue.component('switcher', require('./components/switcher.vue'));
+
 
 Vue.component('add-order-form-wizard', require('./components/add-order-form-wizard.vue'));
 Vue.component('register-company-form-wizard', require('./components/register-company-form-wizard.vue'));
