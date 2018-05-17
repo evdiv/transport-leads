@@ -1,6 +1,6 @@
 @if(count($order->comments) > 0)
 
-    <article class="message is-info">
+    <article class="message is-small">
         <div class="message-body">
 
             @foreach($order->comments as $comment)
@@ -10,14 +10,16 @@
                     <div class="media-content">
                         <div class="content">
                             <p>
-                            <small><span class="tag">{{ $comment->created_at->diffForHumans() }}</span>
+                                {{ $comment->body }}
+
+                            <small>
                            <a href="/carriers/{{ $comment->commentable->id }}">{{ $comment->commentable->name }}</a></small> 
 
                                 @if($comment->commentable_type == "App\Carrier")
                                     <span class="tag is-rounded is-warning">Carrier</span>
                                 @endif
 
-                                {{ $comment->body }}
+                                <small><span class="tag">{{ $comment->created_at->diffForHumans() }}</span></small> 
                                 
                             </p>
                         </div>
@@ -29,6 +31,8 @@
 
             <!--Add a comment form -->
             @if($order->areCommentsAllowed())
+                    
+                <span class="button is-primary is-small">toggle form</span>            
 
                 <form method="POST" action="/orders/{{ $order->id }}/comments" class="form-horizontal" style="margin-top: 20px;">
 
@@ -62,6 +66,8 @@
                     </div>
 
                 </form>
+
+
 
             @endif
             <!--/ Add a comment form -->

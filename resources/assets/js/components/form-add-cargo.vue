@@ -153,29 +153,11 @@
 <div class="field is-horizontal">
     <div class="field-label is-normal"></div>
 
-    <div class="field-body" v-if="!this.showDescriptionField">
-        <a class="button is-success is-outlined is-small" @click="showDescriptionField = true">
-            <i class="fa fa-plus" aria-hidden="true"></i>&nbsp; Add Lesson Description</a>
-    </div>
-
-    <div class="field-body" v-if="this.showDescriptionField">
-        <a class="button is-danger is-outlined is-small" @click="showDescriptionField = false">
-            <i class="fa fa-minus" aria-hidden="true"></i>&nbsp; Remove Lesson Description</a>
-    </div>
-
-</div>
-
-
-<div class="field is-horizontal">
-    <div class="field-label is-normal"></div>
-
-    <div class="field-body" v-if="this.showDescriptionField">
+    <div class="field-body">
         
         <div class="field is-expanded">
             <div class="field"> 
-
                 <textarea class="textarea" placeholder="Description of the required Lesson" v-model="cargo.description"></textarea>
-    
             </div>
         </div>
     </div>

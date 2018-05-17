@@ -15,32 +15,32 @@
                     </div>
 
                     <div class="column is-7">
+                        {{ getProposal.body }} 
+                        <br/>
+                        <span class="has-text-grey-light">Added {{ addedAgo }} by </span>
                         <strong><a :href="'/carriers/' + getCarrier.id">
                                 {{ getCarrier.name }}</a></strong>
-                        
-                        <br/>{{ getProposal.body }}
-                        <br/>
-                        <small><span class="tag">Proposal added on {{ addedAgo }}</span></small>
                     </div>
 
                     <div class="column is-4">
 
-                        <button class="button is-info">
+                        <button class="button is-small is-info"
+                                @click="toggleProposalDetails()">
                             <i class="fa fa-envelope fa-lg"></i> &nbsp;&nbsp;&nbsp;
-                            <div class="tag is-rounded is-white"> {{ numberMessages }} </div>
+                            {{ numberMessages }} Messages
                         </button>
 
-                        <button class="button is-success"
-                                @click="">
-                           <i class="fa fa-plus"></i> &nbsp;&nbsp;&nbsp;Show details
+                        <button class="button is-small is-success"
+                                @click="toggleProposalDetails()">
+                           <i v-if="!displayProposalFullDetails" class="fa fa-plus"></i> 
+                           <i v-if="displayProposalFullDetails" class="fa fa-minus"></i> 
+                           &nbsp;&nbsp;&nbsp;Show details
                         </button>
 
                     </div>
                 </div>
 
-                <hr/>
-
-                <slot name="full-details"></slot>
+                <slot v-if="displayProposalFullDetails" name="full-details"></slot>
 
             </div>
         </article>
@@ -55,13 +55,13 @@
 
         data() {
             return {
-                displayProposalDetails: false
+                displayProposalFullDetails: false
             }
         },
 
         methods: {
             toggleProposalDetails: function() {
-                this.displayProposalDetails = true; 
+                this.displayProposalFullDetails = !this.displayProposalFullDetails; 
             }
         },
 
