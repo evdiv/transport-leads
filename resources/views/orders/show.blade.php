@@ -31,6 +31,49 @@
                     @include('orders.partials.display-comment')
                     <!--/ Comments -->
 
+                    <!-- Add Comment Form -->
+                    @if($order->areCommentsAllowed())
+                            
+                        <div style="text-align: right;">
+                            <a href="#" class="is-small">add comment</a>
+                        </div>           
+
+                        <form method="POST" action="/orders/{{ $order->id }}/comments" class="form-horizontal" style="margin-top: 20px;">
+
+                           {{ csrf_field() }}
+
+                            <div class="field is-horizontal">
+                                  
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="control">
+                                            <textarea class="textarea" name="body" rows="3" placeholder="Add your comment here..."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                                            
+                            <div class="field is-horizontal">
+                              <div class="field-label">
+                                <!-- Left empty for spacing -->
+                              </div>
+                                <div class="field-body">
+                                    <div class="field">
+                                        <div class="is-pulled-right control">
+                                            <button type="submit" class="button is-primary is-small">
+                                                Send message
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </form>
+                    @endif
+
+                    <!--/ Add Comment Form -->
+
 
                     <!-- Proposals from Carriers -->
                         @foreach($order->proposals as $proposal)
