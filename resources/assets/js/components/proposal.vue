@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <article class="message is-success">
+    <div style='margin: 4px 0;'>
+        <article class="message is-link">
             <div class="message-body">
 
                 <div class="columns">
@@ -8,39 +8,27 @@
                     <div class="column is-2">
                         <span style="font-size: 42px;">{{ getProposal.amount }}</span>
                         <span style="font-size: 18px;">USD</span>
-
-                        <div v-if="getProposal.accepted === 1" class="tag is-rounded is-success">           Proposal accepted
-                        </div>
+                        
+                        <slot name="acceptProposal"></slot>
 
                     </div>
 
-                    <div class="column is-7">
+                    <div class="column is-10">
                         {{ getProposal.body }} 
                         <br/>
-                        <span class="has-text-grey-light">Added {{ addedAgo }} by </span>
-                        <strong><a :href="'/carriers/' + getCarrier.id">
-                                {{ getCarrier.name }}</a></strong>
-                    </div>
+                        <span class="has-text-grey-light" style="font-size: 12px;">
+                            Added {{ addedAgo }} by 
+                            <a :href="'/carriers/' + getCarrier.id">{{ getCarrier.name }}</a>
+                         </span>
 
-                    <div class="column is-4">
+                        <slot name="proposalMessages"
+                            :messageFormDisplay="messageFormDisplay"
+                            :toggleMessageFormDisplay="toggleMessageFormDisplay"></slot>
 
-                        <button class="button is-small is-info"
-                                @click="toggleProposalDetails()">
-                            <i class="fa fa-envelope fa-lg"></i> &nbsp;&nbsp;&nbsp;
-                            {{ numberMessages }} Messages
-                        </button>
+                    </div>                
 
-                        <button class="button is-small is-success"
-                                @click="toggleProposalDetails()">
-                           <i v-if="!displayProposalFullDetails" class="fa fa-plus"></i> 
-                           <i v-if="displayProposalFullDetails" class="fa fa-minus"></i> 
-                           &nbsp;&nbsp;&nbsp;Show details
-                        </button>
 
-                    </div>
                 </div>
-
-                <slot v-if="displayProposalFullDetails" name="full-details"></slot>
 
             </div>
         </article>
@@ -49,19 +37,17 @@
 
 <script>
 
-    import ProposalPreview from './proposal-preview.vue'
-
     export default {
 
         data() {
             return {
-                displayProposalFullDetails: false
+                messageFormDisplay: false,
             }
         },
 
         methods: {
-            toggleProposalDetails: function() {
-                this.displayProposalFullDetails = !this.displayProposalFullDetails; 
+            toggleMessageFormDisplay: function() {
+                this.messageFormDisplay = !this.messageFormDisplay; 
             }
         },
 

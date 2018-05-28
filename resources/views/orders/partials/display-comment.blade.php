@@ -1,6 +1,6 @@
 @if(count($order->comments) > 0)
 
-    <article class="message is-small">
+    <article class="message is-small" style="margin-bottom: 2px;" >
         <div class="message-body">
 
             @foreach($order->comments as $comment)

@@ -25,22 +25,6 @@
         </p>
 
 
-        <!-- Display Locations -->
-        <p>
-            @foreach($order->locations as $location )
-                
-                @if ($location->pogruzka > 0) 
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                        Loading at: {{ $location->city }}, {{ $location->address }} 
-                @else
-                        <br/><i class="fa fa-map-marker" aria-hidden="true"></i> 
-                        Move to:  {{ $location->city }}, {{ $location->address }} 
-                @endif  
-
-            @endforeach
-        </p>
-
-
         @if (isset($order->note)) 
             <div class="notification">{{ $order->note }}</div>
         @endif  
