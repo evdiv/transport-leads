@@ -26,9 +26,15 @@
 
             <template slot-scope="props">
 
-                <b-table-column label="Order #">
+                <b-table-column label="#">
                    <a :href="'/orders/'+ props.row.id" >{{ props.row.id }}</a>
                 </b-table-column>
+
+
+                <b-table-column label="User">
+                   <a :href="'/users/'+ props.row.user.id" >{{ props.row.user.name }}</a>
+                </b-table-column>
+
 
 
                 <b-table-column label="Cargo">
