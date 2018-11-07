@@ -1,7 +1,10 @@
 
 
         <h1 class="title"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp;&nbsp;Takelajnie Raboty 
-            <span class="tag is-white">Created on: {{ $order->created_at->diffForHumans() }}</span>
+            <span class="tag is-white">
+                Created: {{ $order->created_at->diffForHumans() }}
+                by &nbsp;<a href="/customers/{{ $order->user_id }}">{{ $order->user->name }}</a>
+            </span>
         </h1>
 
 
@@ -22,22 +25,6 @@
             @if (isset($order->takelaj->razbor)) 
                 <span class="tag is-dark"><i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;&nbsp;Razbor Perekritiy</span> 
             @endif  
-        </p>
-
-
-        <!-- Display Locations -->
-        <p>
-            @foreach($order->locations as $location )
-                
-                @if ($location->pogruzka > 0) 
-                    <i class="fa fa-map-marker" aria-hidden="true"></i> 
-                        Loading at: {{ $location->city }}, {{ $location->address }} 
-                @else
-                        <br/><i class="fa fa-map-marker" aria-hidden="true"></i> 
-                        Move to:  {{ $location->city }}, {{ $location->address }} 
-                @endif  
-
-            @endforeach
         </p>
 
 

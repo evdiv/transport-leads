@@ -13,7 +13,6 @@
                 <a class="navbar-item" href="/carriers">Carriers</a>
                 <a class="navbar-item" href="{{ route('select.service') }}">Create Lesson</a>
                 <a class="navbar-item" href="/carriers/register">Courier Registration</a>
-                <a class="navbar-item" href="{{ route('contact') }}">Contact</a>
             </div>
         </div>
 
@@ -56,7 +55,7 @@
                             </a> 
 
 
-                            <a class="navbar-item" href="/account">Personal Details</a>
+                            <a class="navbar-item" href="/account">Account Settings</a>
                             <a class="navbar-item" href="{{ route('logout') }}">Logout</a>
                         
                         <!-- Carrier Authentication Links -->

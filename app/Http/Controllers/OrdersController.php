@@ -43,7 +43,6 @@ class OrdersController extends Controller
             $order->showProposalForm = Proposal::showForm($id);
             $order->showProposalButton = Proposal::showButton();
         }
-        
         return view('orders.show', compact('order'));
     }
 
@@ -117,6 +116,7 @@ class OrdersController extends Controller
 
         return response()->json(['response' => 'true']);
     }
+
 
     public function edit($id) {
 

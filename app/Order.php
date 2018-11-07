@@ -19,7 +19,7 @@ class Order extends Model
 
 
     public function comments() {
-        return $this->hasMany(Comment::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(Comment::class)->orderBy('created_at', 'asc');
     }
 
 
@@ -130,14 +130,16 @@ class Order extends Model
 
     private function withRelatedFields($orders) {
         foreach ($orders as &$order) {
-            $order['user'] = self::find($order->id)->user;
-            $order['cargos'] = self::find($order->id)->cargos;
-            $order['takelaj'] = self::find($order->id)->takelaj;
-            $order['locations'] = self::find($order->id)->locations;
-        }
+            $currentOrder = self::find($order->id);
 
+            $order['user'] = $currentOrder->user;
+            $order['cargos'] = $currentOrder->cargos;
+            $order['takelaj'] = $currentOrder->takelaj;
+            $order['locations'] = $currentOrder->locations;
+        }
         return $orders;
     }
+
 
 
     public function recent() {

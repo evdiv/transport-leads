@@ -31,7 +31,7 @@
 
 
                 <b-table-column label="User">
-                    {{ props.row.user.name }}
+                   <a :href="'/customers/'+ props.row.user.id" >{{ props.row.user.name }}</a>
                 </b-table-column>
 
 

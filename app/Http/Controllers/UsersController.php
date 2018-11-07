@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\User;
 
 class UsersController extends Controller
 {
@@ -15,7 +16,7 @@ class UsersController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     /**
@@ -29,6 +30,15 @@ class UsersController extends Controller
     }
 
 
+
+    public function show($id) {
+
+        $user = User::findOrFail($id);
+        return view('customers.show', compact('user'));
+    }
+
+
+
     public function update() {
 
         if(Auth::guard('web-carrier')->check()) {
@@ -40,6 +50,7 @@ class UsersController extends Controller
         $user = Auth::user();
         return view('users.account', compact('user'));
     }
+
 
 
     public function store(Request $request) {

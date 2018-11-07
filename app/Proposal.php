@@ -22,7 +22,7 @@ class Proposal extends Model
 
 
     public function messages() {
-        return $this->hasMany(Message::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(Message::class)->orderBy('created_at', 'asc');
     }    
 
 
@@ -41,11 +41,11 @@ class Proposal extends Model
     }
 
 
-    public function canMessageBeAdded() {
+    public function messageCanBeAdded() {
         $User = Auth::guard('web')->user(); 
         $Carrier = Auth::guard('web-carrier')->user(); 
 
-        if($this->order->in_process || $this->order->completed || !$this->order->active) {
+        if($this->order->completed || !$this->order->active) {
             return false;
         }
 

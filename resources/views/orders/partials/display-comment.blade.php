@@ -1,6 +1,6 @@
 @if(count($order->comments) > 0)
 
-    <article class="message is-small">
+    <article class="message is-small" style="margin-bottom: 2px;" >
         <div class="message-body">
 
             @foreach($order->comments as $comment)
@@ -12,11 +12,18 @@
                             <p>
                                 {{ $comment->body }}
 
-                            <small>
-                           <a href="/carriers/{{ $comment->commentable->id }}">{{ $comment->commentable->name }}</a></small> 
-
                                 @if($comment->commentable_type == "App\Carrier")
-                                    <span class="tag is-rounded is-warning">Carrier</span>
+                                    <small>
+                                        <a href="/carriers/{{ $comment->commentable->id }}">{{ $comment->commentable->name }}</a>
+                                        <span class="tag is-rounded is-warning">Carrier</span>
+                                    </small>
+                                @else
+                                    <small>
+                                        <a href="/customers/{{ $comment->commentable->id }}">{{ $comment->commentable->name }}</a>
+                                        @if($order->user_id == $comment->commentable->id)
+                                            <span class="tag is-rounded is-info">Order Owner</span>
+                                        @endif
+                                    </small>
                                 @endif
 
                                 <small><span class="tag">{{ $comment->created_at->diffForHumans() }}</span></small> 

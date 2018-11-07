@@ -10,7 +10,7 @@
 
 	  			@include('flash::message')
 	  			
-	  			<h1>User Details</h1>
+	  			<h1>Account Settings</h1>
 
 				<form class="form-horizontal" role="form" method="POST" action="{{ url('/account') }}">
   
@@ -39,7 +39,7 @@
 					  <div class="field-body">
 					    <div class="field">
 					      <p class="control">
-					        <input class="input" type="text" placeholder="Phone" value="{{ old('phone', $user->phone) }}">
+					        <input class="input" type="text" name="phone" placeholder="Phone" value="{{ old('phone', $user->phone) }}">
 					      </p>
 					    </div>
 					  </div>
@@ -53,26 +53,8 @@
 					    <div class="field">
 
 					      <p class="control">
-					        <input class="input" type="text" placeholder="Email" value="{{ old('email', $user->email) }}">
+					        <input class="input" type="text" name="email" placeholder="Email" value="{{ old('email', $user->email) }}">
 					      </p>
-
-					      <div class="control">
-					        <input class="input" name="email" type="text" value="{{ old('email', $user->email) }}">
-					      </div>
-					    </div>
-					  </div>
-					</div>
-
-
-					<div class="field is-horizontal">
-					  <div class="field-label is-normal">
-					    <label class="label">Phone</label>
-					  </div>
-					  <div class="field-body">
-					    <div class="field">
-					      <div class="control">
-					        <input class="input" name="phone" type="text" value="{{ old('phone', $user->phone) }}">
-					      </div>
 
 					    </div>
 					  </div>
@@ -87,7 +69,7 @@
 
 					    <div class="field">
 					      <div class="control">
-					        <input type="submit" class="button is-primary" value="Update">
+					        <input type="submit" class="button is-success" value="Update Account">
 					      </div>
 					    </div>
 					  </div>

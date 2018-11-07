@@ -5,13 +5,13 @@
 //**************************
 Route::get('/', 'PageController@index');
 Route::get('/about', 'PageController@about')->name('about');
-Route::get('/contact', 'PageController@contact')->name('contact');
 Route::get('/select-service', 'PageController@selectService')->name('select.service');
 
 
 //**************************
-// Account Pages
+// Account and User Info Pages
 //**************************
+Route::get('/customers/{customer}', 'UsersController@show');
 Route::get('/account', 'UsersController@update');
 Route::post('/account', 'UsersController@store');
 

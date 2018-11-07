@@ -18,7 +18,7 @@
 			  	</div>
 		    </div>
 	  	</section>
-	  	
+
 		<!-- Vue JS component for adding multiple goods -->
 		<div class="container">
 			<orders-table :orders="'{{ $orders }}'"></orders-table>

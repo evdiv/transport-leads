@@ -33,6 +33,7 @@ class User extends Authenticatable
         return $this->hasMany('App\Order');
     }
 
+
     public function getNumberOfActiveOrders() {
         return $this->hasMany('App\Order')->where('completed', 0)->count();
     }
@@ -46,6 +47,7 @@ class User extends Authenticatable
     public function comments() {
         return $this->morphMany('App\Comment', 'commentable');
     }
+
 
     public function messages() {
         return $this->morphMany('App\Message', 'postedfrom');
