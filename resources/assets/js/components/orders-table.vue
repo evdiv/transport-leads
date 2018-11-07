@@ -1,6 +1,5 @@
 <template>
     <section>
-        
 
         <div style="text-align:center;" v-if="orders.length == 0">
            <i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Lessons not found
@@ -26,8 +25,13 @@
 
             <template slot-scope="props">
 
-                <b-table-column label="Order #">
+                <b-table-column label="#">
                    <a :href="'/orders/'+ props.row.id" >{{ props.row.id }}</a>
+                </b-table-column>
+
+
+                <b-table-column label="User">
+                    {{ props.row.user.name }}
                 </b-table-column>
 
 

@@ -116,8 +116,7 @@ class OrdersController extends Controller
         flash('Your order has been added!')->success();
 
         return response()->json(['response' => 'true']);
-    } 
-
+    }
 
     public function edit($id) {
 

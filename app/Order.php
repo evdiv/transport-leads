@@ -24,7 +24,7 @@ class Order extends Model
 
 
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
 
@@ -130,6 +130,7 @@ class Order extends Model
 
     private function withRelatedFields($orders) {
         foreach ($orders as &$order) {
+            $order['user'] = self::find($order->id)->user;
             $order['cargos'] = self::find($order->id)->cargos;
             $order['takelaj'] = self::find($order->id)->takelaj;
             $order['locations'] = self::find($order->id)->locations;
