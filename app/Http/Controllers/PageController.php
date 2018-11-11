@@ -1,13 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Order;
 
 
 class PageController extends Controller
 {
-    public function index()
+    public function index(Order $order)
     {
-        return view('pages.index');
+        $orders = $order->all();
+        return view('home-page', compact('orders'));
     }
 
 
@@ -17,7 +19,7 @@ class PageController extends Controller
     }
 
 
-    public function store() 
+    public function store()
     {
         return view('pages.contact');
     }

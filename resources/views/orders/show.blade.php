@@ -2,8 +2,6 @@
 
 @section ('content')
 
-    @include('layouts.hero')
-
         <section class="section">
             <div class="container">
                 <div class="content">
@@ -43,9 +41,11 @@
 
                         </div><!--/ .column is-8-->
 
+
+
                         <div class="column is-4" style='background-color: #edfbfc;'>
 
-                            <!-- Display Loading / Destination Points -->
+                            <!-- Display Loading and Destination Locations -->
                             <p style="font-size: 12px;">
                                 @foreach($order->locations as $location )
                                     

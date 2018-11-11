@@ -16,8 +16,16 @@
     <body>
         <div id="app">
             @include('layouts.nav-top')
+            @include('layouts.hero')
+            <section class="section">
+                <div class="container">
+                    <div class="content">
 
-            @yield('content')
+                        @yield('content')
+
+                    </div>
+                </div>
+            </section>
 
             @include('layouts.footer')
         </div>

@@ -8,11 +8,19 @@
 
         <div class="navbar-menu">
             <div class="navbar-start">
-                <a class="navbar-item" href="{{ route('about') }}">About</a>
-                <a class="navbar-item" href="{{ route('orders') }}">Lessons</a>
+                <a class="navbar-item" href="/about">About</a>
+                <a class="navbar-item" href="/orders">Lessons</a>
                 <a class="navbar-item" href="/carriers">Carriers</a>
-                <a class="navbar-item" href="{{ route('select.service') }}">Create Lesson</a>
+
+                @if(!Auth::guard('web-carrier')->check())
+                    <a class="navbar-item" href="{{ route('select.service') }}">Create Lesson</a>
+                @endif
+
+
+                @if(!Auth::guard('web-carrier')->check() && !Auth::guard('web')->check())
                 <a class="navbar-item" href="/carriers/register">Courier Registration</a>
+                @endif
+
             </div>
         </div>
 
@@ -24,7 +32,7 @@
                     <a href="#" class="navbar-link">
 
                         @if(Auth::guard('web')->check())
-                            {{ Auth::user()->name }} 
+                            {{ Auth::user()->name }}
 
                         @elseif(Auth::guard('web-carrier')->check())
                             {{ Auth::guard('web-carrier')->user()->name }}
@@ -36,7 +44,8 @@
                     
                     <div class="navbar-dropdown is-boxed">
 
-                        <!-- User Authentication Links -->
+
+                        <!-- Customer Authentication Links -->
                         @if(Auth::guard('web')->check())
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
                             <a class="navbar-item" href="{{ route('active-orders') }}">
@@ -46,7 +55,6 @@
                                 </span>
                             </a> 
 
-
                             <a class="navbar-item" href="{{ route('complete-orders') }}">
                                 Completed Orders&nbsp;&nbsp;                                
                                 <span class="tag is-light">
@@ -54,20 +62,24 @@
                                 </span>
                             </a> 
 
-
                             <a class="navbar-item" href="/account">Account Settings</a>
                             <a class="navbar-item" href="{{ route('logout') }}">Logout</a>
-                        
+
+
+
+
                         <!-- Carrier Authentication Links -->
                         @elseif(Auth::guard('web-carrier')->check())
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
                             <a class="navbar-item" href="{{ route('home') }}">Active Orders with my Offer</a> 
                             <a class="navbar-item" href="{{ route('home') }}">Completed Orders</a> 
-                            <a class="navbar-item" href="/account">Personal Details</a> 
+                            <a class="navbar-item" href="/account">Account Settings</a>
                             <a class="navbar-item" href="{{ route('carrier.logout') }}">Logout</a>
 
 
-                        <!-- Carrier Authentication Links -->
+
+
+                        <!-- Admin Authentication Links -->
                         @elseif(Auth::guard('web-admin')->check())
                             <a class="navbar-item" href="{{ route('home') }}">Messages</a> 
                             <a class="navbar-item" href="{{ route('admin.logout') }}">Logout</a>

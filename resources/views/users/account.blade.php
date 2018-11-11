@@ -1,8 +1,6 @@
 @extends('layouts.master')
 
 @section ('content')
-	
-    @include('layouts.hero')
 
 	<section class="section">
 	    <div class="container">

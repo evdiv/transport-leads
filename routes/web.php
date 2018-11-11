@@ -4,6 +4,16 @@
 // Main Pages
 //**************************
 Route::get('/', 'PageController@index');
+
+
+
+
+
+
+
+
+
+
 Route::get('/about', 'PageController@about')->name('about');
 Route::get('/select-service', 'PageController@selectService')->name('select.service');
 
@@ -14,6 +24,20 @@ Route::get('/select-service', 'PageController@selectService')->name('select.serv
 Route::get('/customers/{customer}', 'UsersController@show');
 Route::get('/account', 'UsersController@update');
 Route::post('/account', 'UsersController@store');
+
+
+//**************************
+// Account and Carrier Info Pages
+//**************************
+
+Route::get('/carriers', 'CarriersController@index');
+Route::get('/carriers/{carrier}', 'CarriersController@show');
+Route::post('/carriers', 'CarriersController@store')->name('submit.carriers');
+Route::get('/carriers/register', 'CarriersController@create');
+Route::get('/carriers/create', 'CarriersController@create');
+Route::put('/carriers/{carrier}', 'CarriersController@update');
+
+
 
 
 //**************************
@@ -42,13 +66,6 @@ Route::get('/messages/{message}', 'MessageController@show');
 Route::post('/messages', 'MessageController@store');
 
 
-//Carrier Pages
-Route::post('/carriers', 'CarriersController@store')->name('submit.carriers');
-Route::get('/carriers', 'CarriersController@index');
-Route::get('/carriers/register', 'CarriersController@create');
-Route::get('/carriers/create', 'CarriersController@create');
-Route::get('/carriers/{carrier}', 'CarriersController@show');
-Route::put('/carriers/{carrier}', 'CarriersController@update');
 
 
 //Takelaj 

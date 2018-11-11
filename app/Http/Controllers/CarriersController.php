@@ -21,8 +21,7 @@ class CarriersController extends Controller
     }
 
 
-    public function show($id) {
-        $carrier = Carrier::find($id);
+    public function show(Carrier $carrier) {
 
         return view('carriers.show', compact('carrier'));
     }
